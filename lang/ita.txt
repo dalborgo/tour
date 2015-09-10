@@ -1,0 +1,13 @@
+{
+"sInfo": "Mostra da _START_ a _END_ su _TOTAL_ messaggi totali",
+        "sSearch": "Cerca:",
+        "sEmptyTable": "Nessun messaggio.",
+	   "sInfoEmpty": "Caricamento...",
+	   "sLoadingRecords" : "Caricamento...",
+ "oPaginate": {
+                                        "sFirst":    "  <<  ",
+                                        "sPrevious": " < ",
+                                        "sNext":     " > ",
+                                        "sLast":     "  >>  "
+                                }
+}
