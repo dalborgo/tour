@@ -1,9 +1,10 @@
 {
-"sInfo": "Mostra da _START_ a _END_ su _TOTAL_ messaggi totali",
+"sInfo": "Mostra da _START_ a _END_ su _TOTAL_ giocatori",
         "sSearch": "Cerca:",
-        "sEmptyTable": "Nessun messaggio.",
+        "sEmptyTable": "Nessun giocatore.",
 	   "sInfoEmpty": "Caricamento...",
 	   "sLoadingRecords" : "Caricamento...",
+	   "sProcessing" : "<img src='./media/images/loader.gif'>",
  "oPaginate": {
                                         "sFirst":    "  <<  ",
                                         "sPrevious": " < ",

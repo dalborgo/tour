@@ -2,7 +2,7 @@
 $host = 'localhost';
 $user = 'root';
 $password = 'Montebaldo1';
-$db = 'dalborgo_db';
+$db = 'tour';
 
 $connection=mysql_connect($host,$user,$password);
 if (!$connection ) die('Cannot connect: ' . mysql_error());

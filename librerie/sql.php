@@ -85,7 +85,7 @@ function repTV($t,$v) {
             $i++;
           }
           $s=$sql.$sql2;
-  // echo $s;
+  //echo $s;
           $sq=mysql_query ($s);
 
           if (!$sq ) die("Replace errata - tabella $t");

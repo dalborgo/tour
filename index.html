@@ -23,6 +23,48 @@ require_once "librerie/sql.php";
 
     </style>
     <script type="text/javascript" language="javascript" >
+        $(document).ready(function () {
+
+            var table=$('#example').DataTable({
+                "ajax": "diretta.php?g=<?php echo $gg?>",
+                "columns": [
+                    {
+                        "className":'details-control',
+                        "orderable":      false,
+                        "data":           null,
+                        "defaultContent": ''
+                    },
+                    { "data": "info" },
+                    { "data": "superE" },
+                    { "data": "nick_eu" },
+                    { "data": "nick_usa" },
+                    { "data": "superU" }
+                ],
+                "aoColumnDefs": [
+                    { "sClass": "piccoloC", "aTargets": [ 1] },
+                    { "sClass": "bold center", "aTargets": [ 3 ] },
+                    { "sClass": "bold center usa", "aTargets": [ 4 ] },
+                    { "sClass": "center", "aTargets": [ 2] },
+                    { "sClass": "center", "aTargets": [ 5] }
+                ],
+                "order": [[3, 'asc']],
+                "oLanguage": {
+                    "sUrl": "./lang/ita.txt"
+                },
+                "paging": false,
+                "bSort" : false,
+                "pagingType": "full",
+                "searching": true,
+                "bLengthChange": false,
+                "pageLength": 30,
+                "fnInitComplete" : function () {   var json = table.ajax.json(); $("#giors").html(json.data[0].giornata+"&deg;");$("#toA").html(json.toA);$("#toB").html(json.toB)  },
+                "dom": '<"top"iflp<"clear">>rt<"bottom"il<"clear">>',
+                "scrollCollapse": true,
+                columnDefs: [
+                    {type: 'date-uk', targets: 0}
+                ]
+            });
+        } );
     </script>
 </head>
 <body>
