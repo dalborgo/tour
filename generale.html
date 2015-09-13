@@ -1,0 +1,137 @@
+<?php
+/**
+ * Created by IntelliJ IDEA.
+ * User: Scuola
+ * Date: 20/06/2015
+ * Time: 01:32
+ */
+require_once "librerie/fetch.php";
+require_once "librerie/date.php";
+require_once "librerie/sql.php";
+?>
+
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Tour</title>
+    <link href="media/css/jquery.mio.css" rel="stylesheet" type="text/css">
+    <link href="style.css" rel="stylesheet" type="text/css">
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js" type="application/javascript"></script>
+    <script src="https://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js" type="application/javascript"></script>
+    <style>
+
+    </style>
+    <script type="text/javascript" language="javascript" >
+        $(document).ready(function () {
+
+            var table=$('#example').DataTable({
+                "ajax": "getGenerale.php",
+                "columns": [
+                    { "data": "pos" },
+                    { "data": "nick" },
+                    { "data": "squadra" },
+                    { "data": "guadagno" },
+                    { "data": "distacco" },
+                    { "data": "tornei" }
+                ],
+                "aoColumnDefs": [
+                    { "sClass": "center", "aTargets": [ 0] },
+                    { "sClass": "", "aTargets": [ 1] },
+                    { "sClass": "", "aTargets": [ 2] },
+                    { "sClass": "destra", "aTargets": [ 3 ] },
+                    { "sClass": "destra", "aTargets": [ 4 ] },
+                    { "sClass": "destra", "aTargets": [ 5 ] }
+                ],
+                "oLanguage": {
+                    "sUrl": "./lang/ita.txt"
+                },
+                "paging": false,
+                "bSort" : false,
+                "searching": false,
+                "bLengthChange": false,
+                "info":     false,
+                "fnInitComplete" : function () {   var json = table.ajax.json(); $(".numTappa").html("Classifica Generale: "+json.tappa+"&deg; tappa ("+json.data2+")");
+                    $(".totRac").html("Guadagno Reality: &euro; "+json.totRac);},
+                "dom": '<"top"iflp<"clear">>rt<"bottom"il<"clear">>',
+                "createdRow": function ( row, data, index ) {
+                        if ( data.pos=="1&deg;" ) {
+                            $('td', row).addClass('highlight');
+                        }
+                },
+                "scrollCollapse": true
+            });
+
+            var table2=$('#example2').DataTable({
+                "ajax": "getPunti.php",
+                "columns": [
+                    { "data": "pos" },
+                    { "data": "nick" },
+                    { "data": "squadra" },
+                    { "data": "punti" },
+                    { "data": "tornei" }
+                ],
+                "aoColumnDefs": [
+                    { "sClass": "center", "aTargets": [ 0] },
+                    { "sClass": "", "aTargets": [ 1] },
+                    { "sClass": "", "aTargets": [ 2] },
+                    { "sClass": "destra", "aTargets": [ 3 ] },
+                    { "sClass": "destra", "aTargets": [ 4 ] }
+                ],
+                "oLanguage": {
+                    "sUrl": "./lang/ita.txt"
+                },
+                "paging": false,
+                "bSort" : false,
+                "searching": false,
+                "bLengthChange": false,
+                "info":     false,
+                "fnInitComplete" : function () {   var json = table2.ajax.json(); $(".numTappa2").html("Classifica a Punti: "+json.tappa+"&deg; tappa ("+json.data2+")");
+                    },
+                "dom": '<"top"iflp<"clear">>rt<"bottom"il<"clear">>',
+                "createdRow": function ( row, data, index ) {
+                    if ( data.pos=="1&deg;" ) {
+                        $('td', row).addClass('highlight2');
+                    }
+                },
+                "scrollCollapse": true
+            });
+        } );
+    </script>
+</head>
+<body id="mainB">
+<table id="example" class="display compact">
+    <thead>
+    <tr class="sopra">
+        <th colspan="3" class="numTappa"></th>
+        <th colspan="3" class="totRac"></th>
+    </tr>
+    <tr class="sotto">
+        <th class="" style=""></th>
+        <th class="sinistra" style="padding-left: 25px">Nick</th>
+        <th class="">Squadra</th>
+        <th style="padding-right: 10px">&euro; Guadagno</th>
+        <th style="padding-right: 10px">&euro; Distacco</th>
+        <th style="padding-right: 10px">&euro; Tornei</th>
+    </tr>
+    </thead>
+</table>
+
+<table id="example2" class="display compact">
+    <thead class="">
+    <tr class="sopra">
+        <th colspan="2" class="numTappa2"></th>
+        <th colspan="3" >&nbsp;</th>
+    </tr>
+    <tr class="sotto">
+        <th class="" style=""></th>
+        <th class="sinistra" style="padding-left: 25px">Nick</th>
+        <th class="">Squadra</th>
+        <th style="padding-right: 10px">Punti</th>
+        <th style="padding-right: 10px">Tornei</th>
+    </tr>
+    </thead>
+</table>
+</body>
+</html>

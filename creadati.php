@@ -10,15 +10,17 @@ include "librerie/fetch.php";
 include "librerie/sql.php";
 include "librerie/specific.php";
 include "librerie/date.php";
-$esc=getIntervallo(date_create("2015-09-10"));
+$esc=getIntervallo(date_create($INIZIO));
 $tappa=$esc[0]; //(nick LIKE 'Parasar' OR nick LIKE 'stardust85') AND
-$res = query("SELECT * from tt_player WHERE abil IS NULL"); //nick LIKE 'Bosca95' AND
+$res = query("SELECT * from tt_player"); //nick LIKE 'Bosca95' AND
 $lista="";
 $status = array();
 $squadra = array();
+$under = array();
 while (($ra = mysql_fetch_assoc($res))) {
     $val=$ra["nick"];
     $status[$val] = $ra["status"];
+    $under[$val] = $ra["under"];
     $squadra[$val] = $ra["squadra"];
     $lista.="$val,";
 }
@@ -55,7 +57,7 @@ foreach ($res as $key2 => $value2) {
             $sireb='0';
         $buyd=(($value->{'@stake'}+$value->{'@rake'})>0)?($value->{'@stake'}+$value->{'@rake'}):'0';
         if($sireb!='0')
-            $guad=$pirce-($value->{'@rake'}+$sireb);
+            $guad=$pirce-($value->{'@rake'}+floatval($sireb));
         else
             $guad=$pirce-($value->{'@stake'}+$value->{'@rake'});
         if ($conto<2)
@@ -71,7 +73,8 @@ foreach ($res as $key2 => $value2) {
         $usc['id_torneo']=$value->{'@id'};
         $usc['posizione']=$value->TournamentEntry->{'@position'};
         $usc['network']=$value->{'@network'};
-        $usc['squadra']=$squadra[$key2];
+      //  $usc['squadra']=$squadra[$key2];
+      //  $usc['under']=$under[$key2];
         $usc['entranti']=$value->{'@totalEntrants'};
         $usc['buyin']=$buyd;
         $usc['stake']=$value->{'@stake'};

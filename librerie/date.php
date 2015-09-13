@@ -26,3 +26,16 @@ function prog()
     $prog = $datec->format('z');
     return $prog;
 }
+
+function diffDate($inizio){
+    $date = new DateTime();
+    $format=$date->format('Y-m-d');
+    $interval=date_diff(date_create($format), $inizio);
+    return $interval->days;
+}
+
+
+function addDate($inizio,$n){
+    return date('d/m/Y', strtotime($inizio. " + $n days"));
+}
+

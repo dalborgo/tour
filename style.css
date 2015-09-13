@@ -1,0 +1,48 @@
+body#mainB{
+    font-family: arial;
+}
+
+.destra{
+    text-align: right;
+}
+
+.sinistra{
+    text-align: left;
+}
+.center{
+    text-align: center;
+}
+.highlight{
+   font-weight: bold;
+   background-color: yellow;
+}
+
+.highlight2{
+    font-weight: bold;
+    color:white;
+    background-color: green;
+}
+
+body#mainB table{
+    width: 95%;
+    margin:0 10px 40px 10px;
+}
+body#mainB table tr.sotto{
+   color:white;
+    background-color: black;
+}
+body#mainB table tr.sopra{
+    background-color: #E5E4E4;
+}
+body#mainB table th{
+    padding-right:5px;
+    paddding-top:20px;
+    border-top: 1px solid gray;
+    border-left: 0px;
+    border-bottom: 0px;
+}
+
+table.dataTable.compact tbody td {
+    padding: 4px;
+    padding-right: 10px;
+}

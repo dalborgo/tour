@@ -4,6 +4,8 @@
  * User: Scuola
  * Date: 20/06/2015
  * Time: 01:44
+ * @param $eccolo
+ * @return mixed
  */
 
 function ccall($eccolo){

@@ -56,7 +56,7 @@ function delFW($f, $w) {
 
 function truncate($t) {
     $sq=mysql_query ( "TRUNCATE $t" );
-    if (!$sq ) die("truncate errata - tabella $f");
+    if (!$sq ) die("truncate errata - tabella $t");
 }
 
 function repTV($t,$v) {
@@ -85,9 +85,9 @@ function repTV($t,$v) {
             $i++;
           }
           $s=$sql.$sql2;
-  //echo $s;
+          //echo $s;
           $sq=mysql_query ($s);
 
-          if (!$sq ) die("Replace errata - tabella $t");
+          if (!$sq ) die("Replace errata - tabella $t $s");
 }
 
