@@ -1,0 +1,372 @@
+body#mainB{
+    font-family: arial;
+}
+
+.piccolo{
+    font-size:xx-small;
+}
+.piccolo2{
+    font-size:8pt;
+}
+
+.display td.sright{
+    text-align:right;
+}
+
+.dataTables_wrapper .dataTables_info{
+    visibility: hidden;
+}
+
+#guashark.pos{
+    color: green;
+}
+
+#guashark.neg{
+    color: red;
+}
+
+span.pos{
+    color: green;
+}
+
+span.neg{
+    color: red;
+}
+
+
+#titolonick{    
+    color: #ff7800;
+    font-size: xx-large;
+    
+}
+
+
+#destra{
+    width: 100%;
+    text-align:right;
+    color:gray;
+}
+
+#blue{
+    color:blue;
+}
+.greenSh{
+    color:green;
+}
+.redSh{
+    color:red
+}
+#center{
+     width: 100%;
+     text-align:center;
+     color: white;
+     background-color:black;
+     font-variant: small-caps;
+}
+
+#nomeAv{
+    color: steelblue;
+    font-family: verdana, serif;
+    font-size: xx-large;
+    margin-left: 10px;
+}
+
+div.right{
+    width:98%;
+    text-align:right;
+    padding-top:5px;
+}
+
+span.totbuy{
+    margin: 0 5px;
+}
+
+
+span.nowr{
+    line-height:17px; 
+}
+span.punt{
+    margin-right:3px;
+}
+table#exampleS.dataTable.compact tbody th, table#exampleS.dataTable.compact tbody td {
+    padding: 2px 5px;
+}
+
+button.bottone{
+    float: right;
+    font-size: 8pt;
+    height: 20px;
+    margin-right: 10px;
+    width: 45px;
+}
+
+div#tipDiv {
+    font-size:11px; line-height:1.2;
+    color:#000; background-color:#E1E5F1; 
+    border:1px solid #667295; padding:4px;
+    width:190px; 
+}
+div#tipDiv div.close {
+    display: none;
+}
+
+span.cifra{
+    font-weight: bold;
+}
+span.nomi{
+    color: navy; 
+    font-weight: bold;
+    font-size: larger;
+}
+
+span.result{
+    color: maroon; 
+    font-weight: bold;
+    font-size: larger;
+}
+
+h3.riga{
+    font-size: 17pt;
+    padding: 5px 11px;
+}
+#exampleS td {
+    font-weight: bold;
+}
+#exampleS td.rosso {
+    /*font-weight: bold;*/
+    color: #ff000d;
+}
+
+#exampleS td.verde {
+    /*font-weight: bold;*/
+    color: #179700;
+}
+
+#exampleS td.arancio {
+    /*font-weight: bold;*/
+    color: #a619cd;
+}
+
+#exampleS td.giallo {
+
+    color: #3e82ce;
+}
+td.details-control {
+    background: url('./media/images/details_open.png') no-repeat center center;
+    cursor: pointer;
+}
+tr.shown td.details-control {
+    background: url('./media/images/details_close.png') no-repeat center center;
+}
+div.slider {    display: none; background-color: white;}
+
+table.dataTable tbody td.no-padding {    padding: 0;}
+
+table#example{
+    font-size: 14pt;
+}
+
+table#example thead.bandiere, table#example tfoot.bandiere{
+
+   font-size: 14pt;
+    background-color: lightgray;
+}
+
+
+table#example th.bandiera{
+    color: white;
+	background-color: #1F4696;
+}
+table#example th.bandiera.rossa{
+    color: white;
+	background-color: #660000;
+}
+
+
+table#example td.center{
+    text-align: center;
+}
+#exampleS td.center{
+    text-align: center;
+}
+table#example td.bold{
+    font-weight: bold;
+    height: 65px;
+	background-image: url("./media/images/ues.png");
+	background-repeat: no-repeat;
+	color: white;
+}
+table#example td.bold.usa{
+
+    background-image: url("./media/images/ueu.png");
+    background-position: right center;
+
+}
+table#example th.bandiera span {
+    font-size: 14pt;
+}
+
+table#example table.sotto{
+    font-size: 8pt;
+    border-top: 1px solid;
+}
+span.vals {
+    border-radius: 23px;
+    color: white;
+    font-size: 28pt;
+    font-weight: bold;
+    padding: 8px;
+}
+span.gros{
+    font-weight: bold;
+    padding:4px;
+    color:white;
+    border-radius: 15px;
+}
+
+span.puntoEU{
+    background-color: #1F4695;
+}
+
+span.puntoUSA{
+    background-color: #6A0000;
+}
+span.colorEU{
+    color: #1F4695;
+}
+span.contoEU{
+    background-color: #1F4695;
+    color: gold;
+    padding: 2px 4px;
+	font-weight: bold;
+}
+
+span.contoUSA{
+    background-color: #6A0000;
+    color: gold;
+    padding: 3px;
+}
+span.colorUSA{
+    color: #6A0000;
+}
+
+span.high{
+	color: gold;
+}
+
+td.redso{
+    background-color: rgba(255, 0, 0, 0.1);
+}
+
+td.blueso{
+    background-color: rgba(13, 5, 216, 0.1);
+}
+
+td.bor{
+    border-right: 1px solid gray;
+}
+
+td.bora{
+    border-left: 1px solid gray;
+}
+table.sotto th{
+    background-color: lightgoldenrodyellow;
+}
+
+table.sotto thead tr{
+    border:1px black solid;
+}
+table.sotto .totali {
+    background-color: white;
+    font-size: large;
+    font-weight: bold;
+    padding: 6px 10px 6px;
+    text-align: right;
+    border-bottom: 15px solid white;
+	border-top: 1px solid;
+}
+
+
+
+
+span.momento{
+    font-size: medium;
+    font-variant: all-small-caps;
+    font-style: italic;
+}
+img.flaggo{
+    border: 1px solid black;
+}
+
+#example.dataTable tbody tr.odd {
+}
+#example.dataTable tbody tr.even {
+    background-color: #cedeff;
+}
+
+
+#giors.th2{
+    text-align: left;
+	color: #160095;
+}
+
+
+table.dataTable.row-border tbody th, table.dataTable.row-border tbody td, table.dataTable.display tbody th, table.dataTable.display tbody td {
+    border:0px;
+}
+table.sotto tbody tr:last-child td{
+    border-top: 1px solid;
+}
+table.sotto thead tr:first-child th{
+    border-bottom: 1px solid;
+}
+td.piccoloC{
+    font-size: 8pt;
+}
+
+div.spiri {
+    color: white;
+    margin-bottom: 6px;
+}
+div.spiri span{
+
+    border: 1px solid black;
+
+    padding: 1px 3px;
+
+}
+div.spiri span.sos{
+    background-color: #1f4695;
+
+}
+
+div.spiri span.sos2{
+    background-color: #6A0000;
+}
+
+.dataTables_wrapper .dataTables_filter {
+    font-size: large;
+    text-align: center;
+}
+.bandiere th.thA{
+	background-color: #1F4696;
+	font-size: 20pt;
+	color: white;
+}
+.bandiere th.thB{
+    background-color: #660000;
+    font-size: 20pt;
+    color: white;
+}
+table.display .prec{
+	font-size: 13pt;
+	font-weight: bold;
+}
+
+#mainB div.top{
+    max-width: 1166px;
+}
+
+#textarea2{
+    width:300px;
+}

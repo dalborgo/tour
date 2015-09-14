@@ -15,12 +15,54 @@ body#mainB{
 .highlight{
    font-weight: bold;
    background-color: yellow;
+   font-size: larger;
+   border-bottom: 1px solid black;
 }
 
 .highlight2{
     font-weight: bold;
     color:white;
     background-color: green;
+    font-size: larger;
+    border-bottom: 1px solid black;
+}
+
+
+.highlight3{
+    font-weight: bold;
+    border-bottom: 1px solid black;
+    font-size: larger;
+}
+.highlight4{
+    font-weight: bold;
+    border-bottom: 1px solid black;
+    font-size: larger;
+    background-color: #F87B7B;
+}
+.highlight5{
+    font-weight: bold;
+    border-bottom: 1px solid black;
+    font-size: larger;
+    background-color: #248af8;
+    color: white;
+}
+.highlight6{
+    font-weight: bold;
+    border-bottom: 1px solid black;
+    font-size: larger;
+}
+.rosso{
+    color: red;
+    cursor: help;
+    font-weight: bold;
+}
+.under{
+    font-style: italic;
+    cursor: help;
+}
+.bianco{
+    cursor: help;
+    font-weight: bold;
 }
 
 body#mainB table{
@@ -33,6 +75,10 @@ body#mainB table tr.sotto{
 }
 body#mainB table tr.sopra{
     background-color: #E5E4E4;
+    text-align:left;
+}
+tr.sopra th{
+    padding-left: 15px;
 }
 body#mainB table th{
     padding-right:5px;

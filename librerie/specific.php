@@ -7,7 +7,7 @@
  * @param $inizio
  * @return array
  */
-$INIZIO="2015-09-11";
+$INIZIO="2015-09-12";
 function getIntervallo($inizio){
     $date = new DateTime();
     $format=$date->format('Y-m-d');
