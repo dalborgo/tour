@@ -92,3 +92,28 @@ table.dataTable.compact tbody td {
     padding: 4px;
     padding-right: 10px;
 }
+span#poke{
+    color: #ff511a;
+}
+
+td.bgred{
+    background-color: #ffd0b3;
+}
+td.bgyel{
+    background-color: seashell;
+}
+td.bgyel2{
+    background-color: lemonchiffon;
+
+}
+td.bold{
+    font-weight: bold;
+}
+
+td.uno{
+    border-left: 1px solid black;
+
+}
+td.due{
+    border-right: 1px solid black;
+}

@@ -10,7 +10,7 @@ include "librerie/fetch.php";
 include "librerie/sql.php";
 include "librerie/specific.php";
 include "librerie/date.php";
-$esc=getIntervallo(date_create($INIZIO));
+$esc=getIntervallo($INIZIO);
 $tappa=$esc[0]; //(nick LIKE 'Parasar' OR nick LIKE 'stardust85') AND
 $res = query("SELECT * from tt_player"); //nick LIKE 'Bosca95' AND
 $lista="";
@@ -26,7 +26,7 @@ while (($ra = mysql_fetch_assoc($res))) {
 }
 $lista2=substr($lista,0,-1);
 $lista2=explode(",",$lista);
-$ore=$esc[1]."~".$esc[2];
+$ore=$esc[1]."~".$esc[2]; //1442214000~1442300399
 $res= array();
 foreach ($lista2 as $key => $value) {
     $res[$value] = ccall('http://www.sharkscope.com/api/dalborgo/networks/PlayerGroup/players/'.$value.'/completedTournaments?order=Last,50&filter=Date:'.$ore.';Class:SCHEDULED');

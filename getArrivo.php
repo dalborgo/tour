@@ -8,7 +8,7 @@
 include_once "librerie/sql.php";
 include_once "librerie/date.php";
 include_once "librerie/specific.php";
-$tappa=diffDate(date_create($INIZIO));
+$tappa=diffDate2($INIZIO);
 $dr=query("SELECT * FROM `tt_generale` JOIN tt_player ON tt_generale.nick = tt_player.nick LEFT JOIN tt_squadra ON tt_player.squadra = tt_squadra.nome WHERE tappa='$tappa' order by guadagno desc");
 if (mysql_num_rows($dr)<1){
     $tappa--;

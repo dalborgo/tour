@@ -13,7 +13,7 @@ include "librerie/fetch.php";
 include "librerie/sql.php";
 include "librerie/specific.php";
 include "librerie/date.php";
-$tappa=diffDate(date_create($INIZIO));
+$tappa=diffDate2($INIZIO);
  //(nick LIKE 'Parasar' OR nick LIKE 'stardust85') AND
 $res2 = query("SELECT id_torneo as id, nome, COUNT(*) cat FROM `tt_dati` WHERE tappa = '$tappa' GROUP BY id_torneo HAVING cat > 2");
 $out2=array();

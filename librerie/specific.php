@@ -7,17 +7,14 @@
  * @param $inizio
  * @return array
  */
-$INIZIO="2015-09-12";
+$INIZIO="Sep 13 2015";
 function getIntervallo($inizio){
     $date = new DateTime();
     $format=$date->format('Y-m-d');
     $seco=date('Y-m-d',(strtotime ( '-1 day' , strtotime ( $format) ) ));
-    $dateW = new DateTime($format.'08:59:59');
-    $dateW2 = new DateTime($seco.'09:00:00');
-    $out = array();
-    $interval=date_diff(date_create($format), $inizio);
-    $out[0]=$interval->days;
-    $out[1]=$dateW2->getTimestamp();
-    $out[2]=$dateW->getTimestamp();
+    $intervallo=diffDate2($inizio);
+    $out[0]=$intervallo;
+    $out[1]=strtotime($seco.'07:00:00');
+    $out[2]=strtotime($format.'06:59:59');
     return $out;
 }

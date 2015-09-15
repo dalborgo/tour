@@ -27,6 +27,7 @@ while (($h = mysql_fetch_assoc($dr))) {
     $obj->squadra=$h["nome"];
     $obj->tornei=$h["tor"];
     $obj->status=$h["status"];
+    $obj->nick2 = $h["nick"];
     $obj->nick='<span class="nowr"><img style="vertical-align:middle" src="http://www.dalborgo.it/public/ss/' . $h["status"]  . 'p.png"/> ' . $h["nick"] . '</span>';
     $abbin[]=$obj;
 }

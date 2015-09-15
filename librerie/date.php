@@ -33,6 +33,11 @@ function diffDate($inizio){
     $interval=date_diff(date_create($format), $inizio);
     return $interval->days;
 }
+function diffDate2($inizio){
+    $str = $inizio;
+    $str = strtotime(date("M d Y ")) - (strtotime($str));
+    return floor($str/3600/24);
+}
 
 
 function addDate($inizio,$n){
