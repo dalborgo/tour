@@ -10,6 +10,10 @@ include "librerie/fetch.php";
 include "librerie/sql.php";
 include "librerie/specific.php";
 include "librerie/date.php";
+
+//$_GET['a']="1442163600";
+//$_GET['b']="1442185200";
+//$_GET['c']="explosive";
 $esc=getIntervallo($INIZIO);
 $tappa=$esc[0]; //(nick LIKE 'Parasar' OR nick LIKE 'stardust85') AND
 $res = query("SELECT * from tt_player"); //nick LIKE 'Bosca95' AND
@@ -24,14 +28,21 @@ while (($ra = mysql_fetch_assoc($res))) {
     $squadra[$val] = $ra["squadra"];
     $lista.="$val,";
 }
+if (!isset($_GET['a']) || !isset($_GET['b']))
+{
+    $ore=$esc[1]."~".$esc[2];
+}else
+    $ore=$_GET['a']."~".$_GET['b'];
+echo $ore;
 $lista2=substr($lista,0,-1);
 $lista2=explode(",",$lista);
-$ore=$esc[1]."~".$esc[2];
-echo $ore;
-//$ore="1442163600~1442185200";
 $res= array();
+if(isset($_GET['c']))
+    $opt="TournamentName:".$_GET['c'].";";
+else
+    $opt="";
 foreach ($lista2 as $key => $value) {
-    $res[$value] = ccall('http://www.sharkscope.com/api/dalborgo/networks/PlayerGroup/players/'.$value.'/completedTournaments?order=Last,50&filter=Date:'.$ore.';Class:SCHEDULED');
+    $res[$value] = ccall('http://www.sharkscope.com/api/dalborgo/networks/PlayerGroup/players/'.$value.'/completedTournaments?order='.$opt.'Last,50&filter=Date:'.$ore.';Class:SCHEDULED');
 }
 $usc=array();
 $err=array();
@@ -73,8 +84,8 @@ foreach ($res as $key2 => $value2) {
         $usc['id_torneo']=$value->{'@id'};
         $usc['posizione']=$value->TournamentEntry->{'@position'};
         $usc['network']=$value->{'@network'};
-      //  $usc['squadra']=$squadra[$key2];
-      //  $usc['under']=$under[$key2];
+        //  $usc['squadra']=$squadra[$key2];
+        //  $usc['under']=$under[$key2];
         $usc['entranti']=$value->{'@totalEntrants'};
         $usc['buyin']=$buyd;
         $usc['stake']=$value->{'@stake'};

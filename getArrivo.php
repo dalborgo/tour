@@ -34,7 +34,7 @@ while (($h = mysql_fetch_assoc($dr))) {
     //$obj->distacco=($base-$h["guad"]==0)?"":"-".($base-$h["guad"]);
     $obj->status=$h["status"];
     $obj->nick2=$h["nick"];
-    $obj->nick='<span class="nowr"><img style="vertical-align:middle" src="http://www.dalborgo.it/public/ss/' . $h["status"]  . 'p.png"/> ' . $h["nick"] . '</span>';
+    $obj->nick='<span class="nowr"><img style="vertical-align:middle" src="http://static.pokerstrategycdn.com/front/images/ranks/mini/' . $h["status"]  . '.png"/> ' . $h["nick"] . '</span>';
     $abbin[]=$obj;
 }
 $usc2 = new stdClass();

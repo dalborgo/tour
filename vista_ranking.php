@@ -115,9 +115,9 @@ while (($r = mysql_fetch_assoc($res))) {
 
 function getProf($nome, $st, $reg)
 {
-    $im = ($reg == "p") ? $st . "p" : $st;
+    $im = ($reg == "p") ? $st : $st;
     $im .= ".png";
-    return '<span class="nowr"><img style="vertical-align:middle" src="http://www.dalborgo.it/public/ss/' . $im . '"/> ' . $nome . '</span>';
+    return '<span class="nowr"><img style="vertical-align:middle" src="http://static.pokerstrategycdn.com/front/images/ranks/mini/' . $im . '"/> ' . $nome . '</span>';
 }
 
 ?>
