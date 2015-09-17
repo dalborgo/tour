@@ -23,7 +23,7 @@ $soldil=0;
 $cont=0;
 $cont2=0;
 while (($ra = mysql_fetch_assoc($res2))) {
-    $tappa=$ra["tp"];
+    //$tappa=$ra["tp"];
     $out["nick"]=$ra["nick"];
     $out["guadagno"]=$ra["guad"];
     if($ra["guadagno"]>$mguad && $ra["tp"] == $tappaN ){
@@ -39,7 +39,7 @@ while (($ra = mysql_fetch_assoc($res2))) {
         $primo = $ra["nick"];
         $soldil=$ra["guad"];
     }
-    $out["tappa"]=$tappa;
+    $out["tappa"]=$tappaN;
     $out["ultima_pres"]=$ra["tp"];
     if($ra["tp"]<$tappaN)
         $out["ultimo"]='0';

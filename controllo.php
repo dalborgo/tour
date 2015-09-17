@@ -10,10 +10,13 @@ include "librerie/fetch.php";
 include "librerie/sql.php";
 include "librerie/specific.php";
 include "librerie/date.php";
+//1442214000~1442300400
 
-//$_GET['a']="1442163600";
-//$_GET['b']="1442185200";
-//$_GET['c']="thecogo";
+$format="2015-09-14";
+$seco=date('Y-m-d',(strtotime ( '-1 day' , strtotime ( $format) ) ));
+$_GET['a']=strtotime($seco . '09:00:00');
+$_GET['b']=strtotime($format . '08:59:59');
+$_GET['c']="Bosca95";
 if (!isset($_GET['a']) || !isset($_GET['b']) || !isset($_GET['c']))
 {
     exit ("ERRORE MANCA A o B o C");

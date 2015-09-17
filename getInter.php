@@ -12,17 +12,16 @@ include_once "librerie/date.php";
 include_once "librerie/specific.php";
 
 //$tappa=diffDate2($INIZIO);
-$res = query("CREATE TEMPORARY TABLE IF NOT EXISTS table4 AS (SELECT tt_dati.`nick`, SUM(guadagno) as guadagno, COUNT(*) as tornei, MAX(tappa) as tp FROM `tt_dati` WHERE buyin <= 5.00 GROUP BY nick)");
+$res = query("CREATE TEMPORARY TABLE IF NOT EXISTS table4 AS (SELECT tt_dati.`nick`, SUM(guadagno) as guadagno, COUNT(*) as tornei FROM `tt_dati` WHERE buyin <= 5.00 GROUP BY nick)");
 
-$dr=query("SELECT a.`nick`, guadagno,  tornei, tp, status, squadra FROM `table4` a LEFT JOIN tt_player b ON a.nick = b.nick  ORDER BY guadagno DESC");
-
+$dr=query("SELECT a.`nick`, guadagno,  tornei, status, squadra FROM `table4` a LEFT JOIN tt_player b ON a.nick = b.nick  ORDER BY guadagno DESC");
+$tappa=getTappa();
 //$f=addDate($INIZIO,$tappa);
 $abbin = array();
 $base=0;
 $tra=0;
 $cont=0;
 while (($h = mysql_fetch_assoc($dr))) {
-    $tappa=$h["tp"];
     $obj = new stdClass();
     $cont++;
     $obj->pos=$cont."&deg;";

@@ -9,19 +9,27 @@ include_once "librerie/sql.php";
 include_once "librerie/date.php";
 include_once "librerie/specific.php";
 
-$dr=query("SELECT *, SUM(punti) as punt, MAX(tappa) as tp, SUM(tornei) as tor FROM `tt_generale` JOIN tt_player ON tt_generale.nick = tt_player.nick LEFT JOIN tt_squadra ON tt_player.squadra = tt_squadra.nome GROUP BY tt_generale.nick order by punt desc");
-
-
+$dr=query("SELECT *, SUM(punti) as punt, SUM(tornei) as tor FROM `tt_generale` JOIN tt_player ON tt_generale.nick = tt_player.nick LEFT JOIN tt_squadra ON tt_player.squadra = tt_squadra.nome GROUP BY tt_generale.nick order by punt desc");
+$tappa=getTappa();
+$odi=array();
+$dr2=query("SELECT nick, punti as last FROM `tt_generale` WHERE tappa='$tappa'");
+while (($h2 = mysql_fetch_assoc($dr2))) {
+    $odi[$h2["nick"]]=$h2["last"];
+}
 //$f=addDate($INIZIO,$tappa);
 $abbin = array();
 $base=0;
 $tra=0;
 $cont=0;
 while (($h = mysql_fetch_assoc($dr))) {
-    $tappa=$h["tp"];
     $obj = new stdClass();
     $cont++;
     $obj->pos=$cont."&deg;";
+    if (!isset($odi[$h["nick"]])) {
+        $obj->last="";
+    } else {
+        $obj->last=($odi[$h["nick"]]>0)?"+".$odi[$h["nick"]]:"";
+    }
     // $obj->nick=$h["nick"];
     $obj->punti=$h["punt"];
     $obj->squadra=$h["nome"];

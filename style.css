@@ -117,3 +117,7 @@ td.uno{
 td.due{
     border-right: 1px solid black;
 }
+
+th a{
+    color:black;
+}

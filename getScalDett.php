@@ -10,9 +10,8 @@ include_once "librerie/date.php";
 include_once "librerie/specific.php";
 
 
-$tu=mysql_fetch_assoc(query("SELECT max(tappa) as tp FROM `tt_tappa`"));
-$tappa=$tu["tp"]-1;//$res = query("CREATE TEMPORARY TABLE IF NOT EXISTS table4 AS (SELECT tt_dati.`nick`, SUM(guadagno) as guadagno, COUNT(*) as tornei FROM `tt_dati` WHERE buyin <= 5.00 GROUP BY nick)");
-
+//$res = query("CREATE TEMPORARY TABLE IF NOT EXISTS table4 AS (SELECT tt_dati.`nick`, SUM(guadagno) as guadagno, COUNT(*) as tornei FROM `tt_dati` WHERE buyin <= 5.00 GROUP BY nick)");
+$tappa=getTappa();
 $dr=query("SELECT b.id, a.nome, categoria, b.nick, punti, status, squadra, maglia FROM `tt_pois` b JOIN tt_granpremi a ON a.id = b.id LEFT JOIN tt_player c ON b.nick = c.nick WHERE punti>0 AND b.tappa='$tappa' order by categoria desc, a.id, punti desc");
 //CONVERT(CAST(CONVERT(a.nome USING latin1) AS BINARY) as nome
 //$f=addDate($INIZIO,$tappa);

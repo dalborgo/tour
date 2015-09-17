@@ -33,7 +33,11 @@ echo $mio->{'@name'}.'<br>';
     $ns=$mio->{'@name'};
     $out["ultima"]=$mio->{'@lastActivity'};
     $out["status"]=($sta[$out["nick"]])?$sta[$out["nick"]]:getProf($out["nick"]);
-    //$out["status"]=getProf($out["nick"]);
+    if (isset($_GET['f']))
+        $out["status"]=getProf($out["nick"]);
+    else
+        $out["status"]=($sta[$out["nick"]])?$sta[$out["nick"]]:getProf($out["nick"]);
+    //echo $out["nick"]."<br>";
     $out["squadra"] = $sa[$out["nick"]];
     $out["abil"] = $saa[$out["nick"]];
     $out["under"] = $sta2[$out["nick"]];

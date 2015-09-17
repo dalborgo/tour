@@ -24,6 +24,7 @@ foreach ($ltot as  $mio) {
     $value=$mio->{'@name'};
     $res[$value] = ccall('http://www.sharkscope.com/api/dalborgo/networks/PlayerGroup/players/'.$value
         .'/statistics/Ability,AvStake,AvGamesPerDay?filter=Class:SCHEDULED');
+    echo $mio->{'@name'}."<br>";
 }
 //echo "miao";
 foreach ($res as $k => $v) {

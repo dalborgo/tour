@@ -27,7 +27,7 @@ while (($ra = mysql_fetch_assoc($res))) {
 $lista2=substr($lista,0,-1);
 $lista2=explode(",",$lista);
 $ore=$esc[1]."~".$esc[2];
-echo $ore;
+echo '<br>'.$ore;
 //$ore="1442163600~1442185200";
 $res= array();
 foreach ($lista2 as $key => $value) {
