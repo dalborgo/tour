@@ -1,5 +1,11 @@
 <?php
-require_once "dbmarc.php";
+if (isset($_GET['f'])) {
+    include_once "dbmarc2.php";
+    echo "SPECIAL<br>";
+}
+else {
+    include_once "dbmarc.php";
+}
 function query($s, $sub = false) {
     if ($sub) {
         $sq = mysql_query ( $s );

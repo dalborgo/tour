@@ -55,3 +55,4 @@ $rtg3=$resi3["nick"];
 $res = query("UPDATE tt_tappa SET partecipanti='$cont2', leader='$primo', soldi_leader='$soldil', vincitore='$vinci', soldi = '$mguad', scalatore = '$rtg', giovane='$rtg2', inter= '$rtg3' WHERE tappa='$tappaN'");
 $to["tappa"]=$tappaN+1;
 repTV("tt_tappa",$to);
+echo "OK";

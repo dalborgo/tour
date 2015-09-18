@@ -15,7 +15,7 @@ $base=0;
 $tra=0;
 $cont=0;
 $s='DELETE FROM "main"."replace_pattern_0_1" WHERE replacement LIKE \'[img]http://static.pokerstrategycdn.com/%\';';
-echo $s;
+echo "<br><br>".$s;
 while (($h = mysql_fetch_assoc($dr))) {
     $s="INSERT INTO";
     $s.=' "main"."replace_pattern_0_1" ("url_pattern","input","replacement") VALUES ("http://it.pokerstrategy.com/","';

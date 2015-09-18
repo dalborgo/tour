@@ -26,17 +26,22 @@ while (($ra = mysql_fetch_assoc($sq))) {
     $sta2[$fg]=$ra["under"];
 }
 foreach ($ltot as  $mio) {
-echo $mio->{'@name'}.'<br>';
+
     $out["nick"]=$mio->{'@name'};
     if($out["nick"]=="confra")
         continue;
     $ns=$mio->{'@name'};
     $out["ultima"]=$mio->{'@lastActivity'};
-    $out["status"]=($sta[$out["nick"]])?$sta[$out["nick"]]:getProf($out["nick"]);
-    if (isset($_GET['f']))
-        $out["status"]=getProf($out["nick"]);
+    if (isset($_GET['f'])) {
+        $rrr=getProf($out["nick"]);
+        if($rrr!=$sta[$out["nick"]])
+            echo "XXXXXXXXXXXXXXXX ".$out["nick"]." ".$sta[$out["nick"]]." -> ".$rrr."<br>";
+        $out["status"] = $rrr;
+    }
     else
         $out["status"]=($sta[$out["nick"]])?$sta[$out["nick"]]:getProf($out["nick"]);
+    $nuovst=$out["status"];
+    echo $mio->{'@name'}." -> $nuovst <br>";
     //echo $out["nick"]."<br>";
     $out["squadra"] = $sa[$out["nick"]];
     $out["abil"] = $saa[$out["nick"]];
@@ -46,6 +51,7 @@ echo $mio->{'@name'}.'<br>';
     $out["ultima"] = date('Y-m-d',$out["ultima"]);
     repTV("tt_player", $out);
 }
+include_once "creaNomi.php";
 
 function getProf($nome){
     if ($nome == "DONSABY")

@@ -55,5 +55,5 @@ while (($ra = mysql_fetch_assoc($res))) {
     $out["tappa"]=$tappa;
     repTV("tt_pois",$out);
 }
-
+echo "OK";
 

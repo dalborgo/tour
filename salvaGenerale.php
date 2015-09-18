@@ -40,5 +40,5 @@ while (($ra = mysql_fetch_assoc($res))) {
     $out["tornei"]=$ra["tornei"];
     repTV("tt_generale",$out);
 }
-
+echo "OK";
 
