@@ -12,21 +12,25 @@ include "librerie/specific.php";
 include "librerie/date.php";
 //1442214000~1442300400
 
-$format="2015-09-14";
-$seco=date('Y-m-d',(strtotime ( '-1 day' , strtotime ( $format) ) ));
-$_GET['a']=strtotime($seco . '09:00:00');
-$_GET['b']=strtotime($format . '08:59:59');
-$_GET['c']="Bosca95";
+
 if (!isset($_GET['a']) || !isset($_GET['b']) || !isset($_GET['c']))
 {
-    exit ("ERRORE MANCA A o B o C");
-}else
-    $ore=$_GET['a']."~".$_GET['b'];
-echo date('d/m/Y H:i', $_GET['a'])."\n";
-echo date('d/m/Y H:i', $_GET['b'])."\n";
+    $format="2015-09-14";
+    $seco=date('Y-m-d',(strtotime ( '-1 day' , strtotime ( $format) ) ));
+    $_GET['a']=strtotime($seco . '09:00:00');
+    $_GET['b']=strtotime($format . '08:59:59');
+    $value="Bosca95";
+    $ore = $_GET['a'] . "~" . $_GET['b'];
+}else {
+    $ore = $_GET['a'] . "~" . $_GET['b'];
+    $value=$_GET['c'];
+}
+
+echo date('d/m/Y H:i', $_GET['a'])."<br>";
+echo date('d/m/Y H:i', $_GET['b'])."<br>";
 //$ore=$esc[1]."~".$esc[2]; //1442214000~1442300399
 $res= array();
-$value=$_GET['c'];
+//$value=$_GET['c'];
 $ecco=array();
 $reso = query("SELECT * FROM `tt_dati` WHERE nick LIKE '$value'");
 while (($ra = mysql_fetch_assoc($reso))) {
@@ -54,7 +58,7 @@ foreach ($res as $key2 => $value2) {
             $value=$gioc2->PlayerGroup->CompletedTournaments->Tournament;
 
         if(!array_key_exists($value->{'@id'},$ecco)){
-            echo "\nXXXXXXXXXXXXXXXXXXXXX ID: ".$value->{'@id'}." ".$value->{'@name'}."\n";
+            echo "<br>XXXXXXXXXXXXXXXXXXXXX ID: ".$value->{'@id'}." ".$value->{'@name'}."<br>";
         }
         //else
             //echo "\nPRESENTE: ".$value->{'@name'}."\n";

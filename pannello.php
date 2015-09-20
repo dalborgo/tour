@@ -1,3 +1,16 @@
+<?php
+$format=date('Y-m-d');
+$seco=date('Y-m-d',(strtotime ( '-1 day' , strtotime ( $format) ) ));
+$a=strtotime($seco . '07:00:00');
+$b=strtotime($format . '06:59:59');
+$toy=$a."~".$b;
+
+//$format="2015-09-14";
+$terzo=date('Y-m-d',(strtotime ( '-1 day' , strtotime ( $seco) ) ));
+$c=strtotime($terzo . '07:00:00');
+echo "";
+?>
+
 <a href="creadati.php">1. Crea Dati</a><br/>
 <a href="salvaGenerale.php">2. Salva Generale</a><br/>
 <a href="salvaPois.php">3. Salva Pois</a><br/>
@@ -6,8 +19,9 @@
 <a href="./pl/">Edita Database</a><br/>
 <a href="creaNomi.php">Crea Nomi</a><br/>
 <a href="agg_players.php">Aggiorna Player</a><br/>
-<a href="agg_players.php?f=si">Aggiorna Player (FORZATO)</a><br/>
+<a href="agg_players.php?f=si">Aggiorna Player F (offline)</a><br/>
 <a href="agg_ranking.php">Aggiorna Ranking</a><br/>
 <a href="http://www.dalborgo.com/ryder/azz_blog.php">Azzera Blog</a><br/>
-<a href="http://www.dalborgo.com/shark/cm.php?tipo=l&d=24H">CM</a><br/>
-<a href="gruppi/myphp.php">Gruppi</a>
+<a href="http://www.dalborgo.com/shark/cm.php?tipo=l&d=<?php echo $toy ?>">CM (online)</a><br/>
+<a href="gruppi/myphp.php">Gruppi</a><br/>
+<a href="controllo.php?a=<?php echo $c ?>&b=<?php echo $a ?>&c=Bosca95">Controllo (online)</a>

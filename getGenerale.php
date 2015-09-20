@@ -8,19 +8,42 @@
 include_once "librerie/sql.php";
 include_once "librerie/date.php";
 include_once "librerie/specific.php";
-$dr=query("SELECT *, SUM(guadagno) as guad, MAX(tappa) as tp, SUM(tornei) as tor, under FROM `tt_generale` JOIN tt_player ON tt_generale.nick = tt_player.nick LEFT JOIN tt_squadra ON tt_player.squadra = tt_squadra.nome GROUP BY tt_generale.nick order by guad desc");
-
+$dr=query("SELECT *, SUM(guadagno) as guad, SUM(tornei) as tor, under FROM `tt_generale` JOIN tt_player ON tt_generale.nick = tt_player.nick LEFT JOIN tt_squadra ON tt_player.squadra = tt_squadra.nome GROUP BY tt_generale.nick order by guad desc");
+$tappa=getTappa();
+$tap=$tappa-1;
+$dr2=query("SELECT nick, posizione, ultimo FROM `tt_stats_gen` WHERE tappa >= '$tap' ORDER BY tappa desc");
 //$f=addDate($INIZIO,$tappa);
+$atr=array();
+while (($o = mysql_fetch_assoc($dr2))) {
+    if(array_key_exists($o["nick"],$atr)){
+        $atr[$o["nick"]]->posi=$o["posizione"];
+    }
+    else{
+        $obj2 = new stdClass();
+        $obj2->ulti=$o["ultimo"];
+        $atr[$o["nick"]]=$obj2;
+    }
+
+}
 $abbin = array();
 $base=0;
 $tra=0;
 $cont=0;
 while (($h = mysql_fetch_assoc($dr))) {
-    $tappa=$h["tp"];
+    //$tappa=$h["tp"];
     $obj = new stdClass();
     $cont++;
     $obj->pos=$cont."&deg;";
    // $obj->nick=$h["nick"];
+    $posi=$atr[$h["nick"]]->posi;
+    $ulti=($atr[$h["nick"]]->ulti>=0)?"(+ &euro;".$atr[$h["nick"]]->ulti.")":"(- &euro;".abs($atr[$h["nick"]]->ulti).")";
+    $cumul=$posi."&deg; ".$ulti;
+    if($obj->pos<$posi)
+        $obj->simb="<img src='media/images/GreenUpArrow.png' title='$cumul'>";
+    else if ($obj->pos>$posi)
+        $obj->simb="<img src='media/images/RedDownArrow.png' title='$cumul'>";
+    else
+        $obj->simb="<img src='media/images/GreyNeutralArrow.png' title='$cumul'>";
     if($cont==1)
         $base=$h["guad"];
     $tra+=$h["guad"];

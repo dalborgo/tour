@@ -11,7 +11,7 @@ include_once "librerie/specific.php";
 $tappa=getTappa();
 $dr=query("SELECT * FROM `tt_generale` JOIN tt_player ON tt_generale.nick = tt_player.nick LEFT JOIN tt_squadra ON tt_player.squadra = tt_squadra.nome WHERE tappa='$tappa' order by guadagno desc");
 
-$dr2=mysql_fetch_array(query("SELECT descrizione, combat FROM tt_tappa WHERE tappa ='$tappa'"));
+$dr2=mysql_fetch_array(query("SELECT descrizione, combat, tipo, diff FROM tt_tappa WHERE tappa ='$tappa'"));
 //$f=addDate($INIZIO,$tappa);
 $abbin = array();
 $base=0;
@@ -37,6 +37,8 @@ $usc2 = new stdClass();
 $usc2->data = $abbin;
 $usc2->tappa = $tappa;
 $usc2->totRac = $tra;
+$usc2->tipo = $dr2["tipo"];
+$usc2->diff = $dr2["diff"];
 $usc2->combat = $dr2["combat"];
 $usc2->partecipanti = $cont;
 $usc2->data2 = addDate($INIZIO,$tappa);

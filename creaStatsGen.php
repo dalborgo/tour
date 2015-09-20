@@ -46,13 +46,20 @@ while (($ra = mysql_fetch_assoc($res2))) {
     $out["presenze"]=$ra["pres"];
     repTV("tt_stats_gen",$out);
 }
+$resm = mysql_fetch_assoc(query("SELECT COUNT(*) as conta ,ROUND(AVG(categoria),2) as mont, tappa FROM `tt_granpremi` WHERE tappa = '$tappaN' GROUP BY tappa"));
+if($resm["conta"]>19)
+    $tipo="montuosa";
+else
+    $tipo="pianeggiante";
+$diff=$resm["mont"];
+$res = query("UPDATE tt_tappa SET tipo='$tipo', diff='$diff' WHERE tappa='$tappaN'");
 $resi = mysql_fetch_assoc(query("SELECT nick, SUM(punti) as p FROM `tt_pois` GROUP BY nick order by p desc LIMIT 1"));
 $rtg=$resi["nick"];
 $resi2 = mysql_fetch_assoc(query("SELECT a.nick, SUM(guadagno) as pu FROM `tt_generale` p JOIN tt_player a ON a.nick = p.nick WHERE under = 1 GROUP BY p.nick order by pu desc LIMIT 1"));
 $rtg2=$resi2["nick"];
 $resi3 = mysql_fetch_assoc(query("SELECT tt_dati.`nick`, SUM(guadagno) as guadagno  FROM `tt_dati` WHERE buyin <= 5.00 GROUP BY nick ORDER BY guadagno desc LIMIT 1"));
 $rtg3=$resi3["nick"];
-$res = query("UPDATE tt_tappa SET partecipanti='$cont2', leader='$primo', soldi_leader='$soldil', vincitore='$vinci', soldi = '$mguad', scalatore = '$rtg', giovane='$rtg2', inter= '$rtg3' WHERE tappa='$tappaN'");
+$res = query("UPDATE tt_tappa SET partecipanti='$cont2', leader='$primo', soldi_leader='$soldil', vincitore='$vinci', soldi = '$mguad', scalatore = '$rtg', giovane='$rtg2', inter= '$rtg3', tipo='$tipo', diff='$diff' WHERE tappa='$tappaN'");
 $to["tappa"]=$tappaN+1;
 repTV("tt_tappa",$to);
 echo "OK";

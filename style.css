@@ -121,3 +121,8 @@ td.due{
 th a{
     color:black;
 }
+
+th a img {
+    height: 23px;
+    vertical-align: middle;
+}
