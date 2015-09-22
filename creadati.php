@@ -31,7 +31,7 @@ echo '<br>'.$ore;
 //$ore="1442163600~1442185200";
 $res= array();
 foreach ($lista2 as $key => $value) {
-    $res[$value] = ccall('http://www.sharkscope.com/api/dalborgo/networks/PlayerGroup/players/'.$value.'/completedTournaments?order=Last,50&filter=Date:'.$ore.';Class:SCHEDULED');
+    $res[$value] = ccall('http://www.sharkscope.com/api/dalborgo/networks/PlayerGroup/players/'.$value.'/completedTournaments?order=Last,70&filter=Date:'.$ore.';Class:SCHEDULED');
 }
 $usc=array();
 $err=array();

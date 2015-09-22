@@ -41,7 +41,11 @@ while (($h = mysql_fetch_assoc($dr))) {
     $obj->squadra=$h["nome"];
     //$obj->tornei=$h["tor"];
    // $obj->status=$h["status"];
-    $obj->nick='<span class="nowr"><img style="vertical-align:middle" src="http://static.pokerstrategycdn.com/front/images/ranks/mini/' . $h["status"]  . '.png"/> ' . $h["nick"] . '</span>';
+    if($h["maglia"]!=null)
+        $colore=$h["maglia"];
+    else
+        $colore="";
+    $obj->nick='<span class="nowr '.$colore.'"><img style="vertical-align:middle" src="http://static.pokerstrategycdn.com/front/images/ranks/mini/' . $h["status"]  . '.png"/> ' . $h["nick"] . '</span>';
     $abbin[]=$obj;
 }
 $usc2 = new stdClass();

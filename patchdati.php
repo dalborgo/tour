@@ -42,7 +42,7 @@ if(isset($_GET['c']))
 else
     $opt="";
 foreach ($lista2 as $key => $value) {
-    $res[$value] = ccall('http://www.sharkscope.com/api/dalborgo/networks/PlayerGroup/players/'.$value.'/completedTournaments?order='.$opt.'Last,50&filter=Date:'.$ore.';Class:SCHEDULED');
+    $res[$value] = ccall('http://www.sharkscope.com/api/dalborgo/networks/PlayerGroup/players/'.$value.'/completedTournaments?order=Last,70&filter=Date:'.$ore.';'.$opt.'Class:SCHEDULED');
 }
 $usc=array();
 $err=array();
@@ -60,6 +60,7 @@ foreach ($res as $key2 => $value2) {
         $conto=count($gioc2->PlayerGroup->CompletedTournaments->Tournament);
         if ($conto<2)
             $value=$gioc2->PlayerGroup->CompletedTournaments->Tournament;
+        echo "<br>".$key2." ".$value->{'@name'}." ".$value->{'@id'};
         if(isset($value->TournamentEntry->{'@prize'}))
             $pirce=($value->TournamentEntry->{'@prize'})?$value->TournamentEntry->{'@prize'}:'0';
         else

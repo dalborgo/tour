@@ -126,3 +126,39 @@ th a img {
     height: 23px;
     vertical-align: middle;
 }
+
+.gialla{
+    background-color: yellow;
+    color: black;
+    border: 1px solid black;
+    font-weight: bold;
+    padding: 1px 2px 0;
+}
+.verde{
+    background-color: green;
+    font-weight: bold;
+    color: white;
+    border: 1px solid black;
+    padding: 1px 2px 0;
+}
+.pois{
+    background-color: #FD5B5B;
+    font-weight: bold;
+    color: white;
+    border: 1px solid black;
+    padding: 1px 2px 0;
+}
+.bianca{
+    background-color: white;
+    font-weight: bold;
+    color: black;
+    border: 1px solid black;
+    padding: 1px 2px 0;
+}
+.blu{
+    font-weight: bold;
+    background-color: #0065ff;
+    color: white;
+    border: 1px solid black;
+    padding: 1px 2px 0;
+}

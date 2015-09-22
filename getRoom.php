@@ -19,7 +19,7 @@ if (!isset($_GET['r']) || $_GET['r']=="")
 //$tappa=diffDate2($INIZIO);
 $res = query("CREATE TEMPORARY TABLE IF NOT EXISTS table3 AS (SELECT tt_dati.`nick`, SUM(guadagno) as guadagno, COUNT(*) as tornei FROM `tt_dati` WHERE network = '$room' GROUP BY nick)");
 
-$dr=query("SELECT a.`nick`, guadagno,  tornei, status, squadra FROM `table3` a LEFT JOIN tt_player b ON a.nick = b.nick  ORDER BY guadagno DESC");
+$dr=query("SELECT a.`nick`, guadagno,  tornei, maglia, status, squadra FROM `table3` a LEFT JOIN tt_player b ON a.nick = b.nick  ORDER BY guadagno DESC");
 $tappa=getTappa();
 //$f=addDate($INIZIO,$tappa);
 $abbin = array();
@@ -35,7 +35,11 @@ while (($h = mysql_fetch_assoc($dr))) {
     $obj->squadra=$h["squadra"];
     $obj->status=$h["status"];
     $obj->nick2 = $h["nick"];
-    $obj->nick='<span class="nowr"><img style="vertical-align:middle" src="http://static.pokerstrategycdn.com/front/images/ranks/mini/' . $h["status"]  . '.png"/> ' . $h["nick"] . '</span>';
+    if($h["maglia"]!=null)
+        $colore=$h["maglia"];
+    else
+        $colore="";
+    $obj->nick='<span class="nowr '.$colore.'"><img style="vertical-align:middle" src="http://static.pokerstrategycdn.com/front/images/ranks/mini/' . $h["status"]  . '.png"/> ' . $h["nick"] . '</span>';
     $abbin[]=$obj;
 }
 $usc2 = new stdClass();

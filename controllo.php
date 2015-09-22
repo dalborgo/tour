@@ -38,7 +38,7 @@ while (($ra = mysql_fetch_assoc($reso))) {
     $ecco[$val] = $ra["nome"];
 }
 echo " CONTA :".count($ecco);
-$res[$value] = ccall('http://www.sharkscope.com/api/dalborgo/networks/PlayerGroup/players/'.$value.'/completedTournaments?order=Last,50&filter=Date:'.$ore.';Class:SCHEDULED');//TournamentName:explosive;
+$res[$value] = ccall('http://www.sharkscope.com/api/dalborgo/networks/PlayerGroup/players/'.$value.'/completedTournaments?order=Last,70&filter=Date:'.$ore.';Class:SCHEDULED');//TournamentName:explosive;
 
 $usc=array();
 $err=array();
@@ -58,7 +58,7 @@ foreach ($res as $key2 => $value2) {
             $value=$gioc2->PlayerGroup->CompletedTournaments->Tournament;
 
         if(!array_key_exists($value->{'@id'},$ecco)){
-            echo "<br>XXXXXXXXXXXXXXXXXXXXX ID: ".$value->{'@id'}." ".$value->{'@name'}."<br>";
+            echo "<br>XXXXXXXXXXXXXXXXXXXXX ID: ".$value->{'@id'}." ".$value->{'@name'}." ".$value->{'@date'}."<br>";
         }
         //else
             //echo "\nPRESENTE: ".$value->{'@name'}."\n";

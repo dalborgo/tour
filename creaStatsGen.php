@@ -53,13 +53,43 @@ else
     $tipo="pianeggiante";
 $diff=$resm["mont"];
 $res = query("UPDATE tt_tappa SET tipo='$tipo', diff='$diff' WHERE tappa='$tappaN'");
+$respi = mysql_fetch_assoc(query("SELECT nick, SUM(punti) as p FROM `tt_generale` GROUP BY nick order by p desc LIMIT 1"));
+$rtgp=$respi["nick"];
 $resi = mysql_fetch_assoc(query("SELECT nick, SUM(punti) as p FROM `tt_pois` GROUP BY nick order by p desc LIMIT 1"));
 $rtg=$resi["nick"];
 $resi2 = mysql_fetch_assoc(query("SELECT a.nick, SUM(guadagno) as pu FROM `tt_generale` p JOIN tt_player a ON a.nick = p.nick WHERE under = 1 GROUP BY p.nick order by pu desc LIMIT 1"));
 $rtg2=$resi2["nick"];
 $resi3 = mysql_fetch_assoc(query("SELECT tt_dati.`nick`, SUM(guadagno) as guadagno  FROM `tt_dati` WHERE buyin <= 5.00 GROUP BY nick ORDER BY guadagno desc LIMIT 1"));
 $rtg3=$resi3["nick"];
-$res = query("UPDATE tt_tappa SET partecipanti='$cont2', leader='$primo', soldi_leader='$soldil', vincitore='$vinci', soldi = '$mguad', scalatore = '$rtg', giovane='$rtg2', inter= '$rtg3', tipo='$tipo', diff='$diff' WHERE tappa='$tappaN'");
+$res = query("UPDATE tt_tappa SET partecipanti='$cont2', leader='$primo', soldi_leader='$soldil', vincitore='$vinci', soldi = '$mguad', scalatore = '$rtg', punti = '$rtgp', giovane='$rtg2', inter= '$rtg3', tipo='$tipo', diff='$diff' WHERE tappa='$tappaN'");
 $to["tappa"]=$tappaN+1;
 repTV("tt_tappa",$to);
+$rew = query("SELECT nick, maglia FROM tt_player");
+while (($j = mysql_fetch_assoc($rew))) {
+    $n=$j["nick"];
+    $m=$j["maglia"];
+    if($n==$primo){
+        $c="gialla";
+        if($m!=$c)
+            query("UPDATE tt_player SET maglia='$c' WHERE nick LIKE '$n'");
+    }else if($n==$rtgp){
+        $c="verde";
+        if($m!=$c)
+            query("UPDATE tt_player SET maglia='$c' WHERE nick LIKE '$n'");
+    }else if($n==$rtg){
+        $c="pois";
+        if($m!=$c)
+            query("UPDATE tt_player SET maglia='$c' WHERE nick LIKE '$n'");
+    }else if($n==$rtg3){
+        $c="blu";
+        if($m!=$c)
+            query("UPDATE tt_player SET maglia='$c' WHERE nick LIKE '$n'");
+    }else if($n==$rtg2){
+        $c="bianca";
+        if($m!=$c)
+            query("UPDATE tt_player SET maglia='$c' WHERE nick LIKE '$n'");
+    }else
+        query("UPDATE tt_player SET maglia=NULL WHERE nick LIKE '$n'");
+}
+
 echo "OK";

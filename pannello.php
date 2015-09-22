@@ -24,4 +24,5 @@ echo "";
 <a href="http://www.dalborgo.com/ryder/azz_blog.php">Azzera Blog</a><br/>
 <a href="http://www.dalborgo.com/shark/cm.php?tipo=l&d=<?php echo $toy ?>">CM (online)</a><br/>
 <a href="gruppi/myphp.php">Gruppi</a><br/>
-<a href="controllo.php?a=<?php echo $c ?>&b=<?php echo $a ?>&c=Bosca95">Controllo (online)</a>
+<a href="controllo.php?a=<?php echo $c ?>&b=<?php echo $a ?>&c=Bosca95">Controllo (online)</a><br/>
+<a href="patchdati.php?a=<?php echo $c ?>&b=<?php echo $a ?>&c=explosive">Patcha</a>

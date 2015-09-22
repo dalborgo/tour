@@ -35,13 +35,22 @@ while (($h = mysql_fetch_assoc($dr))) {
     $cont++;
     $obj->pos=$cont."&deg;";
    // $obj->nick=$h["nick"];
-    $posi=$atr[$h["nick"]]->posi;
+    if (!isset($atr[$h["nick"]]->posi)) {
+        $posi="New";
+    } else {
+        $posi=$atr[$h["nick"]]->posi;
+    }
     $ulti=($atr[$h["nick"]]->ulti>=0)?"(+ &euro;".$atr[$h["nick"]]->ulti.")":"(- &euro;".abs($atr[$h["nick"]]->ulti).")";
-    $cumul=$posi."&deg; ".$ulti;
-    if($obj->pos<$posi)
+    if($posi=="New")
+        $cumul=$posi." ".$ulti;
+    else
+        $cumul=$posi."&deg; ".$ulti;
+    if($cont<$posi && $posi!="New")
         $obj->simb="<img src='media/images/GreenUpArrow.png' title='$cumul'>";
-    else if ($obj->pos>$posi)
+    else if ($cont>$posi && $posi!="New")
         $obj->simb="<img src='media/images/RedDownArrow.png' title='$cumul'>";
+    else if ($posi=="New")
+        $obj->simb="<img src='media/images/plus.png' title='$cumul'>";
     else
         $obj->simb="<img src='media/images/GreyNeutralArrow.png' title='$cumul'>";
     if($cont==1)
@@ -54,7 +63,11 @@ while (($h = mysql_fetch_assoc($dr))) {
     $obj->status=$h["status"];
     $obj->under = $h["under"];
     $obj->nick2 = $h["nick"];
-    $obj->nick='<span class="nowr"><img style="vertical-align:middle" src="http://static.pokerstrategycdn.com/front/images/ranks/mini/' . $h["status"]  . '.png"/> ' . $h["nick"] . '</span>';
+    if($h["maglia"]!=null)
+        $colore=$h["maglia"];
+    else
+        $colore="";
+    $obj->nick='<span class="nowr '.$colore.'"><img style="vertical-align:middle" src="http://static.pokerstrategycdn.com/front/images/ranks/mini/' . $h["status"]  . '.png"/> ' . $h["nick"] . '</span>';
     $abbin[]=$obj;
 }
 $dr2=mysql_fetch_array(query("SELECT giovane FROM tt_tappa WHERE tappa ='$tappa'"));
