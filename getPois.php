@@ -23,7 +23,7 @@ $base=0;
 $tra=0;
 $cont=0;
 $senti=0;
-
+$arr=maglie();
 while (($h = mysql_fetch_assoc($dr))) {
 
     $obj = new stdClass();
@@ -41,11 +41,16 @@ while (($h = mysql_fetch_assoc($dr))) {
     $obj->squadra=$h["nome"];
     //$obj->tornei=$h["tor"];
    // $obj->status=$h["status"];
-    if($h["maglia"]!=null)
-        $colore=$h["maglia"];
-    else
-        $colore="";
-    $obj->nick='<span class="nowr '.$colore.'"><img style="vertical-align:middle" src="http://static.pokerstrategycdn.com/front/images/ranks/mini/' . $h["status"]  . '.png"/> ' . $h["nick"] . '</span>';
+    $m="";$colore2="";$colore="";
+    if(array_key_exists($h["nick"],$arr)) {
+        $m = $arr[$h["nick"]];
+        foreach ($m as $k => $v)
+            $colore2.="<img class='maglia' src='media/images/$v.png'/>";
+        $colore="bold";
+    }else
+        $colore2="";
+    $obj->nick='<span class="nowr '.$colore.'"><img style="vertical-align:middle" src="http://static.pokerstrategycdn.com/front/images/ranks/mini/' . $h["status"]  . '.png"/> ' . $h["nick"] . '</span>
+    '.$colore2;
     $abbin[]=$obj;
 }
 $usc2 = new stdClass();

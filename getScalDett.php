@@ -64,6 +64,7 @@ while (($h = mysql_fetch_assoc($dr))) {
     //$obj->nick2 = $h["nick"];
     //$obj->nick='<span class="nowr"><img style="vertical-align:middle" src="http://www.dalborgo.it/public/ss/' . $h["status"]  . 'p.png"/> ' . $h["nick"] . '</span>';
 }
+$abbin[] = $obj;
 $usc2 = new stdClass();
 $usc2->data = $abbin;
 $usc2->tappa = $tappa;

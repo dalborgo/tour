@@ -29,6 +29,7 @@ $abbin = array();
 $base=0;
 $tra=0;
 $cont=0;
+$arr=maglie();
 while (($h = mysql_fetch_assoc($dr))) {
     //$tappa=$h["tp"];
     $obj = new stdClass();
@@ -63,11 +64,16 @@ while (($h = mysql_fetch_assoc($dr))) {
     $obj->status=$h["status"];
     $obj->under = $h["under"];
     $obj->nick2 = $h["nick"];
-    if($h["maglia"]!=null)
-        $colore=$h["maglia"];
-    else
-        $colore="";
-    $obj->nick='<span class="nowr '.$colore.'"><img style="vertical-align:middle" src="http://static.pokerstrategycdn.com/front/images/ranks/mini/' . $h["status"]  . '.png"/> ' . $h["nick"] . '</span>';
+    $m="";$colore2="";$colore="";
+    if(array_key_exists($h["nick"],$arr)) {
+        $m = $arr[$h["nick"]];
+        foreach ($m as $k => $v)
+            $colore2.="<img class='maglia' src='media/images/$v.png'/>";
+        $colore="bold";
+    }else
+        $colore2="";
+    $obj->nick='<span class="nowr '.$colore.'"><img style="vertical-align:middle" src="http://static.pokerstrategycdn.com/front/images/ranks/mini/' . $h["status"]  . '.png"/> ' . $h["nick"] . '</span>
+    '.$colore2;
     $abbin[]=$obj;
 }
 $dr2=mysql_fetch_array(query("SELECT giovane FROM tt_tappa WHERE tappa ='$tappa'"));
