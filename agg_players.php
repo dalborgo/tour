@@ -13,17 +13,19 @@ require_once "librerie/simple_html_dom.php";
 $service_url = 'http://www.sharkscope.com/api/dalborgo/playergroups';
 $decoded = ccall($service_url);
 $ltot = $decoded->Response->PlayerGroupResponse->PlayerGroup;
-$sq = query("SELECT nick, squadra, abil, under, status from tt_player");
+$sq = query("SELECT nick, squadra, abil, under, status, maglia from tt_player");
 $sa = array();
 $saa = array();
 $sta = array();
 $sta2 = array();
+$stam = array();
 while (($ra = mysql_fetch_assoc($sq))) {
     $fg=$ra["nick"];
     $sa[$fg]=$ra["squadra"];
     $sta[$fg]=$ra["status"];
     $saa[$fg]=$ra["abil"];
     $sta2[$fg]=$ra["under"];
+    $stam[$fg]=$ra["maglia"];
 }
 foreach ($ltot as  $mio) {
 
@@ -46,6 +48,7 @@ foreach ($ltot as  $mio) {
     $out["squadra"] = $sa[$out["nick"]];
     $out["abil"] = $saa[$out["nick"]];
     $out["under"] = $sta2[$out["nick"]];
+    $out["maglia"] = $stam[$out["nick"]];
     //$datec = new DateTime($out["ultima"]);
     //$datec->setTimezone(new DateTimeZone('Europe/Rome'));
     $out["ultima"] = date('Y-m-d',$out["ultima"]);

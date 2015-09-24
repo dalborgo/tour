@@ -60,7 +60,8 @@ while (($h = mysql_fetch_assoc($dr))) {
     $obj->guadagno=$h["guad"];
     $obj->squadra=$h["nome"];
     $obj->tornei=$h["tor"];
-    $obj->distacco=($base-$h["guad"]==0)?"":"-".($base-$h["guad"]);
+    $sott=number_format($base-$h["guad"],2);
+    $obj->distacco=($sott==0)?"":"-".($sott);
     $obj->status=$h["status"];
     $obj->under = $h["under"];
     $obj->nick2 = $h["nick"];

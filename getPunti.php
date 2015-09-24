@@ -16,7 +16,6 @@ $dr2=query("SELECT nick, punti as last FROM `tt_generale` WHERE tappa='$tappa'")
 while (($h2 = mysql_fetch_assoc($dr2))) {
     $odi[$h2["nick"]]=$h2["last"];
 }
-//$f=addDate($INIZIO,$tappa);
 $abbin = array();
 $base=0;
 $tra=0;
@@ -31,7 +30,6 @@ while (($h = mysql_fetch_assoc($dr))) {
     } else {
         $obj->last=($odi[$h["nick"]]>0)?"+".$odi[$h["nick"]]:"";
     }
-    // $obj->nick=$h["nick"];
     $obj->punti=$h["punt"];
     $obj->squadra=$h["nome"];
     $obj->tornei=$h["tor"];

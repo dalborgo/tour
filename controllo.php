@@ -45,8 +45,6 @@ $err=array();
 $atos=array();
 $errC=array();
 foreach ($res as $key2 => $value2) {
-
-    //$gioc2=$value2->Response->PlayerResponse->PlayerView;
     if(!isset($value2->Response->PlayerResponse->PlayerView->PlayerGroup->CompletedTournaments->Tournament))
         continue;
     else
@@ -60,8 +58,6 @@ foreach ($res as $key2 => $value2) {
         if(!array_key_exists($value->{'@id'},$ecco)){
             echo "<br>XXXXXXXXXXXXXXXXXXXXX ID: ".$value->{'@id'}." ".$value->{'@name'}." ".$value->{'@date'}."<br>";
         }
-        //else
-            //echo "\nPRESENTE: ".$value->{'@name'}."\n";
         if ($conto<2)
             break;
     }

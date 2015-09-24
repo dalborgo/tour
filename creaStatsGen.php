@@ -10,6 +10,7 @@ include "librerie/fetch.php";
 include "librerie/sql.php";
 include "librerie/specific.php";
 include "librerie/date.php";
+include "librerie/stringhe.php";
 $tappaN=diffDate2($INIZIO);
 $res = query("CREATE TEMPORARY TABLE IF NOT EXISTS table2 AS (SELECT COUNT(*) as pres, SUM(guadagno) as guad, MAX(tappa) as tp, nick as n1 FROM tt_generale GROUP BY nick)");
 
@@ -23,14 +24,12 @@ $soldil=0;
 $cont=0;
 $cont2=0;
 while (($ra = mysql_fetch_assoc($res2))) {
-    //$tappa=$ra["tp"];
     $out["nick"]=$ra["nick"];
     $out["guadagno"]=$ra["guad"];
     if($ra["guadagno"]>$mguad && $ra["tp"] == $tappaN ){
         $mguad=$ra["guadagno"];
         $vinci=$ra["nick"];
     }
-
     if($ra["tp"] == $tappaN)
         $cont2++;
     $out["ultimo"]=$ra["guadagno"];
@@ -68,28 +67,32 @@ $rew = query("SELECT nick, maglia FROM tt_player");
 while (($j = mysql_fetch_assoc($rew))) {
     $n=$j["nick"];
     $m=$j["maglia"];
+    $stot="";
     if($n==$primo){
         $c="gialla";
-        if($m!=$c)
-            query("UPDATE tt_player SET maglia='$c' WHERE nick LIKE '$n'");
-    }else if($n==$rtgp){
+        $stot.=$c.",";
+    }
+    if($n==$rtgp){
         $c="verde";
-        if($m!=$c)
-            query("UPDATE tt_player SET maglia='$c' WHERE nick LIKE '$n'");
-    }else if($n==$rtg){
+        $stot.=$c.",";
+    }
+    if($n==$rtg){
         $c="pois";
-        if($m!=$c)
-            query("UPDATE tt_player SET maglia='$c' WHERE nick LIKE '$n'");
-    }else if($n==$rtg3){
+        $stot.=$c.",";
+    }
+    if($n==$rtg3){
         $c="blu";
-        if($m!=$c)
-            query("UPDATE tt_player SET maglia='$c' WHERE nick LIKE '$n'");
-    }else if($n==$rtg2){
+        $stot.=$c.",";
+    }
+    if($n==$rtg2){
         $c="bianca";
-        if($m!=$c)
-            query("UPDATE tt_player SET maglia='$c' WHERE nick LIKE '$n'");
-    }else
+        $stot.=$c.",";
+    }
+    $stot=togliUltimo($stot);
+    if($stot=="")
         query("UPDATE tt_player SET maglia=NULL WHERE nick LIKE '$n'");
+    else
+        query("UPDATE tt_player SET maglia='$stot' WHERE nick LIKE '$n'");
 }
 
 echo "OK";

@@ -7,11 +7,9 @@
  */
 include_once "librerie/sql.php";
 include_once "librerie/specific.php";
-//INSERT INTO "main"."replace_pattern_0_1" ("url_pattern","input","replacement") VALUES ("http://it.pokerstrategy.com/","qwerr","sds")
 $dr=query("SELECT * FROM tt_player");
 $tappa=getTappa();
 $comb=mysql_fetch_assoc(query("SELECT combat FROM tt_tappa WHERE tappa='$tappa'"));
-//$f=addDate($INIZIO,$tappa);
 $abbin = array();
 $base=0;
 $tra=0;
