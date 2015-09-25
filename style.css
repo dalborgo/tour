@@ -57,6 +57,9 @@ body#mainB{
     cursor: help;
     font-weight: bold;
 }
+.rosso2{
+    color: red;
+}
 .under{
     font-style: italic;
     cursor: help;
@@ -128,40 +131,31 @@ th a img {
     vertical-align: middle;
 }
 
-.gialla{
+td.gialla{
     background-color: yellow;
     color: black;
-    border: 1px solid black;
-    font-weight: bold;
-    padding: 1px 2px 0;
+    border-left: 1px solid black;
 }
-.verde{
+td.verde{
     background-color: green;
-    font-weight: bold;
     color: white;
-    border: 1px solid black;
-    padding: 1px 2px 0;
+    border-left: 1px solid black;
 }
-.pois{
+td.pois{
     background-color: #FD5B5B;
-    font-weight: bold;
     color: white;
-    border: 1px solid black;
-    padding: 1px 2px 0;
+    border-left: 1px solid black;
 }
-.bianca{
+td.bianca{
     background-color: white;
-    font-weight: bold;
     color: black;
-    border: 1px solid black;
-    padding: 1px 2px 0;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
 }
-.blu{
-    font-weight: bold;
-    background-color: #0065ff;
+td.blu{
+    background-color: #3d64ff;
     color: white;
-    border: 1px solid black;
-    padding: 1px 2px 0;
+    border-left: 1px solid black;
 }
 .maglia{
     vertical-align: sub;
