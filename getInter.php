@@ -14,7 +14,7 @@ include_once "librerie/specific.php";
 //$tappa=diffDate2($INIZIO);
 $res = query("CREATE TEMPORARY TABLE IF NOT EXISTS table4 AS (SELECT tt_dati.`nick`, SUM(guadagno) as guadagno, COUNT(*) as tornei FROM `tt_dati` WHERE buyin <= 5.00 GROUP BY nick)");
 
-$dr=query("SELECT a.`nick`, guadagno,  tornei, status, squadra, maglia FROM `table4` a LEFT JOIN tt_player b ON a.nick = b.nick  ORDER BY guadagno DESC");
+$dr=query("SELECT a.`nick`, guadagno,  tornei, status, squadra, maglia FROM `table4` a LEFT JOIN tt_player b ON a.nick = b.nick  ORDER BY guadagno DESC, tornei desc");
 $tappa=getTappa();
 //$f=addDate($INIZIO,$tappa);
 $abbin = array();

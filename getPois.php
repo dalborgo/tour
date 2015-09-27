@@ -9,7 +9,7 @@ include_once "librerie/sql.php";
 include_once "librerie/date.php";
 include_once "librerie/specific.php";
 
-$dr=query("SELECT *, SUM(punti) as punt FROM `tt_pois` JOIN tt_player ON tt_pois.nick = tt_player.nick LEFT JOIN tt_squadra ON tt_player.squadra = tt_squadra.nome GROUP BY tt_pois.nick order by punt desc");
+$dr=query("SELECT *, SUM(punti) as punt, sum(case when punti > 0 then 1 else 0 end) as conto FROM `tt_pois` JOIN tt_player ON tt_pois.nick = tt_player.nick LEFT JOIN tt_squadra ON tt_player.squadra = tt_squadra.nome GROUP BY tt_pois.nick order by punt desc, conto desc");
 //$dr2=query("SELECT nick, SUM(punti) as last FROM `tt_pois` WHERE tappa=3 group by nick");
 $tappa=getTappa();
 $odi=array();
@@ -31,6 +31,7 @@ while (($h = mysql_fetch_assoc($dr))) {
     $obj->pos=$cont."&deg;";
     // $obj->nick=$h["nick"];
     $obj->punti=$h["punt"];
+    $obj->conto=$h["conto"];
     if (!isset($odi[$h["nick"]])) {
         $obj->last="";
     } else {

@@ -18,7 +18,7 @@ if (!isset($_GET['r']) || $_GET['r']=="")
 
 $res = query("CREATE TEMPORARY TABLE IF NOT EXISTS table3 AS (SELECT tt_dati.`nick`, SUM(guadagno) as guadagno, COUNT(*) as tornei FROM `tt_dati` WHERE network = '$room' GROUP BY nick)");
 
-$dr=query("SELECT a.`nick`, guadagno,  tornei, maglia, status, squadra FROM `table3` a LEFT JOIN tt_player b ON a.nick = b.nick  ORDER BY guadagno DESC");
+$dr=query("SELECT a.`nick`, guadagno,  tornei, maglia, status, squadra FROM `table3` a LEFT JOIN tt_player b ON a.nick = b.nick  ORDER BY guadagno DESC, tornei desc");
 $tappa=getTappa();
 $abbin = array();
 $base=0;

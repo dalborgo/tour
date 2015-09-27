@@ -224,14 +224,16 @@
                     { "data": "nick" },
                     { "data": "squadra" },
                     { "data": "punti" },
-                    { "data": "last" }
+                    { "data": "last" },
+                    { "data": "conto" }
                 ],
                 "aoColumnDefs": [
                     { "sClass": "center", "aTargets": [ 0] },
                     { "sClass": "", "aTargets": [ 1] },
                     { "sClass": "", "aTargets": [ 2] },
                     { "sClass": "destra", "aTargets": [ 3 ] },
-                    { "sClass": "destra", "aTargets": [ 4 ] }
+                    { "sClass": "destra", "aTargets": [ 4 ] },
+                    { "sClass": "destra", "aTargets": [ 5 ] }
                 ],
                 "oLanguage": {
                     "sUrl": "./lang/ita.txt"
@@ -417,7 +419,7 @@
     </tr>
     <tr class="sotto" style="color:white">
         <th class="">Tappa</th>
-        <th class="" >Partiti</th>
+        <th class="" >Giocatori</th>
         <th class="" style="">Vincitore</th>
         <th style="text-align: right;">&euro; Soldi&nbsp;</th>
         <th>Gialla</th>
@@ -470,7 +472,7 @@
     <thead class="">
     <tr class="sopra">
         <th colspan="2" class="numTappa4" style="padding-left: 20px"></th>
-        <th colspan="3" style="padding-right: 20px;text-align:right">
+        <th colspan="4" style="padding-right: 20px;text-align:right">
             <a href="#dettscal" class="" onclick="$('#example7').toggle();$('#example4').toggle()"><img src="media/images/piu.png" style="" title="vai al dettaglio scalatori"></a></th>
     </tr>
     <tr class="sotto">
@@ -479,6 +481,9 @@
         <th class="">Squadra</th>
         <th style="padding-right: 10px">Punti</th>
         <th style="padding-right: 10px">Ultimi</th>
+        <th style="padding-right: 10px">
+            <abbr title="Numero di ITM in un torneo con almeno 3 strategisti">Scalate</abbr>
+        </th>
     </tr>
     </thead>
 </table>

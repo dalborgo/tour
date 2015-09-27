@@ -15,7 +15,7 @@ if (!isset($_GET['r']) || $_GET['r']=="")
     $room=1;
 }else
     $tappa=$_GET['r'];
-$dr=query("SELECT * FROM `tt_generale` JOIN tt_player ON tt_generale.nick = tt_player.nick LEFT JOIN tt_squadra ON tt_player.squadra = tt_squadra.nome WHERE tappa='$tappa' order by guadagno desc");
+$dr=query("SELECT * FROM `tt_generale` JOIN tt_player ON tt_generale.nick = tt_player.nick LEFT JOIN tt_squadra ON tt_player.squadra = tt_squadra.nome WHERE tappa='$tappa' order by guadagno desc, tornei desc");
 
 $dr2=mysql_fetch_array(query("SELECT descrizione, combat, tipo, diff FROM tt_tappa WHERE tappa ='$tappa'"));
 //$f=addDate($INIZIO,$tappa);

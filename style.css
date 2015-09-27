@@ -163,3 +163,7 @@ td.blu{
 .bold{
     font-weight: bold;
 }
+abbr {
+    border-bottom: 1px dotted #FFFFFF;
+    cursor: help;
+}

@@ -9,7 +9,7 @@ include_once "librerie/sql.php";
 include_once "librerie/date.php";
 include_once "librerie/specific.php";
 
-$dr=query("SELECT *, SUM(punti) as punt, SUM(tornei) as tor FROM `tt_generale` JOIN tt_player ON tt_generale.nick = tt_player.nick LEFT JOIN tt_squadra ON tt_player.squadra = tt_squadra.nome GROUP BY tt_generale.nick order by punt desc");
+$dr=query("SELECT *, SUM(punti) as punt, SUM(tornei) as tor FROM `tt_generale` JOIN tt_player ON tt_generale.nick = tt_player.nick LEFT JOIN tt_squadra ON tt_player.squadra = tt_squadra.nome GROUP BY tt_generale.nick order by punt desc, tor desc");
 $tappa=getTappa();
 $odi=array();
 $dr2=query("SELECT nick, punti as last FROM `tt_generale` WHERE tappa='$tappa'");
