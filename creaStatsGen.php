@@ -48,6 +48,8 @@ while (($ra = mysql_fetch_assoc($res2))) {
 $resm = mysql_fetch_assoc(query("SELECT COUNT(*) as conta ,ROUND(AVG(categoria),2) as mont, tappa FROM `tt_granpremi` WHERE tappa = '$tappaN' GROUP BY tappa"));
 if($resm["conta"]>19)
     $tipo="montuosa";
+else if($resm["conta"]>13)
+    $tipo="vallonata";
 else
     $tipo="pianeggiante";
 $diff=$resm["mont"];

@@ -167,3 +167,10 @@ abbr {
     border-bottom: 1px dotted #FFFFFF;
     cursor: help;
 }
+abbr.nero{
+    border-bottom: 1px dotted #000;
+}
+
+abbr.senza{
+    border: none;
+}

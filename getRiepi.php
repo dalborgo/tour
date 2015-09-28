@@ -20,10 +20,11 @@ while (($h = mysql_fetch_assoc($dr))) {
         $cont++;
         continue;
     }
+    $piu=$h["tappa"];
+    $ecco=date('d/m/Y', strtotime($INIZIO. " + $piu days"));
     $obj = new stdClass();
-
     $obj->descr=$h["descrizione"];
-    $obj->tappa=$h["tappa"]."&deg;";
+    $obj->tappa="<abbr title='$ecco' class='nero'>".$h["tappa"]."&deg;</abbr>";
     $obj->parte=$h["partecipanti"];
     $obj->vinci=$h["vincitore"];
     $obj->soldil=$h["soldi_leader"];

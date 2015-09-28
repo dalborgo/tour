@@ -1,6 +1,3 @@
-
-
-
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -8,21 +5,31 @@
     <title>Tour</title>
     <link href="media/css/jquery.mio.css" rel="stylesheet" type="text/css">
     <link href="style.css" rel="stylesheet" type="text/css">
+    <link href="media/css/bars-movie.css" rel="stylesheet" type="text/css">
     <script src="https://code.jquery.com/jquery-1.11.1.min.js" type="application/javascript"></script>
     <script src="https://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js" type="application/javascript"></script>
     <style>
 
     </style>
-    <script type="text/javascript" language="javascript" >
+    <script type="text/javascript" language="javascript">
         var table6;
         var table3;
-        var tappa="";
+        var tappa = "";
         var myCallback = function () {
-            var json = table3.ajax.json(); $(".descTappa").html(json.desc+"<br>Tipo: "+json.tipo);
-            $(".numTappa3").html("Ordine di Arrivo: "+json.tappa+"&deg; tappa ("+json.data2+")");
-            $(".totRac3").html("Partecipanti: "+json.partecipanti);
+            var json = table3.ajax.json();
+            $(".descTappa").html(json.desc + " (" + json.tipo + ")");
+            $('#example-movie').barrating('show', {
+                theme: 'bars-movie',
+                readonly: true,
+                showValues: false
+            });
+            $('select').barrating('set', json.diff);
+            $(".br-current-rating").attr('title','Coeff. Diff.: '+json.diff2);
+                    //after("<span style='display:inline-block;font-size:small'>("+json.diff2+")</span>");
+            $(".numTappa3").html("Ordine di Arrivo: " + json.tappa + "&deg; tappa (" + json.data2 + ")");
+            $(".totRac3").html("Partecipanti: " + json.partecipanti);
         };
-        function creaOp(diff){
+        function creaOp(diff) {
             daySelect = document.getElementById('ptappa');
             for (var i = diff; i > 0; i--) {
                 daySelect.options[daySelect.options.length] = new Option('Tappa ' + i, '' + i);
@@ -33,51 +40,51 @@
                 url: 'ajax.php',
                 type: 'post',
                 success: function (data, status) {
-                        creaOp(data);
-                        tappa=data;
+                    creaOp(data);
+                    tappa = data;
                 }
             });
-            table3=$('#example3').DataTable({
+            table3 = $('#example3').DataTable({
                 "ajax": {
                     url: "getArrivo.php",
-                    data: function(data) {
+                    data: function (data) {
                         data.r = $("select#ptappa option:selected").val()
                     }
                 },
                 "columns": [
-                    { "data": "pos" },
-                    { "data": "nick" },
-                    { "data": "squadra" },
-                    { "data": "guadagno" },
-                    { "data": "punti" },
-                    { "data": "tornei" }
+                    {"data": "pos"},
+                    {"data": "nick"},
+                    {"data": "squadra"},
+                    {"data": "guadagno"},
+                    {"data": "punti"},
+                    {"data": "tornei"}
                 ],
                 "aoColumnDefs": [
-                    { "sClass": "center", "aTargets": [ 0] },
-                    { "sClass": "", "aTargets": [ 1] },
-                    { "sClass": "", "aTargets": [ 2] },
-                    { "sClass": "destra", "aTargets": [ 3 ] },
-                    { "sClass": "destra", "aTargets": [ 4 ] },
-                    { "sClass": "destra", "aTargets": [ 5 ] }
+                    {"sClass": "center", "aTargets": [0]},
+                    {"sClass": "", "aTargets": [1]},
+                    {"sClass": "", "aTargets": [2]},
+                    {"sClass": "destra", "aTargets": [3]},
+                    {"sClass": "destra", "aTargets": [4]},
+                    {"sClass": "destra", "aTargets": [5]}
                 ],
                 "oLanguage": {
                     "sUrl": "./lang/ita.txt"
                 },
                 "paging": false,
-                "bSort" : false,
+                "bSort": false,
                 "searching": false,
                 "bLengthChange": false,
-                "info":     false,
-                "fnInitComplete" : function () {
-                   myCallback();
+                "info": false,
+                "fnInitComplete": function () {
+                    myCallback();
                 },
                 "dom": '<"top"iflp<"clear">>rt<"bottom"il<"clear">>',
-                "createdRow": function ( row, data, index ) {
+                "createdRow": function (row, data, index) {
                     var json = table3.ajax.json();
-                    if ( data.pos=="1&deg;" ) {
+                    if (data.pos == "1&deg;") {
                         $('td', row).addClass('highlight3');
                     }
-                    if ( data.nick2==json.combat ) {
+                    if (data.nick2 == json.combat) {
                         $('td', row).eq(1).addClass('rosso');
                         $('td', row).eq(1).prop('title', 'Premio Combattività');
 
@@ -85,93 +92,96 @@
                 },
                 "scrollCollapse": true
             });
-        var table10=$('#example10').DataTable({
+            var table10 = $('#example10').DataTable({
                 "ajax": {
                     url: "getRiepi.php"
                 },
                 "columns": [
-                    { "data": "tappa" },
-                    { "data": "parte" },
-                    { "data": "vinci" },
-                    { "data": "soldi" },
-                    { "data": "gialla" },
-                    { "data": "verde" },
-                    { "data": "pois" },
-                    { "data": "blu" },
-                    { "data": "bianca" },
-                    { "data": "rosso" }
+                    {"data": "tappa"},
+                    {"data": "parte"},
+                    {"data": "vinci"},
+                    {"data": "soldi"},
+                    {"data": "gialla"},
+                    {"data": "verde"},
+                    {"data": "pois"},
+                    {"data": "blu"},
+                    {"data": "bianca"},
+                    {"data": "rosso"}
                 ],
                 "aoColumnDefs": [
-                    { "sClass": "center", "aTargets": [ 0] },
-                    { "sClass": "center", "aTargets": [ 1] },
-                    { "sClass": "center bold", "aTargets": [ 2] },
-                    { "sClass": "destra", "aTargets": [ 3 ] },
-                    { "sClass": "center gialla bold", "aTargets": [ 4 ] },
-                    { "sClass": "center verde bold", "aTargets": [ 5 ] },
-                    { "sClass": "center pois bold", "aTargets": [ 6 ] },
-                    { "sClass": "center blu bold", "aTargets": [ 7 ] },
-                    { "sClass": "center bianca bold", "aTargets": [ 8 ] },
-                    { "sClass": "center rosso2 bold", "aTargets": [ 9 ] }
+                    {"sClass": "center", "aTargets": [0]},
+                    {"sClass": "center", "aTargets": [1]},
+                    {"sClass": "center bold", "aTargets": [2]},
+                    {"sClass": "destra", "aTargets": [3]},
+                    {"sClass": "center gialla bold", "aTargets": [4]},
+                    {"sClass": "center verde bold", "aTargets": [5]},
+                    {"sClass": "center pois bold", "aTargets": [6]},
+                    {"sClass": "center blu bold", "aTargets": [7]},
+                    {"sClass": "center bianca bold", "aTargets": [8]},
+                    {"sClass": "center rosso2 bold", "aTargets": [9]}
                 ],
                 "oLanguage": {
                     "sUrl": "./lang/ita.txt"
                 },
                 "paging": false,
-                "bSort" : false,
+                "bSort": false,
                 "searching": false,
                 "bLengthChange": false,
-                "info":     false,
-                "fnInitComplete" : function () {
+                "info": false,
+                "fnInitComplete": function () {
                 },
                 "dom": '<"top"iflp<"clear">>rt<"bottom"il<"clear">>',
-                "createdRow": function ( row, data, index ) {
+                "createdRow": function (row, data, index) {
 
                 },
                 "scrollCollapse": true
             });
 
-            var table=$('#example').DataTable({
+            var table = $('#example').DataTable({
                 "ajax": "getGenerale.php",
                 "columns": [
-                    { "data": "pos" },
-                    { "data": "nick" },
-                    { "data": "squadra" },
-                    { "data": "guadagno" },
-                    { "data": "simb" },
-                    { "data": "distacco" },
-                    { "data": "tornei" }
+                    {"data": "pos"},
+                    {"data": "nick"},
+                    {"data": "squadra"},
+                    {"data": "guadagno"},
+                    {"data": "simb"},
+                    {"data": "distacco"},
+                    {"data": "tornei"}
                 ],
                 "aoColumnDefs": [
-                    { "sClass": "center", "aTargets": [ 0] },
-                    { "sClass": "", "aTargets": [ 1] },
-                    { "sClass": "", "aTargets": [ 2] },
-                    { "sClass": "destra", "aTargets": [ 3 ] },
-                    { "sClass": "center", "aTargets": [ 4 ] },
-                    { "sClass": "destra", "aTargets": [ 5 ] },
-                    { "sClass": "destra", "aTargets": [ 6 ] }
+                    {"sClass": "center", "aTargets": [0]},
+                    {"sClass": "", "aTargets": [1]},
+                    {"sClass": "", "aTargets": [2]},
+                    {"sClass": "destra", "aTargets": [3]},
+                    {"sClass": "center", "aTargets": [4]},
+                    {"sClass": "destra", "aTargets": [5]},
+                    {"sClass": "destra", "aTargets": [6]}
                 ],
                 "oLanguage": {
                     "sUrl": "./lang/ita.txt"
                 },
                 "paging": false,
-                "bSort" : false,
+                "bSort": false,
                 "searching": false,
                 "bLengthChange": false,
-                "info":     false,
-                "fnInitComplete" : function () {   var json = table.ajax.json(); $(".numTappa").html("Classifica Generale: "+json.tappa+"&deg; tappa ("+json.data2+")");
-                    $(".totRac").html("Guadagno Reality: &euro; "+json.totRac);},
-                "dom": '<"top"iflp<"clear">>rt<"bottom"il<"clear">>',
-                "createdRow": function ( row, data, index ) {
+                "info": false,
+                "fnInitComplete": function () {
                     var json = table.ajax.json();
-                        if ( data.pos=="1&deg;" ) {
-                            $('td', row).addClass('highlight');
-                        }
-                    if ( data.under=='1' ) {
+                    $(".numTappa").html("Classifica Generale: " + json.tappa + "&deg; tappa (" + json.data2 + ")");
+                    $(".totRac").html("Guadagno Reality: &euro; " + json.totRac);
+                },
+                "dom": '<"top"iflp<"clear">>rt<"bottom"il<"clear">>',
+                "createdRow": function (row, data, index) {
+                    var json = table.ajax.json();
+                    if (data.pos == "1&deg;") {
+                        $('td', row).addClass('highlight');
+                    }
+                    if (data.under == '1') {
                         $('td', row).eq(1).addClass('under');
                         $('td', row).eq(1).prop('title', 'Giovane');
 
                     }
-                    if ( data.nick2==json.giovane) {
+                    if (data.nick2 == json.giovane) {
                         $('td', row).eq(1).addClass('bianco');
                         $('td', row).eq(1).prop('title', 'Miglior Giovane');
 
@@ -180,157 +190,164 @@
                 "scrollCollapse": true
             });
 
-            var table2=$('#example2').DataTable({
+            var table2 = $('#example2').DataTable({
                 "ajax": "getPunti.php",
                 "columns": [
-                    { "data": "pos" },
-                    { "data": "nick" },
-                    { "data": "squadra" },
-                    { "data": "punti" },
-                    { "data": "last" },
-                    { "data": "tornei" }
+                    {"data": "pos"},
+                    {"data": "nick"},
+                    {"data": "squadra"},
+                    {"data": "punti"},
+                    {"data": "last"},
+                    {"data": "tornei"}
                 ],
                 "aoColumnDefs": [
-                    { "sClass": "center", "aTargets": [ 0] },
-                    { "sClass": "", "aTargets": [ 1] },
-                    { "sClass": "", "aTargets": [ 2] },
-                    { "sClass": "destra", "aTargets": [ 3 ] },
-                    { "sClass": "destra", "aTargets": [ 4 ] },
-                    { "sClass": "destra", "aTargets": [ 5 ] }
+                    {"sClass": "center", "aTargets": [0]},
+                    {"sClass": "", "aTargets": [1]},
+                    {"sClass": "", "aTargets": [2]},
+                    {"sClass": "destra", "aTargets": [3]},
+                    {"sClass": "destra", "aTargets": [4]},
+                    {"sClass": "destra", "aTargets": [5]}
                 ],
                 "oLanguage": {
                     "sUrl": "./lang/ita.txt"
                 },
                 "paging": false,
-                "bSort" : false,
+                "bSort": false,
                 "searching": false,
                 "bLengthChange": false,
-                "info":     false,
-                "fnInitComplete" : function () {   var json = table2.ajax.json(); $(".numTappa2").html("Classifica a Punti: "+json.tappa+"&deg; tappa ("+json.data2+")");
-                    },
+                "info": false,
+                "fnInitComplete": function () {
+                    var json = table2.ajax.json();
+                    $(".numTappa2").html("Classifica a Punti: " + json.tappa + "&deg; tappa (" + json.data2 + ")");
+                },
                 "dom": '<"top"iflp<"clear">>rt<"bottom"il<"clear">>',
-                "createdRow": function ( row, data, index ) {
-                    if ( data.pos=="1&deg;" ) {
+                "createdRow": function (row, data, index) {
+                    if (data.pos == "1&deg;") {
                         $('td', row).addClass('highlight2');
                     }
                 },
                 "scrollCollapse": true
             });
 
-            var table4=$('#example4').DataTable({
+            var table4 = $('#example4').DataTable({
                 "ajax": "getPois.php",
                 "columns": [
-                    { "data": "pos" },
-                    { "data": "nick" },
-                    { "data": "squadra" },
-                    { "data": "punti" },
-                    { "data": "last" },
-                    { "data": "conto" }
+                    {"data": "pos"},
+                    {"data": "nick"},
+                    {"data": "squadra"},
+                    {"data": "punti"},
+                    {"data": "last"},
+                    {"data": "conto"}
                 ],
                 "aoColumnDefs": [
-                    { "sClass": "center", "aTargets": [ 0] },
-                    { "sClass": "", "aTargets": [ 1] },
-                    { "sClass": "", "aTargets": [ 2] },
-                    { "sClass": "destra", "aTargets": [ 3 ] },
-                    { "sClass": "destra", "aTargets": [ 4 ] },
-                    { "sClass": "destra", "aTargets": [ 5 ] }
+                    {"sClass": "center", "aTargets": [0]},
+                    {"sClass": "", "aTargets": [1]},
+                    {"sClass": "", "aTargets": [2]},
+                    {"sClass": "destra", "aTargets": [3]},
+                    {"sClass": "destra", "aTargets": [4]},
+                    {"sClass": "destra", "aTargets": [5]}
                 ],
                 "oLanguage": {
                     "sUrl": "./lang/ita.txt"
                 },
                 "paging": false,
-                "bSort" : false,
+                "bSort": false,
                 "searching": false,
                 "bLengthChange": false,
-                "info":     false,
-                "fnInitComplete" : function () { var json = table4.ajax.json();
-                    $(".numTappa4").html("Classifica Scalatori: "+json.tappa+"&deg; tappa ("+json.data2+")");
-                    },
+                "info": false,
+                "fnInitComplete": function () {
+                    var json = table4.ajax.json();
+                    $(".numTappa4").html("Classifica Scalatori: " + json.tappa + "&deg; tappa (" + json.data2 + ")");
+                },
                 "dom": '<"top"iflp<"clear">>rt<"bottom"il<"clear">>',
-                "createdRow": function ( row, data, index ) {
-                    if ( data.pos=="1&deg;" ) {
+                "createdRow": function (row, data, index) {
+                    if (data.pos == "1&deg;") {
                         $('td', row).addClass('highlight4');
                     }
                 },
                 "scrollCollapse": true
             });
 
-            var table7=$('#example7').DataTable({
+            var table7 = $('#example7').DataTable({
                 "ajax": {
                     url: "getScalDett.php"
                 },
                 "columns": [
-                    { "data": "torn" },
-                    { "data": "cat" },
-                    { "data": "part" },
-                    { "data": "gioc1" },
-                    { "data": "punti1" },
-                    { "data": "gioc2" },
-                    { "data": "punti2" },
-                    { "data": "gioc3" },
-                    { "data": "punti3" }
+                    {"data": "torn"},
+                    {"data": "cat"},
+                    {"data": "part"},
+                    {"data": "lista"},
+                    {"data": "gioc1"},
+                    {"data": "punti1"},
+                    {"data": "gioc2"},
+                    {"data": "punti2"},
+                    {"data": "gioc3"},
+                    {"data": "punti3"}
                 ],
                 "aoColumnDefs": [
-                    { "sClass": "", "aTargets": [ 0] },
-                    { "sClass": "center", "aTargets": [ 1] },
-                    { "sClass": "center", "aTargets": [ 2] },
-                    { "sClass": "destra bgred bold", "aTargets": [ 4 ] },
-                    { "sClass": " bgred uno", "aTargets": [ 3 ] },
-                    { "sClass": "destra bgyel bold", "aTargets": [ 6 ] },
-                    { "sClass": "bgyel uno", "aTargets": [ 5 ] },
-                    { "sClass": "destra bgyel2 bold due", "aTargets": [ 8 ] },
-                    { "sClass": "bgyel2 uno ", "aTargets": [ 7 ] }
+                    {"sClass": "", "aTargets": [0]},
+                    {"sClass": "center", "aTargets": [1]},
+                    {"sClass": "center", "aTargets": [2]},
+                    {"sClass": "center", "aTargets": [3]},
+                    {"sClass": "destra bgred bold", "aTargets": [5]},
+                    {"sClass": " bgred uno", "aTargets": [4]},
+                    {"sClass": "destra bgyel bold", "aTargets": [7]},
+                    {"sClass": "bgyel uno", "aTargets": [6]},
+                    {"sClass": "destra bgyel2 bold due", "aTargets": [9]},
+                    {"sClass": "bgyel2 uno ", "aTargets": [8]}
                 ],
                 "oLanguage": {
                     "sUrl": "./lang/ita.txt"
                 },
                 "paging": false,
-                "bSort" : false,
+                "bSort": false,
                 "searching": false,
                 "bLengthChange": false,
-                "info":     false,
-                "fnInitComplete" : function () { var json = table7.ajax.json();
-                    $(".numTappa7").html("Dettaglio Scalatori: "+json.tappa+"&deg; tappa ("+json.data2+")");
+                "info": false,
+                "fnInitComplete": function () {
+                    var json = table7.ajax.json();
+                    $(".numTappa7").html("Dettaglio Scalatori: " + json.tappa + "&deg; tappa (" + json.data2 + ")");
                 },
                 "dom": '<"top"iflp<"clear">>rt<"bottom"il<"clear">>',
-                "createdRow": function ( row, data, index ) {
+                "createdRow": function (row, data, index) {
 
                 },
                 "scrollCollapse": true
             });
 
-            var table5=$('#example5').DataTable({
+            var table5 = $('#example5').DataTable({
                 "ajax": {
                     url: "getInter.php"
                 },
                 "columns": [
-                    { "data": "pos" },
-                    { "data": "nick" },
-                    { "data": "squadra" },
-                    { "data": "guadagno" },
-                    { "data": "tornei" }
+                    {"data": "pos"},
+                    {"data": "nick"},
+                    {"data": "squadra"},
+                    {"data": "guadagno"},
+                    {"data": "tornei"}
                 ],
                 "aoColumnDefs": [
-                    { "sClass": "center", "aTargets": [ 0] },
-                    { "sClass": "", "aTargets": [ 1] },
-                    { "sClass": "", "aTargets": [ 2] },
-                    { "sClass": "destra", "aTargets": [ 3 ] },
-                    { "sClass": "destra", "aTargets": [ 4 ] }
+                    {"sClass": "center", "aTargets": [0]},
+                    {"sClass": "", "aTargets": [1]},
+                    {"sClass": "", "aTargets": [2]},
+                    {"sClass": "destra", "aTargets": [3]},
+                    {"sClass": "destra", "aTargets": [4]}
                 ],
                 "oLanguage": {
                     "sUrl": "./lang/ita.txt"
                 },
                 "paging": false,
-                "bSort" : false,
+                "bSort": false,
                 "searching": false,
                 "bLengthChange": false,
-                "info":     false,
-                "fnInitComplete" : function () { var json = table5.ajax.json();
-                    $(".numTappa5").html("Classifica Intergiro: "+json.tappa+"&deg; tappa ("+json.data2+")");
+                "info": false,
+                "fnInitComplete": function () {
+                    var json = table5.ajax.json();
+                    $(".numTappa5").html("Classifica Intergiro: " + json.tappa + "&deg; tappa (" + json.data2 + ")");
                 },
                 "dom": '<"top"iflp<"clear">>rt<"bottom"il<"clear">>',
-                "createdRow": function ( row, data, index ) {
-                    if ( data.pos=="1&deg;" ) {
+                "createdRow": function (row, data, index) {
+                    if (data.pos == "1&deg;") {
                         $('td', row).addClass('highlight5');
                     }
                 },
@@ -338,48 +355,49 @@
             });
 
 
-            table6=$('#example6').DataTable({
+            table6 = $('#example6').DataTable({
                 "ajax": {
                     url: "getRoom.php",
-                    data: function(data) {
+                    data: function (data) {
                         data.r = $("select#proom option:selected").val()
                     }
                 },
                 "columns": [
-                    { "data": "pos" },
-                    { "data": "nick" },
-                    { "data": "squadra" },
-                    { "data": "guadagno" },
-                    { "data": "tornei" }
+                    {"data": "pos"},
+                    {"data": "nick"},
+                    {"data": "squadra"},
+                    {"data": "guadagno"},
+                    {"data": "tornei"}
                 ],
                 "aoColumnDefs": [
-                    { "sClass": "center", "aTargets": [ 0] },
-                    { "sClass": "", "aTargets": [ 1] },
-                    { "sClass": "", "aTargets": [ 2] },
-                    { "sClass": "destra", "aTargets": [ 3 ] },
-                    { "sClass": "destra", "aTargets": [ 4 ] }
+                    {"sClass": "center", "aTargets": [0]},
+                    {"sClass": "", "aTargets": [1]},
+                    {"sClass": "", "aTargets": [2]},
+                    {"sClass": "destra", "aTargets": [3]},
+                    {"sClass": "destra", "aTargets": [4]}
                 ],
                 "oLanguage": {
                     "sUrl": "./lang/ita.txt"
                 },
                 "paging": false,
-                "bSort" : false,
+                "bSort": false,
                 "searching": false,
                 "bLengthChange": false,
-                "info":     false,
-                "fnInitComplete" : function () { var json = table6.ajax.json();
-                    $(".numTappa6").html("Classifica <span id='poke'>"+$("select#proom option:selected").val()+"</span>: "+json.tappa+"&deg; tappa ("+json.data2+")");
+                "info": false,
+                "fnInitComplete": function () {
+                    var json = table6.ajax.json();
+                    $(".numTappa6").html("Classifica <span id='poke'>" + $("select#proom option:selected").val() + "</span>: " + json.tappa + "&deg; tappa (" + json.data2 + ")");
                 },
                 "dom": '<"top"iflp<"clear">>rt<"bottom"il<"clear">>',
-                "createdRow": function ( row, data, index ) {
-                    if ( data.pos=="1&deg;" ) {
+                "createdRow": function (row, data, index) {
+                    if (data.pos == "1&deg;") {
                         $('td', row).addClass('highlight6');
                     }
                 },
                 "scrollCollapse": true
             });
 
-        } );
+        });
 
     </script>
 </head>
@@ -388,15 +406,29 @@
 <table id="example3" class="display compact" cellspacing="0" style="margin: 40px auto;">
     <thead class="">
     <tr class="sopra2">
-        <th colspan="2" style="padding-left: 20px;text-align:left"><select id="ptappa" >
-        </select></th>
-        <th colspan="2" class="descTappa" style=""></th>
+        <th colspan="2" style="padding-left: 20px;text-align:left"><select id="ptappa"></select></th>
+        <th colspan="2" class="descTappa" style="">
+
+        </th>
         <th colspan="2" class="" style="padding-right: 20px;text-align:right">
-            <a href="#dettArr" class="" onclick="$('#example10').toggle();$('#example3').toggle()"><img src="media/images/piu.png" style="" title="vai a progressione tappe e maglie"></a></th>
+
+            <a href="#dettArr" class="" onclick="$('#example10').toggle();$('#example3').toggle()"><img
+                    src="media/images/piu.png" style="" title="vai a progressione tappe e maglie"></a></th>
     </tr>
     <tr class="sopra">
-        <th colspan="3" class="numTappa3" style="padding-left: 20px"></th>
-        <th colspan="3" class="totRac3" style="padding-right: 20px;text-align:right">&nbsp;</th>
+        <th colspan="2" class="numTappa3" style="padding-left: 20px"></th>
+        <th colspan="2" class="" style="">
+                    <select id="example-movie" name="rating" style="visibility:hidden">
+                        <option value="Facile">Piece of Cake</option>
+                        <option value="Normale">Hey not too Rough</option>
+                        <option value="Impegnativa">Let's Rock</option>
+                        <option value="Difficile">Ultra-Violence</option>
+                        <option value="Folle">Nightmare</option>
+                    </select>
+
+
+        </th>
+        <th colspan="2" class="totRac3" style="padding-right: 20px;text-align:right">&nbsp;</th>
     </tr>
     <tr class="sotto">
         <th class="" style=""></th>
@@ -414,12 +446,13 @@
     <tr class="sopra">
         <th colspan="5" class="numTappa10" style="padding-left: 20px;font-size: medium">Progressione Tappe e Maglie</th>
         <th colspan="5" style="padding-right: 20px;text-align:right">
-            <a href="#Arr" class="" onclick="$('#example3').toggle();$('#example10').toggle()"><img src="media/images/meno.png" style="" title="ritorna alle Tappe"></a></th>
+            <a href="#Arr" class="" onclick="$('#example3').toggle();$('#example10').toggle()"><img
+                    src="media/images/meno.png" style="" title="ritorna alle Tappe"></a></th>
         </th>
     </tr>
     <tr class="sotto" style="color:white">
         <th class="">Tappa</th>
-        <th class="" >Giocatori</th>
+        <th class="">Giocatori</th>
         <th class="" style="">Vincitore</th>
         <th style="text-align: right;">&euro; Soldi&nbsp;</th>
         <th>Gialla</th>
@@ -454,7 +487,7 @@
     <thead class="">
     <tr class="sopra">
         <th colspan="3" class="numTappa2" style="padding-left: 20px"></th>
-        <th colspan="3" >&nbsp;</th>
+        <th colspan="3">&nbsp;</th>
     </tr>
     <tr class="sotto">
         <th class="" style=""></th>
@@ -473,7 +506,8 @@
     <tr class="sopra">
         <th colspan="2" class="numTappa4" style="padding-left: 20px"></th>
         <th colspan="4" style="padding-right: 20px;text-align:right">
-            <a href="#dettscal" class="" onclick="$('#example7').toggle();$('#example4').toggle()"><img src="media/images/piu.png" style="" title="vai al dettaglio scalatori"></a></th>
+            <a href="#dettscal" class="" onclick="$('#example7').toggle();$('#example4').toggle()"><img
+                    src="media/images/piu.png" style="" title="vai al dettaglio scalatori"></a></th>
     </tr>
     <tr class="sotto">
         <th class="" style=""></th>
@@ -493,20 +527,22 @@
     <thead class="">
     <tr class="sopra">
         <th colspan="4" class="numTappa7" style="padding-left: 20px"></th>
-        <th colspan="5" style="padding-right: 20px;text-align:right">
-            <a href="#scal" class="" onclick="$('#example4').toggle();$('#example7').toggle()"><img src="media/images/meno.png" style="" title="ritorna alla classifica scalatori"></a></th>
+        <th colspan="6" style="padding-right: 20px;text-align:right">
+            <a href="#scal" class="" onclick="$('#example4').toggle();$('#example7').toggle()"><img
+                    src="media/images/meno.png" style="" title="ritorna alla classifica scalatori"></a></th>
         </th>
     </tr>
-    <tr class="sotto" >
+    <tr class="sotto">
         <th class="">&nbsp;&nbsp;Torneo</th>
-        <th class="" >Cat.</th>
+        <th class="">Cat.</th>
         <th class="" style="padding-left: 10px;padding-right: 10px;">N&deg;</th>
+        <th class="" style="padding-left: 10px;padding-right: 10px;"></th>
         <th style="text-align: right;">1&deg;</th>
-        <th ></th>
+        <th></th>
         <th style="text-align: right;">2&deg;</th>
-        <th ></th>
+        <th></th>
         <th style="text-align: right;">3&deg;</th>
-        <th ></th>
+        <th></th>
     </tr>
     </thead>
 </table>
@@ -517,7 +553,7 @@
         <th colspan="3" class="numTappa5" style="padding-left: 20px"></th>
         <th colspan="2" style="padding-right: 20px;text-align:right">&nbsp;</th>
     </tr>
-    <tr class="sotto" >
+    <tr class="sotto">
         <th class="" style=""></th>
         <th class="sinistra" style="padding-left: 25px">Nick</th>
         <th class="">Squadra</th>
@@ -531,7 +567,7 @@
     <thead class="">
     <tr class="sopra">
         <th colspan="3" class="numTappa6" style="padding-left: 20px"></th>
-        <th colspan="2" style="padding-right: 20px;text-align:right"><select id="proom" >
+        <th colspan="2" style="padding-right: 20px;text-align:right"><select id="proom">
             <option value="ActiveGames.it">ActiveGames.it</option>
             <option value="iPoker.it">iPoker.it</option>
             <option value="Microgame">Microgame</option>
@@ -540,7 +576,7 @@
             <option value="PokerStars.it" selected="selected">PokerStars.it</option>
         </select></th>
     </tr>
-    <tr class="sotto" >
+    <tr class="sotto">
         <th class="" style=""></th>
         <th class="sinistra" style="padding-left: 25px">Nick</th>
         <th class="">Squadra</th>
@@ -550,14 +586,18 @@
     </thead>
 </table>
 <script>
-    $(document).on("change", "#proom", function(event) {
+    $(document).on("change", "#proom", function (event) {
         table6.ajax.reload();
         $('#poke').html($("select#proom option:selected").val());
     });
-    $(document).on("change", "#ptappa", function(event) {
+    $(document).on("change", "#ptappa", function (event) {
         table3.ajax.reload(myCallback);
     });
 
 </script>
+
+
+<script src="media/js/jquery.barrating.js"></script>
+
 </body>
 </html>

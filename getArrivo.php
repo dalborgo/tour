@@ -30,6 +30,7 @@ while (($h = mysql_fetch_assoc($dr))) {
     $obj->pos=$h["posizione"]."&deg;";
     // $obj->nick=$h["nick"];
     $tra+=$h["guadagno"];
+
     $obj->guadagno=$h["guadagno"];
     $obj->squadra=$h["nome"];
     $obj->tornei=$h["tornei"];
@@ -54,7 +55,18 @@ $usc2->data = $abbin;
 $usc2->tappa = $tappa;
 $usc2->totRac = $tra;
 $usc2->tipo = $dr2["tipo"];
-$usc2->diff = $dr2["diff"];
+if($dr2["diff"]<3.4)
+    $cf="Facile";
+else if ($dr2["diff"]<3.8)
+    $cf="Normale";
+else if ($dr2["diff"]<4.2)
+    $cf="Impegnativa";
+else if ($dr2["diff"]<4.6)
+    $cf="Difficile";
+else
+    $cf="Folle";
+$usc2->diff = $cf;
+$usc2->diff2 = $dr2["diff"];
 $usc2->combat = $dr2["combat"];
 $usc2->partecipanti = $cont;
 $usc2->data2 = addDate($INIZIO,$tappa);

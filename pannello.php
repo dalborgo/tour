@@ -17,10 +17,10 @@ $testo=(isLocale())?"Locale":"Online";
     <a href="creadati.php">1. Crea Dati</a><br/>
     <a href="salvaGenerale.php">2. Salva Generale</a><br/>
     <a href="salvaPois.php">3. Salva Pois</a><br/>
-    <a href="creaStatsGen.php">4. Crea Stats</a><br/><br/>
+    <a href="creaStatsGen.php">4. Crea Stats</a><br/>
+    <a href="creaNomi.php">5. Crea Nomi</a><br/><br/>
 
     <a href="./pl/">Edita Database</a><br/>
-    <a href="creaNomi.php">Crea Nomi</a><br/>
     <a href="agg_players.php">Aggiorna Player</a><br/>
     <a href="agg_players.php?f=si">Aggiorna Player F (offline)</a><br/>
     <a href="agg_ranking.php">Aggiorna Ranking</a><br/>
