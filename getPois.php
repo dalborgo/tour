@@ -52,6 +52,7 @@ while (($h = mysql_fetch_assoc($dr))) {
         $colore2="";
     $obj->nick='<span class="nowr '.$colore.'"><img style="vertical-align:middle" src="http://static.pokerstrategycdn.com/front/images/ranks/mini/' . $h["status"]  . '.png"/> ' . $h["nick"] . '</span>
     '.$colore2;
+    $obj->nick2=$h["nick"];
     $abbin[]=$obj;
 }
 $usc2 = new stdClass();

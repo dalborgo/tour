@@ -7,6 +7,7 @@
  */
 include_once "librerie/sql.php";
 include_once "librerie/specific.php";
+header('Content-Type: text/html; charset=utf-8');
 $dr = query("SELECT * FROM tt_player");
 $tappa = getTappa();
 $comb = mysql_fetch_assoc(query("SELECT combat FROM tt_tappa WHERE tappa='$tappa'"));

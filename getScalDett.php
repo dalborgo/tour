@@ -22,15 +22,23 @@ $cont=0;
 $id_prec=0;
 $trov=0;
 $liso="";
+$conq=0;
+$titM="";
 $ce=false;
 $obj = new stdClass();
 $obj->lista="<abbr title='";
 while (($h = mysql_fetch_assoc($dr))) {
+    $wer=$h["categoria"];
+    $nok=$h["nome"];
     if ($trov==0) {
+        $titM="(Cat. $wer) $nok\n";
         $id_prec=$h["id"];
         $trov=1;
+        $conq++;
     }
     if($id_prec!=$h["id"]) {
+        $conq++;
+        $titM.="(Cat. $wer) $nok\n";
         $obj->lista.="$liso' class='senza'><img src='http://www.dalborgo.it/public/ss/bici.png'/></abbr>";
         $id_prec=$h["id"];
         if($ce)
@@ -85,5 +93,6 @@ if($ce) {
 $usc2 = new stdClass();
 $usc2->data = $abbin;
 $usc2->tappa = $tappa;
+$usc2->tot = "<abbr title='$titM' class='nero'>".$conq."</abbr>";
 $usc2->data2 = addDate($INIZIO,$tappa);
 echo json_encode($usc2);

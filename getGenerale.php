@@ -81,7 +81,7 @@ $dr2=mysql_fetch_array(query("SELECT giovane FROM tt_tappa WHERE tappa ='$tappa'
 $usc2 = new stdClass();
 $usc2->data = $abbin;
 $usc2->tappa = $tappa;
-$usc2->totRac = $tra;
+$usc2->totRac = number_format($tra,2);
 $usc2->giovane = $dr2["giovane"];
 $usc2->data2 = addDate($INIZIO,$tappa);
 echo json_encode($usc2);

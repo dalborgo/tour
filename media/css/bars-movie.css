@@ -10,6 +10,8 @@
   background-color: #b8b8b8;
   margin: 7px 0px 0px;
   cursor: default;
+  border: 1px solid black;
+  cursor: help;
 }
 .br-theme-bars-movie .br-widget a.br-active,
 .br-theme-bars-movie .br-widget a.br-selected {

@@ -14,6 +14,7 @@
     <script type="text/javascript" language="javascript">
         var table6;
         var table3;
+        var combatt;
         var tappa = "";
         var myCallback = function () {
             var json = table3.ajax.json();
@@ -24,9 +25,9 @@
                 showValues: false
             });
             $('select').barrating('set', json.diff);
-            $(".br-current-rating").attr('title','Coeff. Diff.: '+json.diff2);
-                    //after("<span style='display:inline-block;font-size:small'>("+json.diff2+")</span>");
-            $(".numTappa3").html("Ordine di Arrivo: " + json.tappa + "&deg; tappa (" + json.data2 + ")");
+            $(".br-current-rating").attr('title', 'Coeff. Diff.: ' + json.diff2);
+            //after("<span style='display:inline-block;font-size:small'>("+json.diff2+")</span>");
+            $(".numTappa3").html("Ordine di Arrivo: " + json.tappa + "&deg; tappa <br>Data: " + json.data2 + "");
             $(".totRac3").html("Partecipanti: " + json.partecipanti);
         };
         function creaOp(diff) {
@@ -76,6 +77,7 @@
                 "bLengthChange": false,
                 "info": false,
                 "fnInitComplete": function () {
+                    //vai();
                     myCallback();
                 },
                 "dom": '<"top"iflp<"clear">>rt<"bottom"il<"clear">>',
@@ -87,11 +89,13 @@
                     if (data.nick2 == json.combat) {
                         $('td', row).eq(1).addClass('rosso');
                         $('td', row).eq(1).prop('title', 'Premio Combattività');
-
+                        combatt = json.combat;
                     }
+
                 },
                 "scrollCollapse": true
             });
+
             var table10 = $('#example10').DataTable({
                 "ajax": {
                     url: "getRiepi.php"
@@ -137,266 +141,293 @@
                 "scrollCollapse": true
             });
 
-            var table = $('#example').DataTable({
-                "ajax": "getGenerale.php",
-                "columns": [
-                    {"data": "pos"},
-                    {"data": "nick"},
-                    {"data": "squadra"},
-                    {"data": "guadagno"},
-                    {"data": "simb"},
-                    {"data": "distacco"},
-                    {"data": "tornei"}
-                ],
-                "aoColumnDefs": [
-                    {"sClass": "center", "aTargets": [0]},
-                    {"sClass": "", "aTargets": [1]},
-                    {"sClass": "", "aTargets": [2]},
-                    {"sClass": "destra", "aTargets": [3]},
-                    {"sClass": "center", "aTargets": [4]},
-                    {"sClass": "destra", "aTargets": [5]},
-                    {"sClass": "destra", "aTargets": [6]}
-                ],
-                "oLanguage": {
-                    "sUrl": "./lang/ita.txt"
-                },
-                "paging": false,
-                "bSort": false,
-                "searching": false,
-                "bLengthChange": false,
-                "info": false,
-                "fnInitComplete": function () {
-                    var json = table.ajax.json();
-                    $(".numTappa").html("Classifica Generale: " + json.tappa + "&deg; tappa (" + json.data2 + ")");
-                    $(".totRac").html("Guadagno Reality: &euro; " + json.totRac);
-                },
-                "dom": '<"top"iflp<"clear">>rt<"bottom"il<"clear">>',
-                "createdRow": function (row, data, index) {
-                    var json = table.ajax.json();
-                    if (data.pos == "1&deg;") {
-                        $('td', row).addClass('highlight');
-                    }
-                    if (data.under == '1') {
-                        $('td', row).eq(1).addClass('under');
-                        $('td', row).eq(1).prop('title', 'Giovane');
+         //   function vai() {
+                var table = $('#example').DataTable({
+                    "ajax": "getGenerale.php",
+                    "columns": [
+                        {"data": "pos"},
+                        {"data": "nick"},
+                        {"data": "squadra"},
+                        {"data": "guadagno"},
+                        {"data": "simb"},
+                        {"data": "distacco"},
+                        {"data": "tornei"}
+                    ],
+                    "aoColumnDefs": [
+                        {"sClass": "center", "aTargets": [0]},
+                        {"sClass": "", "aTargets": [1]},
+                        {"sClass": "", "aTargets": [2]},
+                        {"sClass": "destra", "aTargets": [3]},
+                        {"sClass": "center", "aTargets": [4]},
+                        {"sClass": "destra", "aTargets": [5]},
+                        {"sClass": "destra", "aTargets": [6]}
+                    ],
+                    "oLanguage": {
+                        "sUrl": "./lang/ita.txt"
+                    },
+                    "paging": false,
+                    "bSort": false,
+                    "searching": false,
+                    "bLengthChange": false,
+                    "info": false,
+                    "fnInitComplete": function () {
+                        var json = table.ajax.json();
+                        $(".numTappa").html("Classifica Generale: " + json.tappa + "&deg; tappa (" + json.data2 + ")");
+                        $(".totRac").html("Guadagno Reality: &euro; " + json.totRac);
+                    },
+                    "dom": '<"top"iflp<"clear">>rt<"bottom"il<"clear">>',
+                    "createdRow": function (row, data, index) {
+                        var json = table.ajax.json();
+                        if (data.pos == "1&deg;") {
+                            $('td', row).addClass('highlight');
+                        }
+                        if (data.under == '1') {
+                            $('td', row).eq(1).addClass('under');
+                            $('td', row).eq(1).prop('title', 'Giovane');
 
-                    }
-                    if (data.nick2 == json.giovane) {
-                        $('td', row).eq(1).addClass('bianco');
-                        $('td', row).eq(1).prop('title', 'Miglior Giovane');
+                        }
+                        if (data.nick2 == json.giovane) {
+                            $('td', row).eq(1).addClass('bianco');
+                            $('td', row).eq(1).prop('title', 'Miglior Giovane');
 
-                    }
-                },
-                "scrollCollapse": true
-            });
+                        }
+                        if (data.nick2 == combatt) {
+                            $('td', row).eq(1).addClass('rosso');
+                            $('td', row).eq(1).prop('title', 'Premio Combattività');
 
-            var table2 = $('#example2').DataTable({
-                "ajax": "getPunti.php",
-                "columns": [
-                    {"data": "pos"},
-                    {"data": "nick"},
-                    {"data": "squadra"},
-                    {"data": "punti"},
-                    {"data": "last"},
-                    {"data": "tornei"}
-                ],
-                "aoColumnDefs": [
-                    {"sClass": "center", "aTargets": [0]},
-                    {"sClass": "", "aTargets": [1]},
-                    {"sClass": "", "aTargets": [2]},
-                    {"sClass": "destra", "aTargets": [3]},
-                    {"sClass": "destra", "aTargets": [4]},
-                    {"sClass": "destra", "aTargets": [5]}
-                ],
-                "oLanguage": {
-                    "sUrl": "./lang/ita.txt"
-                },
-                "paging": false,
-                "bSort": false,
-                "searching": false,
-                "bLengthChange": false,
-                "info": false,
-                "fnInitComplete": function () {
-                    var json = table2.ajax.json();
-                    $(".numTappa2").html("Classifica a Punti: " + json.tappa + "&deg; tappa (" + json.data2 + ")");
-                },
-                "dom": '<"top"iflp<"clear">>rt<"bottom"il<"clear">>',
-                "createdRow": function (row, data, index) {
-                    if (data.pos == "1&deg;") {
-                        $('td', row).addClass('highlight2');
-                    }
-                },
-                "scrollCollapse": true
-            });
+                        }
+                    },
+                    "scrollCollapse": true
+                });
 
-            var table4 = $('#example4').DataTable({
-                "ajax": "getPois.php",
-                "columns": [
-                    {"data": "pos"},
-                    {"data": "nick"},
-                    {"data": "squadra"},
-                    {"data": "punti"},
-                    {"data": "last"},
-                    {"data": "conto"}
-                ],
-                "aoColumnDefs": [
-                    {"sClass": "center", "aTargets": [0]},
-                    {"sClass": "", "aTargets": [1]},
-                    {"sClass": "", "aTargets": [2]},
-                    {"sClass": "destra", "aTargets": [3]},
-                    {"sClass": "destra", "aTargets": [4]},
-                    {"sClass": "destra", "aTargets": [5]}
-                ],
-                "oLanguage": {
-                    "sUrl": "./lang/ita.txt"
-                },
-                "paging": false,
-                "bSort": false,
-                "searching": false,
-                "bLengthChange": false,
-                "info": false,
-                "fnInitComplete": function () {
-                    var json = table4.ajax.json();
-                    $(".numTappa4").html("Classifica Scalatori: " + json.tappa + "&deg; tappa (" + json.data2 + ")");
-                },
-                "dom": '<"top"iflp<"clear">>rt<"bottom"il<"clear">>',
-                "createdRow": function (row, data, index) {
-                    if (data.pos == "1&deg;") {
-                        $('td', row).addClass('highlight4');
-                    }
-                },
-                "scrollCollapse": true
-            });
+                var table2 = $('#example2').DataTable({
+                    "ajax": "getPunti.php",
+                    "columns": [
+                        {"data": "pos"},
+                        {"data": "nick"},
+                        {"data": "squadra"},
+                        {"data": "punti"},
+                        {"data": "last"},
+                        {"data": "tornei"}
+                    ],
+                    "aoColumnDefs": [
+                        {"sClass": "center", "aTargets": [0]},
+                        {"sClass": "", "aTargets": [1]},
+                        {"sClass": "", "aTargets": [2]},
+                        {"sClass": "destra", "aTargets": [3]},
+                        {"sClass": "destra", "aTargets": [4]},
+                        {"sClass": "destra", "aTargets": [5]}
+                    ],
+                    "oLanguage": {
+                        "sUrl": "./lang/ita.txt"
+                    },
+                    "paging": false,
+                    "bSort": false,
+                    "searching": false,
+                    "bLengthChange": false,
+                    "info": false,
+                    "fnInitComplete": function () {
+                        var json = table2.ajax.json();
+                        $(".numTappa2").html("Classifica a Punti: " + json.tappa + "&deg; tappa (" + json.data2 + ")");
+                    },
+                    "dom": '<"top"iflp<"clear">>rt<"bottom"il<"clear">>',
+                    "createdRow": function (row, data, index) {
+                        if (data.pos == "1&deg;") {
+                            $('td', row).addClass('highlight2');
+                        }
+                        if (data.nick2 == combatt) {
+                            $('td', row).eq(1).addClass('rosso');
+                            $('td', row).eq(1).prop('title', 'Premio Combattività');
 
-            var table7 = $('#example7').DataTable({
-                "ajax": {
-                    url: "getScalDett.php"
-                },
-                "columns": [
-                    {"data": "torn"},
-                    {"data": "cat"},
-                    {"data": "part"},
-                    {"data": "lista"},
-                    {"data": "gioc1"},
-                    {"data": "punti1"},
-                    {"data": "gioc2"},
-                    {"data": "punti2"},
-                    {"data": "gioc3"},
-                    {"data": "punti3"}
-                ],
-                "aoColumnDefs": [
-                    {"sClass": "", "aTargets": [0]},
-                    {"sClass": "center", "aTargets": [1]},
-                    {"sClass": "center", "aTargets": [2]},
-                    {"sClass": "center", "aTargets": [3]},
-                    {"sClass": "destra bgred bold", "aTargets": [5]},
-                    {"sClass": " bgred uno", "aTargets": [4]},
-                    {"sClass": "destra bgyel bold", "aTargets": [7]},
-                    {"sClass": "bgyel uno", "aTargets": [6]},
-                    {"sClass": "destra bgyel2 bold due", "aTargets": [9]},
-                    {"sClass": "bgyel2 uno ", "aTargets": [8]}
-                ],
-                "oLanguage": {
-                    "sUrl": "./lang/ita.txt"
-                },
-                "paging": false,
-                "bSort": false,
-                "searching": false,
-                "bLengthChange": false,
-                "info": false,
-                "fnInitComplete": function () {
-                    var json = table7.ajax.json();
-                    $(".numTappa7").html("Dettaglio Scalatori: " + json.tappa + "&deg; tappa (" + json.data2 + ")");
-                },
-                "dom": '<"top"iflp<"clear">>rt<"bottom"il<"clear">>',
-                "createdRow": function (row, data, index) {
+                        }
+                    },
+                    "scrollCollapse": true
+                });
 
-                },
-                "scrollCollapse": true
-            });
+                var table4 = $('#example4').DataTable({
+                    "ajax": "getPois.php",
+                    "columns": [
+                        {"data": "pos"},
+                        {"data": "nick"},
+                        {"data": "squadra"},
+                        {"data": "punti"},
+                        {"data": "last"},
+                        {"data": "conto"}
+                    ],
+                    "aoColumnDefs": [
+                        {"sClass": "center", "aTargets": [0]},
+                        {"sClass": "", "aTargets": [1]},
+                        {"sClass": "", "aTargets": [2]},
+                        {"sClass": "destra", "aTargets": [3]},
+                        {"sClass": "destra", "aTargets": [4]},
+                        {"sClass": "destra", "aTargets": [5]}
+                    ],
+                    "oLanguage": {
+                        "sUrl": "./lang/ita.txt"
+                    },
+                    "paging": false,
+                    "bSort": false,
+                    "searching": false,
+                    "bLengthChange": false,
+                    "info": false,
+                    "fnInitComplete": function () {
+                        var json = table4.ajax.json();
+                        $(".numTappa4").html("Classifica Scalatori: " + json.tappa + "&deg; tappa (" + json.data2 + ")");
+                    },
+                    "dom": '<"top"iflp<"clear">>rt<"bottom"il<"clear">>',
+                    "createdRow": function (row, data, index) {
+                        if (data.pos == "1&deg;") {
+                            $('td', row).addClass('highlight4');
+                        }
+                        if (data.nick2 == combatt) {
+                            $('td', row).eq(1).addClass('rosso');
+                            $('td', row).eq(1).prop('title', 'Premio Combattività');
 
-            var table5 = $('#example5').DataTable({
-                "ajax": {
-                    url: "getInter.php"
-                },
-                "columns": [
-                    {"data": "pos"},
-                    {"data": "nick"},
-                    {"data": "squadra"},
-                    {"data": "guadagno"},
-                    {"data": "tornei"}
-                ],
-                "aoColumnDefs": [
-                    {"sClass": "center", "aTargets": [0]},
-                    {"sClass": "", "aTargets": [1]},
-                    {"sClass": "", "aTargets": [2]},
-                    {"sClass": "destra", "aTargets": [3]},
-                    {"sClass": "destra", "aTargets": [4]}
-                ],
-                "oLanguage": {
-                    "sUrl": "./lang/ita.txt"
-                },
-                "paging": false,
-                "bSort": false,
-                "searching": false,
-                "bLengthChange": false,
-                "info": false,
-                "fnInitComplete": function () {
-                    var json = table5.ajax.json();
-                    $(".numTappa5").html("Classifica Intergiro: " + json.tappa + "&deg; tappa (" + json.data2 + ")");
-                },
-                "dom": '<"top"iflp<"clear">>rt<"bottom"il<"clear">>',
-                "createdRow": function (row, data, index) {
-                    if (data.pos == "1&deg;") {
-                        $('td', row).addClass('highlight5');
-                    }
-                },
-                "scrollCollapse": true
-            });
+                        }
+                    },
+                    "scrollCollapse": true
+                });
+
+                var table7 = $('#example7').DataTable({
+                    "ajax": {
+                        url: "getScalDett.php"
+                    },
+                    "columns": [
+                        {"data": "torn"},
+                        {"data": "cat"},
+                        {"data": "part"},
+                        {"data": "lista"},
+                        {"data": "gioc1"},
+                        {"data": "punti1"},
+                        {"data": "gioc2"},
+                        {"data": "punti2"},
+                        {"data": "gioc3"},
+                        {"data": "punti3"}
+                    ],
+                    "aoColumnDefs": [
+                        {"sClass": "", "aTargets": [0]},
+                        {"sClass": "center", "aTargets": [1]},
+                        {"sClass": "center", "aTargets": [2]},
+                        {"sClass": "center", "aTargets": [3]},
+                        {"sClass": "destra bgred bold", "aTargets": [5]},
+                        {"sClass": " bgred uno", "aTargets": [4]},
+                        {"sClass": "destra bgyel bold", "aTargets": [7]},
+                        {"sClass": "bgyel uno", "aTargets": [6]},
+                        {"sClass": "destra bgyel2 bold due", "aTargets": [9]},
+                        {"sClass": "bgyel2 uno ", "aTargets": [8]}
+                    ],
+                    "oLanguage": {
+                        "sUrl": "./lang/ita.txt"
+                    },
+                    "paging": false,
+                    "bSort": false,
+                    "searching": false,
+                    "bLengthChange": false,
+                    "info": false,
+                    "fnInitComplete": function () {
+                        var json = table7.ajax.json();
+                        $(".numTappa7").html("Dettaglio Scalatori: " + json.tappa + "&deg; tappa (" + json.data2 + ")");
+                        $(".numMont").html("Totale Montagne: " + json.tot);
+                    },
+                    "dom": '<"top"iflp<"clear">>rt<"bottom"il<"clear">>',
+                    "createdRow": function (row, data, index) {
+
+                    },
+                    "scrollCollapse": true
+                });
+
+                var table5 = $('#example5').DataTable({
+                    "ajax": {
+                        url: "getInter.php"
+                    },
+                    "columns": [
+                        {"data": "pos"},
+                        {"data": "nick"},
+                        {"data": "squadra"},
+                        {"data": "guadagno"},
+                        {"data": "tornei"}
+                    ],
+                    "aoColumnDefs": [
+                        {"sClass": "center", "aTargets": [0]},
+                        {"sClass": "", "aTargets": [1]},
+                        {"sClass": "", "aTargets": [2]},
+                        {"sClass": "destra", "aTargets": [3]},
+                        {"sClass": "destra", "aTargets": [4]}
+                    ],
+                    "oLanguage": {
+                        "sUrl": "./lang/ita.txt"
+                    },
+                    "paging": false,
+                    "bSort": false,
+                    "searching": false,
+                    "bLengthChange": false,
+                    "info": false,
+                    "fnInitComplete": function () {
+                        var json = table5.ajax.json();
+                        $(".numTappa5").html("Classifica Intergiro: " + json.tappa + "&deg; tappa (" + json.data2 + ")");
+                    },
+                    "dom": '<"top"iflp<"clear">>rt<"bottom"il<"clear">>',
+                    "createdRow": function (row, data, index) {
+                        if (data.pos == "1&deg;") {
+                            $('td', row).addClass('highlight5');
+                        }
+                        if (data.nick2 == combatt) {
+                            $('td', row).eq(1).addClass('rosso');
+                            $('td', row).eq(1).prop('title', 'Premio Combattività');
+
+                        }
+                    },
+                    "scrollCollapse": true
+                });
 
 
-            table6 = $('#example6').DataTable({
-                "ajax": {
-                    url: "getRoom.php",
-                    data: function (data) {
-                        data.r = $("select#proom option:selected").val()
-                    }
-                },
-                "columns": [
-                    {"data": "pos"},
-                    {"data": "nick"},
-                    {"data": "squadra"},
-                    {"data": "guadagno"},
-                    {"data": "tornei"}
-                ],
-                "aoColumnDefs": [
-                    {"sClass": "center", "aTargets": [0]},
-                    {"sClass": "", "aTargets": [1]},
-                    {"sClass": "", "aTargets": [2]},
-                    {"sClass": "destra", "aTargets": [3]},
-                    {"sClass": "destra", "aTargets": [4]}
-                ],
-                "oLanguage": {
-                    "sUrl": "./lang/ita.txt"
-                },
-                "paging": false,
-                "bSort": false,
-                "searching": false,
-                "bLengthChange": false,
-                "info": false,
-                "fnInitComplete": function () {
-                    var json = table6.ajax.json();
-                    $(".numTappa6").html("Classifica <span id='poke'>" + $("select#proom option:selected").val() + "</span>: " + json.tappa + "&deg; tappa (" + json.data2 + ")");
-                },
-                "dom": '<"top"iflp<"clear">>rt<"bottom"il<"clear">>',
-                "createdRow": function (row, data, index) {
-                    if (data.pos == "1&deg;") {
-                        $('td', row).addClass('highlight6');
-                    }
-                },
-                "scrollCollapse": true
-            });
+                table6 = $('#example6').DataTable({
+                    "ajax": {
+                        url: "getRoom.php",
+                        data: function (data) {
+                            data.r = $("select#proom option:selected").val()
+                        }
+                    },
+                    "columns": [
+                        {"data": "pos"},
+                        {"data": "nick"},
+                        {"data": "squadra"},
+                        {"data": "guadagno"},
+                        {"data": "tornei"}
+                    ],
+                    "aoColumnDefs": [
+                        {"sClass": "center", "aTargets": [0]},
+                        {"sClass": "", "aTargets": [1]},
+                        {"sClass": "", "aTargets": [2]},
+                        {"sClass": "destra", "aTargets": [3]},
+                        {"sClass": "destra", "aTargets": [4]}
+                    ],
+                    "oLanguage": {
+                        "sUrl": "./lang/ita.txt"
+                    },
+                    "paging": false,
+                    "bSort": false,
+                    "searching": false,
+                    "bLengthChange": false,
+                    "info": false,
+                    "fnInitComplete": function () {
+                        var json = table6.ajax.json();
+                        $(".numTappa6").html("Classifica <span id='poke'>" + $("select#proom option:selected").val() + "</span>: " + json.tappa + "&deg; tappa (" + json.data2 + ")");
+                    },
+                    "dom": '<"top"iflp<"clear">>rt<"bottom"il<"clear">>',
+                    "createdRow": function (row, data, index) {
+                        if (data.pos == "1&deg;") {
+                            $('td', row).addClass('highlight6');
+                        }
+                        if (data.nick2 == combatt) {
+                            $('td', row).eq(1).addClass('rosso');
+                            $('td', row).eq(1).prop('title', 'Premio Combattività');
 
+                        }
+                    },
+                    "scrollCollapse": true
+                });
+          //  }
         });
 
     </script>
@@ -418,13 +449,13 @@
     <tr class="sopra">
         <th colspan="2" class="numTappa3" style="padding-left: 20px"></th>
         <th colspan="2" class="" style="">
-                    <select id="example-movie" name="rating" style="visibility:hidden">
-                        <option value="Facile">Piece of Cake</option>
-                        <option value="Normale">Hey not too Rough</option>
-                        <option value="Impegnativa">Let's Rock</option>
-                        <option value="Difficile">Ultra-Violence</option>
-                        <option value="Folle">Nightmare</option>
-                    </select>
+            <select id="example-movie" name="rating" style="visibility:hidden">
+                <option value="Facile">Piece of Cake</option>
+                <option value="Normale">Hey not too Rough</option>
+                <option value="Impegnativa">Let's Rock</option>
+                <option value="Difficile">Ultra-Violence</option>
+                <option value="Folle">Nightmare</option>
+            </select>
 
 
         </th>
@@ -527,7 +558,8 @@
     <thead class="">
     <tr class="sopra">
         <th colspan="4" class="numTappa7" style="padding-left: 20px"></th>
-        <th colspan="6" style="padding-right: 20px;text-align:right">
+        <th colspan="4" class="numMont" style="padding-right: 20px;text-align:right"></th>
+        <th colspan="2" style="padding-right: 20px;text-align:right">
             <a href="#scal" class="" onclick="$('#example4').toggle();$('#example7').toggle()"><img
                     src="media/images/meno.png" style="" title="ritorna alla classifica scalatori"></a></th>
         </th>

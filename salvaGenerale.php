@@ -12,7 +12,7 @@ include "librerie/specific.php";
 include "librerie/date.php";
 $tappa=diffDate2($INIZIO);
  //(nick LIKE 'Parasar' OR nick LIKE 'stardust85') AND
-$res = query("SELECT tt_dati.`nick`, SUM(guadagno) as guadagno, COUNT(*) as tornei FROM `tt_dati` WHERE tappa = '$tappa' GROUP BY nick ORDER BY guadagno DESC");
+$res = query("SELECT tt_dati.`nick`, SUM(guadagno) as guadagno, COUNT(*) as tornei FROM `tt_dati` WHERE tappa = '$tappa' GROUP BY nick ORDER BY guadagno DESC, tornei DESC ");
 $qua=mysql_num_rows($res);
 $lista="";
 $out=array();
