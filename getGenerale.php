@@ -8,7 +8,7 @@
 include_once "librerie/sql.php";
 include_once "librerie/date.php";
 include_once "librerie/specific.php";
-$dr=query("SELECT *, SUM(guadagno) as guad, SUM(tornei) as tor, under FROM `tt_generale` JOIN tt_player ON tt_generale.nick = tt_player.nick LEFT JOIN tt_squadra ON tt_player.squadra = tt_squadra.nome GROUP BY tt_generale.nick order by guad desc, tor desc");
+$dr=query("SELECT *, SUM(guadagno) as guad, SUM(apremio) as itm, SUM(tornei) as tor, under FROM `tt_generale` JOIN tt_player ON tt_generale.nick = tt_player.nick LEFT JOIN tt_squadra ON tt_player.squadra = tt_squadra.nome GROUP BY tt_generale.nick order by guad desc, tor desc");
 $tappa=getTappa();
 $tap=$tappa-1;
 $dr2=query("SELECT nick, posizione, ultimo FROM `tt_stats_gen` WHERE tappa >= '$tap' ORDER BY tappa desc");
@@ -35,6 +35,7 @@ while (($h = mysql_fetch_assoc($dr))) {
     $obj = new stdClass();
     $cont++;
     $obj->pos=$cont."&deg;";
+    $obj->itm=number_format($h["itm"]*100/$h["tor"],1);
    // $obj->nick=$h["nick"];
     if (!isset($atr[$h["nick"]]->posi)) {
         $posi="New";

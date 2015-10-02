@@ -16,10 +16,10 @@ $base = 0;
 $tra = 0;
 $cont = 0;
 $arr = maglie();
-$s = "";
-//$s='DELETE FROM "main"."replace_pattern_0_1" WHERE replacement LIKE \'[img]http://static.pokerstrategycdn.com/%\';';
-//$s.='DELETE FROM "main"."replace_pattern_0_1" WHERE replacement LIKE \'[img]http://www.dalborgo.com/tour/media/images/%\';';
-echo "<br><br>";
+//$s = "";
+echo 'DELETE FROM "main"."replace_pattern_0_1" WHERE replacement LIKE \'[img]http://static.pokerstrategycdn.com/%\';';
+echo 'DELETE FROM "main"."replace_pattern_0_1" WHERE replacement LIKE \'[img]http://www.dalborgo.com/tour/media/images/%\';';
+$s="";
 while (($h = mysql_fetch_assoc($dr))) {
     $m = "";
     if ($comb["combat"] == $h["nick"])
@@ -40,7 +40,7 @@ while (($h = mysql_fetch_assoc($dr))) {
         $rui = '[img]http://www.dalborgo.com/tour/media/images/' . $m;
     else
         $rui = '[img]http://static.pokerstrategycdn.com/front/images/ranks/mini/' . $h["status"];
-    $s = "REPLACE INTO";
+    $s .= "REPLACE INTO";
     $s .= ' "main"."replace_pattern_0_1" ("url_pattern","input","replacement") VALUES ("http://it.pokerstrategy.com/","';
     $s .= "q" . $h["nick"];
     $s .= '","';

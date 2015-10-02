@@ -24,7 +24,7 @@ while (($ra2 = mysql_fetch_assoc($res2))) {
     $out2["tappa"]=$tappa;
     repTV("tt_granpremi",$out2);
 }
-$res = query("SELECT nick, guadagno, a.tappa, categoria, a.nome, id  FROM `tt_granpremi` b LEFT JOIN tt_dati a ON b.id = a.id_torneo AND b.tappa = a.tappa  WHERE b.tappa='$tappa' order by a.id_torneo, posizione");
+$res = query("SELECT nick, guadagno, a.tappa, categoria, a.nome, id, a.posizione, a.guadagno  FROM `tt_granpremi` b LEFT JOIN tt_dati a ON b.id = a.id_torneo AND b.tappa = a.tappa  WHERE b.tappa='$tappa' order by a.id_torneo, posizione");
 $out=array();
 $alta = array(15,8,5);
 $media=array(7,3);
@@ -52,6 +52,8 @@ while (($ra = mysql_fetch_assoc($res))) {
     $out["id"]=$ra["id"];
     $out["nick"]=$ra["nick"];
     $out["nome"]=$ra["nome"];
+    $out["pos"]=$ra["posizione"];
+    $out["guad"]=$ra["guadagno"];
     $out["tappa"]=$tappa;
     repTV("tt_pois",$out);
 }

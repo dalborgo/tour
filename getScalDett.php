@@ -12,7 +12,7 @@ include_once "librerie/specific.php";
 
 //$res = query("CREATE TEMPORARY TABLE IF NOT EXISTS table4 AS (SELECT tt_dati.`nick`, SUM(guadagno) as guadagno, COUNT(*) as tornei FROM `tt_dati` WHERE buyin <= 5.00 GROUP BY nick)");
 $tappa=getTappa();
-$dr=query("SELECT b.id, a.nome, categoria, b.nick, punti, status, squadra, maglia FROM `tt_pois` b JOIN tt_granpremi a ON a.id = b.id LEFT JOIN tt_player c ON b.nick = c.nick WHERE b.tappa='$tappa' order by categoria desc, a.id, punti desc");
+$dr=query("SELECT b.id, a.nome, categoria, b.nick, punti, status, squadra, maglia, pos, guad FROM `tt_pois` b JOIN tt_granpremi a ON a.id = b.id LEFT JOIN tt_player c ON b.nick = c.nick WHERE b.tappa='$tappa' order by categoria desc, a.id, punti desc");
 //CONVERT(CAST(CONVERT(a.nome USING latin1) AS BINARY) as nome
 //$f=addDate($INIZIO,$tappa);
 $abbin = array();
@@ -59,7 +59,9 @@ while (($h = mysql_fetch_assoc($dr))) {
         $obj->cat="<img src='media/images/2C.jpg'>";;
     $obj->part=$h["categoria"];
     if($cont==1 && $h["punti"]>0) {
-        $obj->punti1 = $h["punti"];
+        $posiz=$h["pos"];
+        $guad=$h["guad"];
+        $obj->punti1 = "<abbr title='$posiz&deg; (&euro;$guad)' class='nero'>".$h["punti"]."</abbr>";
         $obj->gioc1 = "<span style='margin-left: 5px'>".$h["nick"]."</span>";
         $obj->punti2="";
         $obj->punti3="";
@@ -68,11 +70,15 @@ while (($h = mysql_fetch_assoc($dr))) {
         $ce=true;
     }
     if($cont==2 && $h["punti"]>0) {
-        $obj->punti2 = $h["punti"];
+        $posiz=$h["pos"];
+        $guad=$h["guad"];
+        $obj->punti2 = "<abbr title='$posiz&deg; (&euro;$guad)' class='nero'>".$h["punti"]."</abbr>";
         $obj->gioc2 = "<span style='margin-left: 5px'>".$h["nick"]."</span>";
     }
     if($cont==3 && $h["punti"]>0) {
-        $obj->punti3 = $h["punti"];
+        $posiz=$h["pos"];
+        $guad=$h["guad"];
+        $obj->punti3 = "<abbr title='$posiz&deg; (&euro;$guad)' class='nero'>".$h["punti"]."</abbr>";
         $obj->gioc3 = "<span style='margin-left: 5px'>".$h["nick"]."</span>";
     }
     if($h["punti"]==0)

@@ -9,8 +9,9 @@ $toy = $a . "~" . $b;
 //$format="2015-09-14";
 $terzo = date('Y-m-d', (strtotime('-1 day', strtotime($seco))));
 $c = strtotime($terzo . '07:00:00');
-$colore=(isLocale())?"papayawhip":"white";
-$testo=(isLocale())?"Locale":"Online";
+$colore = (isLocale()) ? "papayawhip" : "white";
+$testo = (isLocale()) ? "Locale" : "Online";
+$ultimo = (isLocale()) ? "" : "<br><br><a href='http://localhost/tmp/tour/pannello.php'>Pannello Locale</a><br/>";
 ?>
 <div style="padding:0px 10px 0px 10px;width:164px;background-color:<?php echo $colore; ?>">
     <h4><?php echo $testo; ?></h4>
@@ -29,4 +30,5 @@ $testo=(isLocale())?"Locale":"Online";
     <a href="gruppi/myphp.php">Gruppi</a><br/>
     <a href="controllo.php?a=<?php echo $c ?>&b=<?php echo $a ?>&c=Bosca95">Controllo (online)</a><br/>
     <a href="patchdati.php?a=<?php echo $c ?>&b=<?php echo $a ?>&c=explosive">Patcha</a>
+    <?php echo $ultimo; ?>
 </div>

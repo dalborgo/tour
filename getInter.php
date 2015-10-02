@@ -11,22 +11,39 @@ include_once "librerie/sql.php";
 include_once "librerie/date.php";
 include_once "librerie/specific.php";
 
-//$tappa=diffDate2($INIZIO);
-$res = query("CREATE TEMPORARY TABLE IF NOT EXISTS table4 AS (SELECT tt_dati.`nick`, SUM(guadagno) as guadagno, COUNT(*) as tornei FROM `tt_dati` WHERE buyin <= 5.00 GROUP BY nick)");
+if (!isset($_GET['r']) || $_GET['r']=="")
+{
+    $buy="0";
+}else
+    $buy=$_GET['r'];
 
-$dr=query("SELECT a.`nick`, guadagno,  tornei, status, squadra, maglia FROM `table4` a LEFT JOIN tt_player b ON a.nick = b.nick  ORDER BY guadagno DESC, tornei desc");
+//$tappa=diffDate2($INIZIO);
+if($buy=="0")
+    $res = query("CREATE TEMPORARY TABLE IF NOT EXISTS table4 AS (SELECT tt_dati.`nick`, SUM(guadagno) as guadagno,SUM(if(guadagno > 0.00, 1, 0)) as itm, COUNT(*) as tornei FROM `tt_dati` WHERE buyin <= $buy
+AND entranti >=450
+AND nome NOT LIKE '%9000 FPP%'
+AND nome NOT LIKE '%1000 FPP%'
+AND nome NOT LIKE '%VIP Privilege%'
+
+GROUP BY nick)");
+else
+    $res = query("CREATE TEMPORARY TABLE IF NOT EXISTS table4 AS (SELECT tt_dati.`nick`, SUM(guadagno) as guadagno, SUM(if(guadagno > 0, 1, 0)) as itm, COUNT(*) as tornei FROM `tt_dati` WHERE buyin <= $buy GROUP BY nick)");
+
+$dr=query("SELECT a.`nick`, guadagno,  tornei, status, squadra, maglia, itm FROM `table4` a LEFT JOIN tt_player b ON a.nick = b.nick  ORDER BY guadagno DESC, tornei desc");
 $tappa=getTappa();
 //$f=addDate($INIZIO,$tappa);
 $abbin = array();
 $base=0;
 $tra=0;
 $cont=0;
+
 $arr=maglie();
 while (($h = mysql_fetch_assoc($dr))) {
     $obj = new stdClass();
     $cont++;
     $obj->pos=$cont."&deg;";
     $obj->guadagno=$h["guadagno"];
+    $obj->itm=number_format($h["itm"]*100/$h["tornei"],1);
     $obj->tornei=$h["tornei"];
     $obj->squadra=$h["squadra"];
     $obj->status=$h["status"];
