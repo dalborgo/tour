@@ -10,36 +10,39 @@ include "librerie/fetch.php";
 include "librerie/sql.php";
 include "librerie/specific.php";
 include "librerie/date.php";
-$tappa=diffDate2($INIZIO)-18;
- //(nick LIKE 'Parasar' OR nick LIKE 'stardust85') AND
+
+$tappa = diffDate2($INIZIO);
+//(nick LIKE 'Parasar' OR nick LIKE 'stardust85') AND
 $res = query("SELECT tt_dati.`nick`, SUM(guadagno) as guadagno, SUM(if(guadagno > 0.00, 1, 0)) as apremio, COUNT(*) as tornei FROM `tt_dati` WHERE tappa = '$tappa' GROUP BY nick ORDER BY guadagno DESC, tornei DESC ");
-$qua=mysql_num_rows($res);
-$lista="";
-$out=array();
-$alta = array(20,17,15,13,12,10,8,6,4,3,2,1);
-$media=array(15,12,10,8,6,5);
-$bassa=array(6,4,2);
-if($qua<7)
-    $rty=$bassa;
-else if ($qua<13)
-    $rty=$media;
+$qua = mysql_num_rows($res);
+$lista = "";
+$out = array();
+$alta = array(20, 17, 15, 13, 12, 10, 8, 6, 4, 3, 2, 1);
+$media = array(15, 12, 10, 8, 6, 5);
+$bassa = array(6, 4, 2);
+if ($qua < 7)
+    $rty = $bassa;
+else if ($qua < 13)
+    $rty = $media;
 else
-    $rty=$alta;
-$cvi=0;
+    $rty = $alta;
+$cvi = 0;
 while (($ra = mysql_fetch_assoc($res))) {
 
-    if($cvi<count($rty) && $cvi<$qua-1)
-        $out["punti"]=$rty[$cvi];
+    if ($cvi < count($rty) && $cvi < $qua - 1)
+        $out["punti"] = $rty[$cvi];
     else
-        $out["punti"]='0';
+        $out["punti"] = '0';
     $cvi++;
-    $out["nick"]=$ra["nick"];
-    $out["guadagno"]=$ra["guadagno"];
-    $out["posizione"]=$cvi;
-    $out["tappa"]=$tappa;
-    $out["apremio"]=$ra["apremio"];
-    $out["tornei"]=$ra["tornei"];
-    repTV("tt_generale",$out);
+    $out["nick"] = $ra["nick"];
+    $out["guadagno"] = $ra["guadagno"];
+    $out["punti"] = ($out["guadagno"] > 0) ? $out["punti"] + 5 : $out["punti"];
+    $out["posizione"] = $cvi;
+    $out["tappa"] = $tappa;
+    $out["apremio"] = $ra["apremio"];
+    $out["tornei"] = $ra["tornei"];
+    repTV("tt_generale", $out);
 }
 echo "OK";
+
 

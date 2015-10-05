@@ -128,14 +128,14 @@
                 "oLanguage": {
                     "sUrl": "./lang/ita.txt"
                 },
-                "paging": false,
+                "paging": true,
                 "bSort": false,
                 "searching": false,
+                "pageLength": 20,
                 "bLengthChange": false,
                 "info": false,
                 "fnInitComplete": function () {
                 },
-                "dom": '<"top"iflp<"clear">>rt<"bottom"il<"clear">>',
                 "createdRow": function (row, data, index) {
 
                 },
@@ -454,7 +454,7 @@
         </th>
         <th colspan="2" class="" style="padding-right: 20px;text-align:right">
 
-            <a href="#dettArr" class="" onclick="$('#example10').toggle();$('#example3').toggle()"><img
+            <a href="#dettArr" class="" onclick="$('#example10').toggle();$('.dataTables_paginate').toggle();$('#example3').toggle()"><img
                     src="media/images/piu.png" style="" title="vai a progressione tappe e maglie"></a></th>
     </tr>
     <tr class="sopra">
@@ -483,12 +483,12 @@
     </thead>
 </table>
 <a name="dettArr"></a>
-<table id="example10" class="display compact" cellspacing="0" style="margin: 40px auto;display: none;font-size:small">
+<table id="example10" class="display compact" cellspacing="0" style="margin: 40px auto 2px auto;display: none;font-size:small">
     <thead class="">
     <tr class="sopra">
         <th colspan="5" class="numTappa10" style="padding-left: 20px;font-size: medium">Progressione Tappe e Maglie</th>
         <th colspan="5" style="padding-right: 20px;text-align:right">
-            <a href="#Arr" class="" onclick="$('#example3').toggle();$('#example10').toggle()"><img
+            <a href="#Arr" class="" onclick="$('#example3').toggle();$('.dataTables_paginate').toggle();$('#example10').toggle()"><img
                     src="media/images/meno.png" style="" title="ritorna alle Tappe"></a></th>
         </th>
     </tr>

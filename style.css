@@ -174,3 +174,18 @@ abbr.nero{
 abbr.senza{
     border: none;
 }
+
+.dataTables_paginate {
+    color: #333333;
+    display: none;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    margin-left: 0px;
+    border-radius: 11px;
+    padding: 0 12px;
+
+}
+.dataTables_wrapper .dataTables_paginate {
+    padding-right: 30px;
+}

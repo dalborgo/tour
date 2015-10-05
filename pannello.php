@@ -28,7 +28,13 @@ $ultimo = (isLocale()) ? "" : "<br><br><a href='http://localhost/tmp/tour/pannel
     <a href="agg_ranking.php">Aggiorna Ranking</a><br/>
     <a href="http://www.dalborgo.com/ryder/azz_blog.php">Azzera Blog</a><br/>
     <a href="gruppi/myphp.php">Gruppi</a><br/>
-    <a href="controllo.php?a=<?php echo $c ?>&b=<?php echo $a ?>&c=Bosca95">Controllo (online)</a><br/>
+    <a href="controllo.php?a=<?php echo $c ?>&b=<?php echo $a ?>&c=Bosca95">Controllo Bosca95</a><br/>
+    <a href="controllo.php?a=<?php echo $c ?>&b=<?php echo $a ?>&c=pokerale17">Controllo Poker</a><br/>
+    <a href="controllo.php?a=<?php echo $c ?>&b=<?php echo $a ?>&c=thecogo">Controllo cogo</a><br/>
+    <a href="controllo.php?a=<?php echo $c ?>&b=<?php echo $a ?>&c=Giuliocesare5">Controllo Giulio</a><br/>
+    <a href="controllo.php?a=<?php echo $c ?>&b=<?php echo $a ?>&c=DamaNera">Controllo DamaNera</a><br/>
+    <a href="controllo.php?a=<?php echo $c ?>&b=<?php echo $a ?>&c=TOPMODEL61">Controllo Top</a><br/>
     <a href="patchdati.php?a=<?php echo $c ?>&b=<?php echo $a ?>&c=explosive">Patcha</a>
-    <?php echo $ultimo; ?>
+    <?php echo $ultimo; ?><br />
+    <a href="generale.html">GENERALE</a><br/>
 </div>
