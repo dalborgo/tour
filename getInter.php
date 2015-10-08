@@ -23,7 +23,9 @@ if($buy=="0")
 AND entranti >=450
 AND nome NOT LIKE '%9000 FPP%'
 AND nome NOT LIKE '%1000 FPP%'
-AND nome NOT LIKE '%VIP Privilege%'
+AND nome NOT LIKE '%SilverStar+ VIP Privilege%'
+AND nome NOT LIKE '%GoldStar+ VIP Privilege%'
+AND nome NOT LIKE '%All-In Shootout%'
 
 GROUP BY nick)");
 else
