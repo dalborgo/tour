@@ -59,7 +59,7 @@ while (($h = mysql_fetch_assoc($dr))) {
         $base=$h["guad"];
     $tra+=$h["guad"];
     $obj->guadagno=$h["guad"];
-    $obj->squadra=$h["nome"];
+    $obj->squadra=$h["completo"];
     $obj->tornei=$h["tor"];
     $sott=number_format($base-$h["guad"],2);
     $obj->distacco=($sott==0)?"":"-".($sott);

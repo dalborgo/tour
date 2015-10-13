@@ -39,7 +39,7 @@ while (($h = mysql_fetch_assoc($dr))) {
     }
     //$obj->last=$odi[$h["nick"]];
     //$obj->punti=$h["last"];
-    $obj->squadra=$h["nome"];
+    $obj->squadra=$h["completo"];
     //$obj->tornei=$h["tor"];
    // $obj->status=$h["status"];
     $m="";$colore2="";$colore="";

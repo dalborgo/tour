@@ -32,7 +32,7 @@ while (($h = mysql_fetch_assoc($dr))) {
     $tra+=$h["guadagno"];
 
     $obj->guadagno=$h["guadagno"];
-    $obj->squadra=$h["nome"];
+    $obj->squadra=$h["completo"];
     $obj->tornei=$h["tornei"];
     $obj->punti=$h["punti"];
     //$obj->distacco=($base-$h["guad"]==0)?"":"-".($base-$h["guad"]);
