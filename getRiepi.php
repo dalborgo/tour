@@ -35,6 +35,7 @@ while (($h = mysql_fetch_assoc($dr))) {
     $obj->pois=$h["scalatore"];
     $obj->bianca=$h["giovane"];
     $obj->blu=$h["inter"];
+    $obj->squadra=$h["squadra"];
     $obj->tipo=$h["tipo"];
     $obj->tipo=($obj->tipo=="pianeggiante")?"P":"M";
     $obj->diff=$h["diff"];

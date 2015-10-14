@@ -46,6 +46,44 @@
                     tappa = data;
                 }
             });
+            var table15 = $('#example15').DataTable({
+                "ajax": "getClassSquadre.php",
+                "columns": [
+                    {"data": "pos"},
+                    {"data": "nick"},
+                    {"data": "squadra"},
+                    {"data": "punti"},
+                    {"data": "last"},
+                    {"data": "tornei"}
+                ],
+                "aoColumnDefs": [
+                    {"sClass": "center", "aTargets": [0]},
+                    {"sClass": "", "aTargets": [1]},
+                    {"sClass": "", "aTargets": [2]},
+                    {"sClass": "destra", "aTargets": [3]},
+                    {"sClass": "destra", "aTargets": [4]},
+                    {"sClass": "destra", "aTargets": [5]}
+                ],
+                "oLanguage": {
+                    "sUrl": "./lang/ita.txt"
+                },
+                "paging": false,
+                "bSort": false,
+                "searching": false,
+                "bLengthChange": false,
+                "info": false,
+                "fnInitComplete": function () {
+                    var json = table15.ajax.json();
+                    $(".numTappa15").html("Classifica a Squadre: " + json.tappa + "&deg; tappa (" + json.data2 + ")");
+                },
+                "dom": '<"top"iflp<"clear">>rt<"bottom"il<"clear">>',
+                "createdRow": function (row, data, index) {
+                    if (data.pos == "1&deg;") {
+                        $('td', row).addClass('highlight3');
+                    }
+                },
+                "scrollCollapse": true
+            });
             table3 = $('#example3').DataTable({
                 "ajax": {
                     url: "getArrivo.php",
@@ -111,6 +149,7 @@
                     {"data": "pois"},
                     {"data": "blu"},
                     {"data": "bianca"},
+                    {"data": "squadra"},
                     {"data": "rosso"}
                 ],
                 "aoColumnDefs": [
@@ -123,7 +162,8 @@
                     {"sClass": "center pois bold", "aTargets": [6]},
                     {"sClass": "center blu bold", "aTargets": [7]},
                     {"sClass": "center bianca bold", "aTargets": [8]},
-                    {"sClass": "center rosso2 bold", "aTargets": [9]}
+                    {"sClass": "center bianca2 bold", "aTargets": [9]},
+                    {"sClass": "center rosso2 bold", "aTargets": [10]}
                 ],
                 "oLanguage": {
                     "sUrl": "./lang/ita.txt"
@@ -444,6 +484,7 @@
     </script>
 </head>
 <body id="mainB">
+
 <a name="Arr"></a>
 <table id="example3" class="display compact" cellspacing="0" style="margin: 40px auto;">
     <thead class="">
@@ -487,7 +528,7 @@
     <thead class="">
     <tr class="sopra">
         <th colspan="5" class="numTappa10" style="padding-left: 20px;font-size: medium">Progressione Tappe e Maglie</th>
-        <th colspan="5" style="padding-right: 20px;text-align:right">
+        <th colspan="6" style="padding-right: 20px;text-align:right">
             <a href="#Arr" class="" onclick="$('#example3').toggle();$('.dataTables_paginate').toggle();$('#example10').toggle()"><img
                     src="media/images/meno.png" style="" title="ritorna alle Tappe"></a></th>
         </th>
@@ -502,7 +543,8 @@
         <th>Pois</th>
         <th style="">Azzurra</th>
         <th>Bianca</th>
-        <th style="color:white">Premio combattività</th>
+        <th>Squadra</th>
+        <th style="color:white">Combattività</th>
     </tr>
     </thead>
 </table>
@@ -522,6 +564,23 @@
         <th style="padding-right: 10px">&euro; Distacco</th>
         <th style="padding-right: 10px">Tornei</th>
         <th style="padding-right: 10px">% ITM</th>
+    </tr>
+    </thead>
+</table>
+
+<table id="example15" class="display compact" cellspacing="0" style="margin: 40px auto;">
+    <thead class="">
+    <tr class="sopra">
+        <th colspan="3" class="numTappa15" style="padding-left: 20px"></th>
+        <th colspan="3">&nbsp;</th>
+    </tr>
+    <tr class="sotto">
+        <th class="" style=""></th>
+        <th class="sinistra" style="padding-left: 25px">Squadra</th>
+        <th class="sinistra" style="padding-left: 0px">Direttore Sportivo</th>
+        <th style="padding-right: 10px">Punti</th>
+        <th style="padding-right: 10px">Ultimi</th>
+        <th style="padding-right: 10px">Tornei</th>
     </tr>
     </thead>
 </table>

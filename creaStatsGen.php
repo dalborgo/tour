@@ -58,11 +58,22 @@ $respi = mysql_fetch_assoc(query("SELECT nick, SUM(punti) as p FROM `tt_generale
 $rtgp=$respi["nick"];
 $resi = mysql_fetch_assoc(query("SELECT nick, SUM(punti) as p FROM `tt_pois` GROUP BY nick order by p desc LIMIT 1"));
 $rtg=$resi["nick"];
+$resi4 = mysql_fetch_assoc(query("SELECT
+  SUM(tt_generale.punti) AS punt,
+  tt_player.squadra,
+  tt_squadra.completo
+FROM tt_generale
+  INNER JOIN tt_player
+    ON tt_generale.nick = tt_player.nick
+  RIGHT OUTER JOIN tt_squadra
+    ON tt_player.squadra = tt_squadra.nome
+GROUP BY tt_player.squadra order by punt DESC LIMIT 1"));
+$rtg4=$resi4["squadra"];
 $resi2 = mysql_fetch_assoc(query("SELECT a.nick, SUM(guadagno) as pu FROM `tt_generale` p JOIN tt_player a ON a.nick = p.nick WHERE under = 1 GROUP BY p.nick order by pu desc LIMIT 1"));
 $rtg2=$resi2["nick"];
 $resi3 = mysql_fetch_assoc(query("SELECT tt_dati.`nick`, SUM(guadagno) as guadagno  FROM `tt_dati` WHERE buyin <= 5.00 GROUP BY nick ORDER BY guadagno desc LIMIT 1"));
 $rtg3=$resi3["nick"];
-$res = query("UPDATE tt_tappa SET partecipanti='$cont2', leader='$primo', soldi_leader='$soldil', vincitore='$vinci', soldi = '$mguad', scalatore = '$rtg', punti = '$rtgp', giovane='$rtg2', inter= '$rtg3', tipo='$tipo', diff='$diff' WHERE tappa='$tappaN'");
+$res = query("UPDATE tt_tappa SET partecipanti='$cont2', leader='$primo', soldi_leader='$soldil', vincitore='$vinci', soldi = '$mguad', scalatore = '$rtg', punti = '$rtgp', giovane='$rtg2', inter= '$rtg3', tipo='$tipo', diff='$diff', squadra='$rtg4' WHERE tappa='$tappaN'");
 $to["tappa"]=$tappaN+1;
 repTV("tt_tappa",$to);
 $rew = query("SELECT nick, maglia FROM tt_player");

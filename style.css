@@ -152,6 +152,11 @@ td.bianca{
     border-left: 1px solid black;
     border-right: 1px solid black;
 }
+td.bianca2{
+    background-color: white;
+    color: green;
+    border-right: 1px solid black;
+}
 td.blu{
     background-color: #3d64ff;
     color: white;
