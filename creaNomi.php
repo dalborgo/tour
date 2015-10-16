@@ -7,6 +7,7 @@
  */
 include_once "librerie/sql.php";
 include_once "librerie/specific.php";
+include_once "librerie/fetch.php";
 header('Content-Type: text/html; charset=utf-8');
 $dr = query("SELECT * FROM tt_player");
 $tappa = getTappa();
@@ -20,10 +21,14 @@ $arr = maglie();
 echo 'DELETE FROM "main"."replace_pattern_0_1" WHERE replacement LIKE \'[img]http://static.pokerstrategycdn.com/%\';';
 echo 'DELETE FROM "main"."replace_pattern_0_1" WHERE replacement LIKE \'[img]http://www.dalborgo.com/tour/media/images/%\';';
 $s="";
+$contr=array();
+$ecom="";
 while (($h = mysql_fetch_assoc($dr))) {
     $m = "";
-    if ($comb["combat"] == $h["nick"])
+    if ($comb["combat"] == $h["nick"]) {
         $colore = "red";
+        $ecom=$h["nick"];
+    }
     else
         $colore = "black";
     if (array_key_exists($h["nick"], $arr))
@@ -40,6 +45,7 @@ while (($h = mysql_fetch_assoc($dr))) {
         $rui = '[img]http://www.dalborgo.com/tour/media/images/' . $m;
     else
         $rui = '[img]http://static.pokerstrategycdn.com/front/images/ranks/mini/' . $h["status"];
+    $contr[$h["nick"]]=$rui;
     $s .= "REPLACE INTO";
     $s .= ' "main"."replace_pattern_0_1" ("url_pattern","input","replacement") VALUES ("http://it.pokerstrategy.com/","';
     $s .= "q" . $h["nick"];
@@ -52,16 +58,16 @@ echo "<br><br>";
 
 while (($h = mysql_fetch_assoc($dr2))) {
     $m = "";
-    if ("PartyPoker.it" == $h["network"])
-        $net = "Party";
+   /* if ("PartyPoker.it" == $h["network"])
+        $net = "Party";*/
     if ("ActiveGames.it" == $h["network"])
         $net = "[img]http://www.dalborgo.it/public/ss/stan.png[/img] [b]Stanleybet.it[/b]";
     if ("iPoker.it" == $h["network"])
         $net = "[img]http://www.dalborgo.it/public/ss/tit.png[/img] [b]Titanbet.it[/b]";
     if ("PokerStars.it" == $h["network"])
         $net = "[img]http://www.dalborgo.it/public/ss/ps1.png[/img][b]PokerStars.it[/b]";
-    if ("PokerClub" == $h["network"])
-        $net = "Lotto";
+  /*  if ("PokerClub" == $h["network"])
+        $net = "Lotto";*/
     if ("MicroGame" == $h["network"])
         $net = "[img]http://www.dalborgo.it/public/ss/all.png[/img] [b]Allinbet.it[/b]";
     $s = "REPLACE INTO";
@@ -71,8 +77,48 @@ while (($h = mysql_fetch_assoc($dr2))) {
     $s .= '[b]'.$h["nome"] . '[/b] di ' . $net . '");';
     echo $s;
 }
-
-
+echo "<br><br>";
+$res = query("SELECT * from tt_player where abil IS NULL");
+while (($ra = mysql_fetch_assoc($res))) {
+    $val=$ra["nick"];
+    //echo "<b>$val</b><br>";
+    $sup="";
+    $base = ccall('http://www.sharkscope.com/api/dalborgo/playergroups/'.$val);
+    $lis = $base->Response->PlayerGroupResponse->PlayerGroup->Players->Player;
+    //$lis2[$val] = $base->Response->PlayerGroupResponse->PlayerGroup->Players->Player;
+    if(is_object($lis)){
+        if(!isset($lis->{'@optedout'})) {
+            $sup=$lis->{'@name'};
+            //ccall('http://www.sharkscope.com/api/dalborgo/playergroups/confra/members/'.$lis->{'@network'}.'/'.$lis->{'@name'});
+        }
+        if (array_key_exists($sup, $contr))
+            continue;
+        $colore = ($ecom==$val)?"red":"black";
+        $s = "REPLACE INTO";
+        $s .= ' "main"."replace_pattern_0_1" ("url_pattern","input","replacement") VALUES ("http://it.pokerstrategy.com/","';
+        $s .= "q" . $sup;
+        $s .= '","';
+        $s .= $contr[$val] . '.png[/img][url=http://it.pokerstrategy.com/user/' . $val . '/profile/][color=' . $colore . '][b]' . $val . '[/b][/color][/url]");';
+        echo $s;
+    }
+    else {
+        foreach ($lis as $o) {
+            if(!isset($o->{'@optedout'})) {
+                $sup=$o->{'@name'};
+                //ccall('http://www.sharkscope.com/api/dalborgo/playergroups/confra/members/'.$o->{'@network'}.'/'.$o->{'@name'});
+            }
+            if (array_key_exists($sup, $contr))
+                continue;
+            $colore = ($ecom==$val)?"red":"black";
+            $s = "REPLACE INTO";
+            $s .= ' "main"."replace_pattern_0_1" ("url_pattern","input","replacement") VALUES ("http://it.pokerstrategy.com/","';
+            $s .= "q" . $sup;
+            $s .= '","';
+            $s .= $contr[$val] . '.png[/img][url=http://it.pokerstrategy.com/user/' . $val . '/profile/][color=' . $colore . '][b]' . $val . '[/b][/color][/url]");';
+            echo $s;
+        }
+    }
+}
 
 
 
