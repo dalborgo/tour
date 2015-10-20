@@ -26,6 +26,7 @@ AND nome NOT LIKE '%1000 FPP%'
 AND nome NOT LIKE '%SilverStar+ VIP Privilege%'
 AND nome NOT LIKE '%GoldStar+ VIP Privilege%'
 AND nome NOT LIKE '%All-In Shootout%'
+AND nome NOT LIKE '%Depositor%'
 
 GROUP BY nick)");
 else

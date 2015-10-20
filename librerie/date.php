@@ -12,6 +12,13 @@ function dammiData($d){
         return $datec->format('Y-m-d');
     } catch (Exception $e) {return "";}
 }
+function dammiLocale(){
+    try {
+        $datec = new DateTime();
+        $datec->setTimezone(new DateTimeZone('Europe/Rome'));
+        return $datec->format('Y-m-d');
+    } catch (Exception $e) {return "";}
+}
 function dammiOra($d){
     try {
         $datec = new DateTime($d);

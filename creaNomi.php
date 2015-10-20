@@ -46,7 +46,7 @@ while (($h = mysql_fetch_assoc($dr))) {
     else
         $rui = '[img]http://static.pokerstrategycdn.com/front/images/ranks/mini/' . $h["status"];
     $contr[$h["nick"]]=$rui;
-    $s .= "REPLACE INTO";
+    $s = "REPLACE INTO";
     $s .= ' "main"."replace_pattern_0_1" ("url_pattern","input","replacement") VALUES ("http://it.pokerstrategy.com/","';
     $s .= "q" . $h["nick"];
     $s .= '","';
