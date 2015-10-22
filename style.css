@@ -94,7 +94,6 @@ body#mainB table th{
 
 table.dataTable.compact tbody td {
     padding: 4px;
-    padding-right: 10px;
 }
 span#poke{
     color: #ff511a;

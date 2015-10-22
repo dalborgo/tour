@@ -91,7 +91,10 @@ include "librerie/date.php";
 $res = query("SELECT r.nick AS nick, a.status AS status, r.Ability AS ability, r.AvStake AS avstake, r.AvGamesPerDay AS avpd, a.ultima AS ultima, a.squadra AS squadra, a.under AS under FROM tt_ranking AS r JOIN tt_player AS a ON r.nick = a.nick ");
 $out = "";
 while (($r = mysql_fetch_assoc($res))) {
-    $squadra = "";
+    if(!isset($r["squadra"]))
+        $squadra = "";
+    else
+        $squadra = '<img style="vertical-align:middle" src="../shark/'.strtolower($r["squadra"]).'.png"></img>';
     $out .= "<tr><td class='center'>" . $squadra . "</td>";
     $out .= "<td>" . getProf($r["nick"], $r["status"], "p") . "</td>";
     $out .= "<td class='sright'>" . $r["ability"] . "</td><td class='sright'>" . $r["avstake"] . "</td><td class='sright'>" . $r["avpd"] . "</td>";

@@ -155,7 +155,7 @@
                 "aoColumnDefs": [
                     {"sClass": "center", "aTargets": [0]},
                     {"sClass": "center", "aTargets": [1]},
-                    {"sClass": "center bold", "aTargets": [2]},
+                    {"sClass": "bold", "aTargets": [2]},
                     {"sClass": "destra", "aTargets": [3]},
                     {"sClass": "center gialla bold", "aTargets": [4]},
                     {"sClass": "center verde bold", "aTargets": [5]},
@@ -391,6 +391,7 @@
                         {"data": "nick"},
                         {"data": "squadra"},
                         {"data": "guadagno"},
+                        {"data": "ultimo"},
                         {"data": "tornei"},
                         {"data": "itm"}
                     ],
@@ -400,7 +401,8 @@
                         {"sClass": "", "aTargets": [2]},
                         {"sClass": "destra", "aTargets": [3]},
                         {"sClass": "destra", "aTargets": [4]},
-                        {"sClass": "destra", "aTargets": [5]}
+                        {"sClass": "destra", "aTargets": [5]},
+                        {"sClass": "destra", "aTargets": [6]}
                     ],
                     "oLanguage": {
                         "sUrl": "./lang/ita.txt"
@@ -530,13 +532,13 @@
         <th colspan="5" class="numTappa10" style="padding-left: 20px;font-size: medium">Progressione Tappe e Maglie</th>
         <th colspan="6" style="padding-right: 20px;text-align:right">
             <a href="#Arr" class="" onclick="$('#example3').toggle();$('.dataTables_paginate').toggle();$('#example10').toggle()"><img
-                    src="media/images/meno.png" style="" title="ritorna alle Tappe"></a></th>
+                    src="media/images/meno.png" style="" title="ritorna alle Tappe"></a>
         </th>
     </tr>
     <tr class="sotto" style="color:white">
         <th class="">Tappa</th>
-        <th class="">Giocatori</th>
-        <th class="" style="">Vincitore</th>
+        <th class=""><abbr title="Numero Partecipanti">N°</abbr></th>
+        <th class="" style="text-align: left;">Vincitore</th>
         <th style="text-align: right;">&euro; Soldi&nbsp;</th>
         <th>Gialla</th>
         <th style="">Verde</th>
@@ -653,7 +655,7 @@
 <table id="example5" class="display compact" cellspacing="0" style="margin: 40px auto;">
     <thead class="">
     <tr class="sopra">
-        <th colspan="3" class="numTappa5" style="padding-left: 20px"></th>
+        <th colspan="4" class="numTappa5" style="padding-left: 20px"></th>
         <th colspan="3" style="padding-right: 20px;text-align:right"><select id="pfree">
             <option value="5" selected="selected">Intergiro</option>
             <option value="0">Freeroll</option>
@@ -664,6 +666,7 @@
         <th class="sinistra" style="padding-left: 25px">Nick</th>
         <th class="sinistra" style="padding-left: 25px">Squadra</th>
         <th style="padding-right: 10px">&euro; Guadagno</th>
+        <th style="padding-right: 10px">&euro; Ultimi</th>
         <th style="padding-right: 10px">Tornei</th>
         <th style="padding-right: 10px">% ITM</th>
     </tr>
@@ -702,7 +705,7 @@
         if(this.value=="0")
             $("#poke2").html("Mago dei Freeroll: ");
         else
-            $("#poke2").html("Classidica Intergiro: ");
+            $("#poke2").html("Classifica Intergiro: ");
         //$('#poke').html($("select#proom option:selected").val());
     });
     $(document).on("change", "#ptappa", function (event) {

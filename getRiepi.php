@@ -12,7 +12,7 @@ include_once "librerie/specific.php";
 
 
 //$tappa=getTappa();
-$dr=query("SELECT * FROM tt_tappa ORDER BY tappa DESC ");
+$dr=query("SELECT * FROM tt_tappa join tt_player on vincitore = nick ORDER BY tappa DESC ");
 $abbin = array();
 $cont=0;
 while (($h = mysql_fetch_assoc($dr))) {
@@ -26,7 +26,7 @@ while (($h = mysql_fetch_assoc($dr))) {
     $obj->descr=$h["descrizione"];
     $obj->tappa="<abbr title='$ecco' class='nero'>".$h["tappa"]."&deg;</abbr>";
     $obj->parte=$h["partecipanti"];
-    $obj->vinci=$h["vincitore"];
+    $obj->vinci='<img style="vertical-align:middle" src="../shark/'.strtolower($h["squadra"]).'.png"></img> '.$h["vincitore"];
     $obj->soldil=$h["soldi_leader"];
     $obj->soldi=$h["soldi"];
     $obj->gialla=$h["leader"];
