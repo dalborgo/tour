@@ -31,7 +31,10 @@ while (($h = mysql_fetch_assoc($dr))) {
         $obj->last=($odi[$h["nick"]]>0)?"+".$odi[$h["nick"]]:"";
     }
     $obj->punti=$h["punt"];
-    $obj->squadra=$h["completo"];
+    if($h["squadra"]!=null)
+        $obj->squadra='<img style="vertical-align:sub" src="../shark/'.strtolower($h["squadra"]).'.png"> '.$h["completo"].'</img>';
+    else
+        $obj->squadra=$h["completo"];
     $obj->tornei=$h["tor"];
     $obj->status=$h["status"];
     $obj->nick2 = $h["nick"];

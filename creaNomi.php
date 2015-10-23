@@ -20,6 +20,7 @@ $arr = maglie();
 //$s = "";
 echo 'DELETE FROM "main"."replace_pattern_0_1" WHERE replacement LIKE \'[img]http://static.pokerstrategycdn.com/%\';';
 echo 'DELETE FROM "main"."replace_pattern_0_1" WHERE replacement LIKE \'[img]http://www.dalborgo.com/tour/media/images/%\';';
+echo 'DELETE FROM "main"."replace_pattern_0_1" WHERE replacement LIKE \'[img]http://www.dalborgo.com/shark/%\';';
 $s="";
 $contr=array();
 $ecom="";
@@ -34,23 +35,28 @@ while (($h = mysql_fetch_assoc($dr))) {
     if (array_key_exists($h["nick"], $arr))
         $m = $arr[$h["nick"]][0];
     if ($m == "gialla")
-        $rui = '[img]http://www.dalborgo.com/tour/media/images/' . $m;
+        $rui = '[img]http://www.dalborgo.com/tour/media/images/' . $m.'.png[/img]';
     else if ($m == "verde")
-        $rui = '[img]http://www.dalborgo.com/tour/media/images/' . $m;
+        $rui = '[img]http://www.dalborgo.com/tour/media/images/' . $m.'.png[/img]';
     else if ($m == "pois")
-        $rui = '[img]http://www.dalborgo.com/tour/media/images/' . $m;
+        $rui = '[img]http://www.dalborgo.com/tour/media/images/' . $m.'.png[/img]';
     else if ($m == "blu")
-        $rui = '[img]http://www.dalborgo.com/tour/media/images/' . $m;
+        $rui = '[img]http://www.dalborgo.com/tour/media/images/' . $m.'.png[/img]';
     else if ($m == "bianca")
-        $rui = '[img]http://www.dalborgo.com/tour/media/images/' . $m;
-    else
-        $rui = '[img]http://static.pokerstrategycdn.com/front/images/ranks/mini/' . $h["status"];
+        $rui = '[img]http://www.dalborgo.com/tour/media/images/' . $m.'.png[/img]';
+    else {
+        //$rui = '[img]http://static.pokerstrategycdn.com/front/images/ranks/mini/' . $h["status"];
+        if($h["squadra"]==null)
+            $rui = '[img]http://static.pokerstrategycdn.com/front/images/ranks/mini/' . $h["status"].'.png[/img]';
+        else
+            $rui = '[img]http://www.dalborgo.com/shark/'.strtolower($h["squadra"]).'.png[/img] ';
+    }
     $contr[$h["nick"]]=$rui;
     $s = "REPLACE INTO";
     $s .= ' "main"."replace_pattern_0_1" ("url_pattern","input","replacement") VALUES ("http://it.pokerstrategy.com/","';
     $s .= "q" . $h["nick"];
     $s .= '","';
-    $s .= $rui . '.png[/img][url=http://it.pokerstrategy.com/user/' . $h["nick"] . '/profile/][color=' . $colore . '][b]' . $h["nick"] . '[/b][/color][/url]");';
+    $s .= $rui . '[url=http://it.pokerstrategy.com/user/' . $h["nick"] . '/profile/][color=' . $colore . '][b]' . $h["nick"] . '[/b][/color][/url]");';
     echo $s;
 }
 $dr2 = query("SELECT nome, network FROM tt_dati WHERE tappa > 1 AND nome IS NOT NULL GROUP BY nome");
@@ -58,16 +64,16 @@ echo "<br><br>";
 
 while (($h = mysql_fetch_assoc($dr2))) {
     $m = "";
-   /* if ("PartyPoker.it" == $h["network"])
-        $net = "Party";*/
+    if ("PartyPoker.it" == $h["network"])
+        $net = "Party";
     if ("ActiveGames.it" == $h["network"])
         $net = "[img]http://www.dalborgo.it/public/ss/stan.png[/img] [b]Stanleybet.it[/b]";
     if ("iPoker.it" == $h["network"])
         $net = "[img]http://www.dalborgo.it/public/ss/tit.png[/img] [b]Titanbet.it[/b]";
     if ("PokerStars.it" == $h["network"])
         $net = "[img]http://www.dalborgo.it/public/ss/ps1.png[/img][b]PokerStars.it[/b]";
-  /*  if ("PokerClub" == $h["network"])
-        $net = "Lotto";*/
+    if ("PokerClub" == $h["network"])
+        $net = "Lotto";
     if ("MicroGame" == $h["network"])
         $net = "[img]http://www.dalborgo.it/public/ss/all.png[/img] [b]Allinbet.it[/b]";
     $s = "REPLACE INTO";
@@ -98,7 +104,7 @@ while (($ra = mysql_fetch_assoc($res))) {
         $s .= ' "main"."replace_pattern_0_1" ("url_pattern","input","replacement") VALUES ("http://it.pokerstrategy.com/","';
         $s .= "q" . $sup;
         $s .= '","';
-        $s .= $contr[$val] . '.png[/img][url=http://it.pokerstrategy.com/user/' . $val . '/profile/][color=' . $colore . '][b]' . $val . '[/b][/color][/url]");';
+        $s .= $contr[$val] . '[url=http://it.pokerstrategy.com/user/' . $val . '/profile/][color=' . $colore . '][b]' . $val . '[/b][/color][/url]");';
         echo $s;
     }
     else {
@@ -114,7 +120,7 @@ while (($ra = mysql_fetch_assoc($res))) {
             $s .= ' "main"."replace_pattern_0_1" ("url_pattern","input","replacement") VALUES ("http://it.pokerstrategy.com/","';
             $s .= "q" . $sup;
             $s .= '","';
-            $s .= $contr[$val] . '.png[/img][url=http://it.pokerstrategy.com/user/' . $val . '/profile/][color=' . $colore . '][b]' . $val . '[/b][/color][/url]");';
+            $s .= $contr[$val] . '[url=http://it.pokerstrategy.com/user/' . $val . '/profile/][color=' . $colore . '][b]' . $val . '[/b][/color][/url]");';
             echo $s;
         }
     }

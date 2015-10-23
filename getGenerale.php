@@ -59,7 +59,10 @@ while (($h = mysql_fetch_assoc($dr))) {
         $base=$h["guad"];
     $tra+=$h["guad"];
     $obj->guadagno=$h["guad"];
-    $obj->squadra=$h["completo"];
+    if($h["squadra"]!=null)
+        $obj->squadra='<img style="vertical-align:sub" src="../shark/'.strtolower($h["squadra"]).'.png"> '.$h["completo"].'</img>';
+    else
+        $obj->squadra=$h["completo"];
     $obj->tornei=$h["tor"];
     $sott=number_format($base-$h["guad"],2);
     $obj->distacco=($sott==0)?"":"-".($sott);

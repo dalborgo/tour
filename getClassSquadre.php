@@ -50,18 +50,12 @@ while (($h = mysql_fetch_assoc($dr))) {
     } else {
         $obj->last=($odi[$h["squadra"]]>0)?"+".$odi[$h["squadra"]]:"";
     }
-
     $obj->punti=$h["punt"];
     $obj->last="<abbr title='".$odi2[$h["squadra"]]."' class='nero'>".$obj->last."</abbr>";
     $obj->squadra=$h["squadra"];
     $obj->tornei=$h["tor"];
-    //$obj->descr=$odi2[$h["squadra"]];
-   // $obj->status=$h["status"];
     $obj->nick2 = $h["completo"];
-    $m="";$colore2="";$colore="";
-        $colore2="";
-    $obj->nick='<span class="nowr '.$colore.'">' . $h["completo"] . '</span>
-    '.$colore2;
+    $obj->nick='<img style="vertical-align:sub" src="../shark/'.strtolower($h["squadra"]).'.png"> '.$h["completo"].'</img>';
     $abbin[]=$obj;
 }
 $usc2 = new stdClass();

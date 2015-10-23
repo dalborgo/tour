@@ -66,7 +66,10 @@ while (($h = mysql_fetch_assoc($dr))) {
     $obj->guadagno=$h["guadagno"];
     $obj->itm=number_format($h["itm"]*100/$h["tornei"],1);
     $obj->tornei=$h["tornei"];
-    $obj->squadra=$h["completo"];
+    if($h["squadra"]!=null)
+        $obj->squadra='<img style="vertical-align:sub" src="../shark/'.strtolower($h["squadra"]).'.png"> '.$h["completo"].'</img>';
+    else
+        $obj->squadra=$h["completo"];
     $obj->status=$h["status"];
     if(isset($yui[$h["nick"]]))
         $obj->ultimo=$yui[$h["nick"]];

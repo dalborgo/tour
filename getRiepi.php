@@ -12,14 +12,14 @@ include_once "librerie/specific.php";
 
 
 //$tappa=getTappa();
-$dr=query("SELECT * FROM tt_tappa join tt_player on vincitore = nick ORDER BY tappa DESC ");
+$dr=query("SELECT * FROM tt_tappa join tt_player on vincitore = nick ORDER BY tappa DESC");
 $abbin = array();
 $cont=0;
 while (($h = mysql_fetch_assoc($dr))) {
-    if($cont==0) {
+    /*if($cont==0) {
         $cont++;
         continue;
-    }
+    }*/
     $piu=$h["tappa"];
     $ecco=date('d/m/Y', strtotime($INIZIO. " + $piu days"));
     $obj = new stdClass();

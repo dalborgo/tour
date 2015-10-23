@@ -31,7 +31,10 @@ while (($h = mysql_fetch_assoc($dr))) {
     $obj->pos=$cont."&deg;";
     $obj->guadagno=$h["guadagno"];
     $obj->tornei=$h["tornei"];
-    $obj->squadra=$h["completo"];
+    if($h["squadra"]!=null)
+        $obj->squadra='<img style="vertical-align:sub" src="../shark/'.strtolower($h["squadra"]).'.png"> '.$h["completo"].'</img>';
+    else
+        $obj->squadra=$h["completo"];
     $obj->status=$h["status"];
     $obj->nick2 = $h["nick"];
     $m="";$colore2="";$colore="";
