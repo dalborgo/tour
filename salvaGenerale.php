@@ -13,7 +13,7 @@ include "librerie/date.php";
 
 $tappa = diffDate2($INIZIO);
 //(nick LIKE 'Parasar' OR nick LIKE 'stardust85') AND
-$res = query("SELECT tt_dati.`nick`, SUM(guadagno) as guadagno, SUM(if(guadagno > 0.00, 1, 0)) as apremio, COUNT(*) as tornei FROM `tt_dati` WHERE tappa = '$tappa' GROUP BY nick ORDER BY guadagno DESC, tornei DESC ");
+$res = query("SELECT tt_dati.`nick`, ROUND(SUM(guadagno),2) as guadagno, SUM(if(guadagno > 0.00, 1, 0)) as apremio, COUNT(*) as tornei FROM `tt_dati` WHERE tappa = '$tappa' GROUP BY nick ORDER BY guadagno DESC, tornei DESC ");
 $qua = mysql_num_rows($res);
 $lista = "";
 $out = array();
@@ -36,7 +36,7 @@ while (($ra = mysql_fetch_assoc($res))) {
     $cvi++;
     $out["nick"] = $ra["nick"];
     $out["guadagno"] = $ra["guadagno"];
-    $out["punti"] = ($out["guadagno"] > 0) ? $out["punti"] + 5 : $out["punti"];
+    $out["punti"] = ($out["guadagno"] >= 20) ? $out["punti"] + 5 : $out["punti"];
     $out["posizione"] = $cvi;
     $out["tappa"] = $tappa;
     $out["apremio"] = $ra["apremio"];

@@ -45,8 +45,8 @@ while (($h = mysql_fetch_assoc($dr))) {
     $obj = new stdClass();
     $cont++;
     $obj->pos=$cont."&deg;";
-    if (!isset($odi[$h["squadra"]])) {
-        $obj->last="";
+    if ($odi[$h["squadra"]]==0) {
+        $obj->last="0";
     } else {
         $obj->last=($odi[$h["squadra"]]>0)?"+".$odi[$h["squadra"]]:"";
     }

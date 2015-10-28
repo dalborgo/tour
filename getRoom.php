@@ -20,6 +20,14 @@ $res = query("CREATE TEMPORARY TABLE IF NOT EXISTS table3 AS (SELECT tt_dati.`ni
 
 $dr=query("SELECT a.`nick`, guadagno,  tornei, maglia, status, squadra, completo FROM `table3` a LEFT JOIN tt_player b ON a.nick = b.nick LEFT JOIN tt_squadra ON b.squadra = tt_squadra.nome ORDER BY guadagno DESC, tornei desc");
 $tappa=getTappa();
+$dr3=query("Select SUM(guadagno) as guada, nick from tt_dati WHERE tappa = $tappa AND network = '$room' GROUP BY nick");
+$yui = array();
+while (($h3 = mysql_fetch_assoc($dr3))) {
+    $yui[$h3["nick"]]=($h3["guada"]>=0)?'+'.$h3["guada"]:$h3["guada"];
+    if($yui[$h3["nick"]]=='+0')
+        $yui[$h3["nick"]]="";
+}
+
 $abbin = array();
 $base=0;
 $tra=0;
@@ -37,6 +45,10 @@ while (($h = mysql_fetch_assoc($dr))) {
         $obj->squadra=$h["completo"];
     $obj->status=$h["status"];
     $obj->nick2 = $h["nick"];
+    if(isset($yui[$h["nick"]]))
+        $obj->ultimo=$yui[$h["nick"]];
+    else
+        $obj->ultimo="";
     $m="";$colore2="";$colore="";
     if(array_key_exists($h["nick"],$arr)) {
         $m = $arr[$h["nick"]];
