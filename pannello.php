@@ -1,4 +1,5 @@
 <?php
+echo "<title>Pannello di Controllo</title>";
 include_once "librerie/specific.php";
 $format = date('Y-m-d');
 $seco = date('Y-m-d', (strtotime('-1 day', strtotime($format))));

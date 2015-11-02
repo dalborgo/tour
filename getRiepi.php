@@ -12,7 +12,7 @@ include_once "librerie/specific.php";
 
 
 //$tappa=getTappa();
-$dr=query("SELECT * FROM tt_tappa join tt_player on vincitore = nick ORDER BY tappa DESC");
+$dr=query("SELECT *, tt_tappa.squadra as clsq FROM tt_tappa join tt_player on vincitore = nick ORDER BY tappa DESC");
 $abbin = array();
 $cont=0;
 while (($h = mysql_fetch_assoc($dr))) {
@@ -35,7 +35,7 @@ while (($h = mysql_fetch_assoc($dr))) {
     $obj->pois=$h["scalatore"];
     $obj->bianca=$h["giovane"];
     $obj->blu=$h["inter"];
-    $obj->squadra=$h["squadra"];
+    $obj->squadra=$h["clsq"];
     $obj->tipo=$h["tipo"];
     $obj->tipo=($obj->tipo=="pianeggiante")?"P":"M";
     $obj->diff=$h["diff"];
