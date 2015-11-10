@@ -54,9 +54,15 @@ foreach ($res as $key2 => $value2) {
         $conto=count($gioc2->PlayerGroup->CompletedTournaments->Tournament);
         if ($conto<2)
             $value=$gioc2->PlayerGroup->CompletedTournaments->Tournament;
+        try {
+            $datec = new DateTime("@".$value->{'@date'});
+            $datec->setTimezone(new DateTimeZone('Europe/Rome'));
+            $datec = $datec->format('d/m/Y H:i');
+        } catch (Exception $e) {
 
+        }
         if(!array_key_exists($value->{'@id'},$ecco)){
-            echo "<br>XXXXXXXXXXXXXXXXXXXXX ID: ".$value->{'@id'}." ".$value->{'@name'}." ".$value->{'@date'}."<br>";
+            echo "<br>XXXXXXXXXXXXXXXXXXXXX ID: ".$value->{'@id'}." ".$value->{'@name'}." ".$datec." (".$value->{'@totalEntrants'}.")<br>";
         }
         if ($conto<2)
             break;

@@ -66,12 +66,16 @@ while (($h = mysql_fetch_assoc($dr2))) {
     $m = "";
     if ("PartyPoker.it" == $h["network"])
         $net = "Party";
+    if ("FullTilt" == $h["network"])
+        $net = "[img]http://www.dalborgo.it/public/ss/full.png[/img] [b]FullTilt[/b]";
     if ("ActiveGames.it" == $h["network"])
         $net = "[img]http://www.dalborgo.it/public/ss/stan.png[/img] [b]Stanleybet.it[/b]";
     if ("iPoker.it" == $h["network"])
         $net = "[img]http://www.dalborgo.it/public/ss/tit.png[/img] [b]Titanbet.it[/b]";
     if ("PokerStars.it" == $h["network"])
         $net = "[img]http://www.dalborgo.it/public/ss/ps1.png[/img][b]PokerStars.it[/b]";
+    if ("PokerStars" == $h["network"])
+        $net = "[img]http://www.dalborgo.it/public/ss/ps1.png[/img][b]PokerStars[/b]";
     if ("PokerClub" == $h["network"])
         $net = "Lotto";
     if ("MicroGame" == $h["network"])

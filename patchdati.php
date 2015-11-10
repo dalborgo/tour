@@ -41,6 +41,8 @@ if(isset($_GET['c']))
     $opt="TournamentName:".$_GET['c'].";";
 else
     $opt="";
+if(isset($_GET['e']))
+    $opt.="Entrants:".$_GET['e'].";";
 foreach ($lista2 as $key => $value) {
     $res[$value] = ccall('http://www.sharkscope.com/api/dalborgo/networks/PlayerGroup/players/'.$value.'/completedTournaments?order=Last,70&filter=Date:'.$ore.';'.$opt.'Class:SCHEDULED');
 }
@@ -60,7 +62,14 @@ foreach ($res as $key2 => $value2) {
         $conto=count($gioc2->PlayerGroup->CompletedTournaments->Tournament);
         if ($conto<2)
             $value=$gioc2->PlayerGroup->CompletedTournaments->Tournament;
-        echo "<br>".$key2." ".$value->{'@name'}." ".$value->{'@id'};
+        try {
+            $datec = new DateTime("@".$value->{'@date'});
+            $datec->setTimezone(new DateTimeZone('Europe/Rome'));
+            $datec = $datec->format('d/m/Y H:i');
+        } catch (Exception $e) {
+
+        }
+        echo "<br>".$key2." ".$value->{'@name'}." ".$value->{'@id'}." ".$datec;
         if(isset($value->TournamentEntry->{'@prize'}))
             $pirce=($value->TournamentEntry->{'@prize'})?$value->TournamentEntry->{'@prize'}:'0';
         else

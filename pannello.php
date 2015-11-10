@@ -37,7 +37,8 @@ $ultimo = (isLocale()) ? "" : "<br><br><a href='http://localhost/tmp/tour/pannel
     <a href="controllo.php?a=<?php echo $c ?>&b=<?php echo $a ?>&c=Giuliocesare5">Controllo Giulio</a><br/>
     <a href="controllo.php?a=<?php echo $c ?>&b=<?php echo $a ?>&c=DamaNera">Controllo DamaNera</a><br/>
     <a href="controllo.php?a=<?php echo $c ?>&b=<?php echo $a ?>&c=TOPMODEL61">Controllo Top</a><br/>
-    <a href="patchdati.php?a=<?php echo $c ?>&b=<?php echo $a ?>&c=25.000">Patcha</a>
+    <a href="patchdati.php?a=<?php echo $c ?>&b=<?php echo $a ?>&c=25.000">Patcha</a><br/>
+    <a href="patchdati.php?a=<?php echo $c ?>&b=<?php echo $a ?>&e=1000">Patcha Entranti</a>
     <?php echo $ultimo; ?><br />
     <a href="generale.html">GENERALE</a><br/>
     <a href="http://www.dalborgo.com/shark/sm.php">LIVE</a><br/>
