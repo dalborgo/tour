@@ -9,3 +9,7 @@
 function togliUltimo($s){
     return substr($s,0,-1);
 }
+
+function startWith($s,$v){
+    return substr($s,0,strlen($v))===$v;
+}

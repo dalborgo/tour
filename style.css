@@ -193,3 +193,7 @@ abbr.senza{
 .dataTables_wrapper .dataTables_paginate {
     padding-right: 30px;
 }
+
+.stroke{
+    text-decoration:line-through;
+}

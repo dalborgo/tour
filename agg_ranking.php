@@ -17,11 +17,14 @@ require_once "dbmarc.php";
 */
 require_once "librerie/sql.php";
 require_once "librerie/fetch.php";
+require_once "librerie/stringhe.php";
 $service_url = 'http://www.sharkscope.com/api/dalborgo/playergroups';
 $decoded = ccall($service_url);
 $ltot = $decoded->Response->PlayerGroupResponse->PlayerGroup;
 foreach ($ltot as  $mio) {
     $value=$mio->{'@name'};
+    if(startWith($value,"sit_"))
+        continue;
     $res[$value] = ccall('http://www.sharkscope.com/api/dalborgo/networks/PlayerGroup/players/'.$value
         .'/statistics/Ability,AvStake,AvGamesPerDay?filter=Class:SCHEDULED');
     echo $mio->{'@name'}."<br>";

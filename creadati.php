@@ -58,10 +58,10 @@ foreach ($res as $key2 => $value2) {
         else
             $sireb='0';
         $buyd=(($value->{'@stake'}+$value->{'@rake'})>0)?($value->{'@stake'}+$value->{'@rake'}):'0';
-       // if($sireb!='0' && $usc['nick']!='Se7enUp')
-       //     $guad=$pirce-($value->{'@rake'}+floatval($sireb));
-       // else
-        $guad=$pirce-($value->{'@stake'}+$value->{'@rake'});
+        if($sireb!='0' && $value->{'@network'}=="PokerStars.it")
+            $guad=$pirce-($value->{'@rake'}+floatval($sireb));
+        else
+            $guad=$pirce-($value->{'@stake'}+$value->{'@rake'});
         $datec="";$datec2="";$dateo="";
         $datec2 = dammiData("@".$value->{'@date'});
         $dateo = dammiOra("@".$value->{'@date'});

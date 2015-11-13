@@ -131,6 +131,7 @@
                         combatt = json.combat;
                     }
 
+
                 },
                 "scrollCollapse": true
             });
@@ -239,6 +240,9 @@
                             $('td', row).eq(1).prop('title', 'Premio Combattività');
 
                         }
+                        if (data.nick2 == "Ritirato") {
+                            $('td', row).eq(1).addClass('stroke');
+                        }
                     },
                     "scrollCollapse": true
                 });
@@ -283,6 +287,9 @@
                             $('td', row).eq(1).prop('title', 'Premio Combattività');
 
                         }
+                        if (data.nick2 == "Ritirato") {
+                            $('td', row).eq(1).addClass('stroke');
+                        }
                     },
                     "scrollCollapse": true
                 });
@@ -326,6 +333,9 @@
                             $('td', row).eq(1).addClass('rosso');
                             $('td', row).eq(1).prop('title', 'Premio Combattività');
 
+                        }
+                        if (data.nick2 == "Ritirato") {
+                            $('td', row).eq(1).addClass('stroke');
                         }
                     },
                     "scrollCollapse": true
@@ -429,6 +439,9 @@
                             $('td', row).eq(1).prop('title', 'Premio Combattività');
 
                         }
+                        if (data.nick2 == "Ritirato") {
+                            $('td', row).eq(1).addClass('stroke');
+                        }
                     },
                     "scrollCollapse": true
                 });
@@ -478,6 +491,9 @@
                             $('td', row).eq(1).addClass('rosso');
                             $('td', row).eq(1).prop('title', 'Premio Combattività');
 
+                        }
+                        if (data.nick2 == "Ritirato") {
+                            $('td', row).eq(1).addClass('stroke');
                         }
                     },
                     "scrollCollapse": true

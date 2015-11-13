@@ -8,6 +8,7 @@
 include_once "librerie/sql.php";
 include_once "librerie/specific.php";
 include_once "librerie/fetch.php";
+include_once "librerie/stringhe.php";
 header('Content-Type: text/html; charset=utf-8');
 $dr = query("SELECT * FROM tt_player");
 $tappa = getTappa();

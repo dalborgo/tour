@@ -8,6 +8,7 @@
 
 include "librerie/sql.php";
 include "librerie/fetch.php";
+include "librerie/stringhe.php";
 require_once "librerie/simple_html_dom.php";
 
 $service_url = 'http://www.sharkscope.com/api/dalborgo/playergroups';
@@ -30,6 +31,8 @@ while (($ra = mysql_fetch_assoc($sq))) {
 foreach ($ltot as  $mio) {
 
     $out["nick"]=$mio->{'@name'};
+    if(startWith($out["nick"],"sit_"))
+        continue;
     if($out["nick"]=="confra")
         continue;
     $ns=$mio->{'@name'};
