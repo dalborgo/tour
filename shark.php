@@ -20,7 +20,9 @@ $a = strtotime($seco . '07:00:00');
 $b = strtotime($format . '06:59:59');
 $ore = $a . "~" . $b;
 while (($h = mysql_fetch_assoc($dr))) {
-    $s="<a href='http://it.sharkscope.com/#Player-Statistics/Advanced-Search//networks/Player%20Group/players/".$h["nick"]."?filter=Date:".$ore.";Class:SCHEDULED' target='_blank'>".$h["nick"]."</a>";
+    $s="<a href='http://it.sharkscope.com/#Player-Statistics/Advanced-Search//networks/Player%20Group/players/".$h["nick"]."?filter=Class:SCHEDULED' target='_blank'>".$h["nick"]."</a>";
+    echo $s."<br>";
+    $s="<a href='http://it.sharkscope.com/#Player-Statistics/Advanced-Search//networks/Player%20Group/players/".$h["nick"]."?filter=Date:".$ore.";Class:SCHEDULED' target='_blank'>".$h["nick"]."(Tappa)</a>";
     echo $s."<br>";
     $s="<a href='http://it.sharkscope.com/#Player-Statistics/Advanced-Search//networks/Player%20Group/players/".$h["nick"]."?filter=Date:24H;Class:SCHEDULED' target='_blank'>".$h["nick"]."(24H)</a>";
     echo $s."<br><br>";
