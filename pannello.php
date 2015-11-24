@@ -26,7 +26,7 @@ $ultimo = (isLocale()) ? "" : "<br><br><a href='http://localhost/tmp/tour/pannel
 
     <a href="./pl/">Edita Database</a><br/>
     <a href="agg_players.php">Aggiorna Player</a><br/>
-    <a href="agg_players.php?f=si">Aggiorna Player F (offline)</a><br/>
+    <a href="http://localhost/tmp/tour/agg_players.php?f=si">Aggiorna Player F (offline)</a><br/>
     <a href="agg_ranking.php">Aggiorna Ranking</a><br/>
     <a href="http://www.dalborgo.com/ryder/azz_blog.php">Azzera Blog</a><br/>
     <a href="gruppi/myphp.php">Gruppi</a><br/>
