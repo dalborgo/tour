@@ -97,3 +97,35 @@ function repTV($t,$v) {
           if (!$sq ) die("Replace errata - tabella $t $s");
 }
 
+function insTV($t,$v) {
+    $i=1;
+    $sql= "INSERT IGNORE INTO $t (";
+    $sql2= " VALUES (";
+    while(list($key, $val)=each($v)){
+        if ($i<count($v)){
+            $sql=$sql.$key.", ";
+            if($val==null)
+                $sql2=$sql2."NULL, ";
+            else{
+                $val=preg_replace("/\"/","'",$val);
+                $sql2=$sql2."\"".$val."\", ";
+            }
+        }
+        else{
+            $sql=$sql.$key.")";
+            if($val==null)
+                $sql2=$sql2."NULL)";
+            else{
+                $val=preg_replace("/\"/","'",$val);
+                $sql2=$sql2."\"".$val."\")";
+            }
+        }
+        $i++;
+    }
+    $s=$sql.$sql2;
+    //echo $s;
+    $sq=mysql_query ($s);
+
+    if (!$sq ) die("Replace errata - tabella $t $s");
+}
+

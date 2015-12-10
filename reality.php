@@ -32,7 +32,7 @@ $o=vai("sqp","sqt", "clsqua", 100, $o[0], $o[1]);
 $bianca=mysql_fetch_assoc(query("SELECT
   tt_player.nick
 FROM tt_player
-WHERE tt_player.maglia IN ('bianca')"));
+WHERE tt_player.maglia LIKE '%bianca%'"));
 print_r($o[1]);
 $s=$o[1];
 foreach ($o[0] as $k => $v) {

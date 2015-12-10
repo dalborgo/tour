@@ -101,7 +101,7 @@ foreach ($res as $key2 => $value2) {
         $usc['stake']=$value->{'@stake'};
         $usc['rebuyStake']=$sireb;
         $usc['tappa']=$tappa;
-        repTV("tt_dati",$usc);
+        insTV("tt_dati",$usc);
         if ($conto<2)
             break;
     }
