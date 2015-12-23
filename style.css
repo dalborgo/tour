@@ -197,3 +197,25 @@ abbr.senza{
 .stroke{
     text-decoration:line-through;
 }
+.averageMark{
+    background-color: lightyellow;
+}
+.averageMark2{
+    background-color: #FCFCCE;
+}
+.averageMark3{
+    background-color: aliceblue;
+}
+.averageMark4{
+    background-color: #DCEDFB;
+}
+.averageMark5{
+    background-color: #FDC9C9;
+}
+.averageMark6{
+    background-color: #FFA0A0;
+}
+.sopra2{
+    background-color: #FFF5EE;
+    /*background-image: url('media/images/steel.jpg');*/
+}
